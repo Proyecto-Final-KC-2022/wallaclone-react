@@ -1,5 +1,9 @@
-import Logo from "../../images/logo.png";
 import { AiOutlineSearch } from "react-icons/ai";
+
+import Logo from "../../images/logo.png";
+import LanguageButton from "../common/LanguageButton"; 
+import MailBoxButton from "../common/MailBoxButton";
+import UploadButton from "../common/UploadButton";
 
 const style = {
     navWrapper: "flex h-[66px] w-full text-center items-center justify-center bg-[#fff] sticky top-0",
@@ -39,9 +43,16 @@ const Header = () => {
                 </div>
             </div>
             <div className={style.headerItemsWrapper}>
-                <div className={style.headerItem}>Buzon</div>
+                <div className={style.headerItem}>
+                    <LanguageButton />
+                </div>
+                <div className={style.headerItem}>
+                    <MailBoxButton />
+                </div>
                 <div className={style.headerItem}>Registro</div>
-                <div className={style.headerItem}>Subir producto</div>
+                <div className={style.headerItem}>
+                    <UploadButton />
+                </div>
             </div>
         </div>
     </div>
