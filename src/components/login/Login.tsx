@@ -1,17 +1,23 @@
-import { GrClose } from 'react-icons/gr';
-const style = {}
+import { Link, useNavigate } from "react-router-dom";
+
+import { GrClose } from "react-icons/gr";
+const style = {};
 
 const Login = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center">
       <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl">
+        <div className="flex m-0 justify-end cursor-pointer text-2xl" onClick={() => navigate("/")}>
           <GrClose />
         </div>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
           Bienvenido a wallaclone
         </h1>
-        <p className="text-center text-gray-700 mb-5">Regístrate o inicia sesión</p>
+        <p className="text-center text-gray-700 mb-5">
+          Regístrate o inicia sesión
+        </p>
 
         <div className="flex flex-col">
           <input
@@ -30,15 +36,16 @@ const Login = () => {
             Iniciar sesión
           </button>
           <div className="flex justify-center items-center">
-            <p className="text-center text-gray-700 my-4">Recuperar contraseña</p>
+            <p className="text-center text-gray-700 my-4">
+              Recuperar contraseña
+            </p>
             <span className="mx-4">|</span>
-            <p className="text-center text-gray-700 my-4">Regístrate</p>
-          </div> 
+            <Link to="/signup" className="text-center text-gray-700 my-4">Regístrate</Link>
+          </div>
         </div>
       </div>
     </div>
-  )
-  
-}
+  );
+};
 
-export default Login
+export default Login;

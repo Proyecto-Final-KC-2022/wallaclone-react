@@ -12,7 +12,6 @@ const HomePage = () => {
     <>
       <Header />
         <div className={style.homepageWrapper}>
-          <Login />
           HomePage
         </div> 
       <Footer />
