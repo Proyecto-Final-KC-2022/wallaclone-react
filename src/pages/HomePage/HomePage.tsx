@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 const style = {
   homepageWrapper: "flex w-full h-screen bg-gray-500",
 };
-
+//TODO: BORRAR FUNCION DE EJEMPLO, SOLO PARA PROBAR CONEXION, SACAR A UN SERVICIO LAS LLAMADAS A APIS
 async function getAdvertisements() {
   let httpResponse;
   let advertisements;
+  //TODO: SACAR A OTRO ARCHIVO
+  const FQDN = import.meta.env.VITE_REACT_APP_API_BASE_URL || 'http://localhost:3000';
   try {
-    //TODO: EL FQDN "http://localhost:3000" DEBERÍA SER UNA VARIABLE DE ENTORNO PARA QUE SE PEUEDA CONFIGURAR DESDE EL SERVIDOR
-    //UISAR DOTENV
-    httpResponse = await fetch("http://localhost:3000/advertisements");
+    httpResponse = await fetch(`${FQDN}/advertisements`);
   } catch (error) {
     throw new Error("ERROR IN HTTP REQUEST");
   }
@@ -55,7 +55,7 @@ const HomePage = () => {
       {/* //TODO: BORRAR EJEMPLO PETICION*/}
       <ul>
         {ads.map((ad: any) => {
-          return <li>{ad.name}</li>;
+          return <li key={ad._id}><strong>{ad.name}</strong></li>;
         })}
       </ul>
       <Footer />
