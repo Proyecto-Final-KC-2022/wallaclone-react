@@ -4,7 +4,7 @@ import { IoLanguage } from "react-icons/io5";
 
 const style = {
   languageButton:
-    "text-[#8a939b] text-[28px] font-extrabold md:my-0 my-7 px-0 md:px-3 flex md:flex items-center",
+    "text-[#8a939b] text-[28px] font-extrabold flex items-center justify-center w-full",
   languageText:
     "flex font-extrabold text-[15px] pl-3 text-center hover:text-gray-600 duration-500 cursor-pointer",
 };

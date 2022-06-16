@@ -1,8 +1,16 @@
+import ProductCard from "../../components/product/ProductCard"
+/* 
+importar:
+  ProductCard
+  ProdcutDetails
+*/
 const style = {}
 
 const ProductPage = () => {
   return (
-    <div>ProductPage</div>
+    <div>
+      <ProductCard />
+    </div>
   )
 }
 

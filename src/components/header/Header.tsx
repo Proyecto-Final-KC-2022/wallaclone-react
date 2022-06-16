@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { AiOutlineSearch } from "react-icons/ai";
 
@@ -6,6 +6,7 @@ import Logo from "../../images/logo.png";
 import LanguageButton from "../common/LanguageButton";
 import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
+import LoginButton from "../common/LoginButton";
 
 const style = {
   navWrapper:
@@ -20,8 +21,8 @@ const style = {
   searchIcon: "text-[#253238] text-xl mx-3 items-center",
   placeholderWrapper:
     "w-full h-[42px] text-[0.875rem] outline-0 ring-0 placeholder:text-[#253238] bg-gray-300 mr-4",
-  headerItemsWrapper: "relative flex items-center justify-end ml-auto gap-2",
-  headerItem: "flex relative h-[65px] items-center text-[#253238]",
+  headerItemsWrapper: "flex w-2/3 items-center justify-between gap-2",
+  headerItem: "flex w-full items-center text-[#253238]",
 };
 
 const Header = () => {
@@ -53,17 +54,17 @@ const Header = () => {
           <div className={style.headerItem}>
             <LanguageButton />
           </div>
-          <div 
+          <Link
+            to="/category" 
             className={style.headerItem}
-            onClick={() => navigate("/login")}
           >
             <MailBoxButton />
-          </div>
+          </Link>
           <button
             className={style.headerItem} 
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/product")}
           >
-            Registro
+            <LoginButton />
           </button>
           <button
             className={style.headerItem}

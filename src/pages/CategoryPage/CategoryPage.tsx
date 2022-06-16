@@ -1,8 +1,12 @@
+import ProductCard from "../../components/product/ProductCard"
+
 const style = {}
 
 const CategoryPage = () => {
   return (
-    <div>CategoryPage</div>
+    <div>
+      <ProductCard />
+    </div>
   )
 }
 
