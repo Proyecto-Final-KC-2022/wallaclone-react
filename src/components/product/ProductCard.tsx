@@ -4,14 +4,14 @@ const style = {};
 
 const ProductCard = () => {
   return (
-    <div className="flex bg-white w-[684px] h-[202px] rounded-[10px] border mb-[12px] overflow-hidden">
-      <div className="flex items-center pl-2">
-        <img src={Img} className="rounded-[10px] h-[196px] w-[268px]" />
+    <div className="flex bg-white w-full rounded-[10px] border border-gray-300 overflow-hidden mb-2">
+      <div className="flex items-center px-1 py-1">
+        <img src={Img} className="rounded-[10px] h-[196px] w-full" />
       </div>
       <div className="m-0 p-0 block">
         <ProductDetails />
       </div>
-    </div>
+    </div> 
   );
 };
 
