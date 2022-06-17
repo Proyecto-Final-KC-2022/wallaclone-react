@@ -1,4 +1,5 @@
 import Header from "../../components/header/Header"
+import Navbar from "../../components/header/Navbar"
 import ProductCard from "../../components/product/ProductCard"
 
 const style = {}
@@ -14,6 +15,7 @@ const CategoryPage = () => {
         <ProductCard />
         <ProductCard />
       </div>
+      <Navbar />
     </>
   )
 }

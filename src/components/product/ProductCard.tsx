@@ -8,7 +8,7 @@ const ProductCard = () => {
       <div className="flex items-center px-1 py-1">
         <img src={Img} className="rounded-[10px] h-[196px] w-full" />
       </div>
-      <div className="m-0 p-0 block">
+      <div className="m-0 p-0 block w-2/3">
         <ProductDetails />
       </div>
     </div> 

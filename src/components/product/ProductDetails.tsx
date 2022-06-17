@@ -6,7 +6,7 @@ const ProductDetails = () => {
       <div className="flex-col w-[416px] pr-[16px] pl-[12px]">
         <div className="m-0 p-0 block">
           <span className="block font-[700] text-[1.25rem] text-[#253238] mt-[10px] mb-[2px]">
-            Precio
+            Precio €
           </span>
         </div>
         <span className="block mb-[2px] text-[1rem] text-[#253238] overflow-hidden">
@@ -16,7 +16,7 @@ const ProductDetails = () => {
           <li>Tags</li>
           <li>Tags</li>
         </ul>
-        <p className="relative overflow-hidden text-[#90A4AE] text-[.875rem]">
+        <p className="overflow-hidden text-[#90A4AE] text-[.875rem]">
           Descripción del producto.
         </p>
       </div>

@@ -1,17 +1,17 @@
-import { MdOutlineEmail } from 'react-icons/md'
+import Inbox from "../../images/inbox.png";
 
 const style = {
-    mailButtonWrapper: "flex w-full items-center justify-center text-center",
-    mailButtonText: "flex text-center text-md px-2"
+    mailButtonWrapper: "flex w-[80px] h-[65px] items-center justify-center text-center hover:border-b-[4px] border-black",
+    mailButtonText: "flex text-center items-center text-[.875rem] pr-2"
 }
 
 const MailBoxButton = () => {
   return (
     <div className={style.mailButtonWrapper}>
-      <div className="flex mr-2">
-        <MdOutlineEmail />
+      <div className="justify-center items-center mr-1">
+        <img src={Inbox} alt="inbox" />
       </div>
-      <span>Buzón</span>
+      <span className={style.mailButtonText}>Buzón</span>
     </div>
   )
 }
