@@ -9,7 +9,7 @@ const style = {}
 const ProductPage = () => {
   return (
     <div>
-      <ProductCard />
+      
     </div>
   )
 }

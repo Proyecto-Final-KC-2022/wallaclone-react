@@ -62,7 +62,7 @@ const Header = () => {
           </Link>
           <button
             className={style.headerItem} 
-            onClick={() => navigate("/product")}
+            onClick={() => navigate("/products")}
           >
             <LoginButton />
           </button>
