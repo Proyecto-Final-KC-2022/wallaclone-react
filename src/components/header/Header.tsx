@@ -32,9 +32,9 @@ const Header = () => {
     <div className={style.navWrapper}>
       <div className={style.navContainer}>
         <a className={style.logoWrapper}>
-          <i className={style.logoContainer}>
+          <Link to="/" className={style.logoContainer}>
             <img src={Logo} alt="logo" />
-          </i>
+          </Link>
         </a>
         <div className={style.searchbarWrapper}>
           <div className={style.searchbarContainer}>

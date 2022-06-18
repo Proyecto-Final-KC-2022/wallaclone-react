@@ -21,14 +21,14 @@ const Navbar = () => {
   return (
     <div className={style.navWrapper}>
       <div className={style.navContainer}>
-        <div className={style.navItems}>
+        <Link to="/" className={style.navItems}>
             <div className={style.navIcon}>
                 <AiOutlineShop />
             </div>
             <span className={style.navText}>
                 Inicio
             </span>
-        </div>
+        </Link>
         <div className={style.navItems}>
             <div className={style.navIcon}>
                 <AiOutlineHeart />

@@ -8,20 +8,21 @@ import Products2 from "./pages/CategoryPage/CategoryPage"
 
 import './index.css'
 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 function App() {
   return (
-    <div  className="m-0 w-full h-full block">
-      <div  className="flex flex-col min-h-full">
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<HomePage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/category" element={<Products2 />} />
-          </Routes>
-        </BrowserRouter>
-      </div> 
+    <div  className="m-0 p-0 w-full min-h-[100vh] block">
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/category" element={<Products2 />} />
+        </Routes>
+      </BrowserRouter> 
     </div>
     
   )
