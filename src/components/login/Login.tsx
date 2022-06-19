@@ -1,15 +1,19 @@
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
 const style = {};
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({ ...open }) => {
+  const [loginModal, setLoginModal] = useState(false);
+
+  if (!open) return null
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center">
+    <>
+    <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center z-10">
       <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl" onClick={() => navigate("/")}>
+        <div className="flex m-0 justify-end cursor-pointer text-2xl">
           <GrClose />
         </div>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
@@ -45,6 +49,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

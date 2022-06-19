@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer"
 import Navbar from "../../components/header/Navbar"
@@ -11,6 +12,8 @@ const style = {
 }
 
 const HomePage = () => {
+  const [loginModal, setLoginModal] = useState(false);
+
   return (
     <>
       <Header />
@@ -27,6 +30,7 @@ const HomePage = () => {
               <Hero />
             </div>
           </div>
+          {/* <Login open={loginModal} /> */}
         </div> 
       <Footer />
       <Navbar />

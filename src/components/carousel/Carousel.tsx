@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -24,11 +25,11 @@ import Jobs from "../../images/category_Jobs.png"
 import Services from "../../images/category_Services.png"
 
 const style = {
-  swiperContainer: "items-center justify-center px-10 flex",
-  swiperSlideWrapper: "hover:border rounded-[10px] items-center justify-center text-center text-[#90A4AE] hover:text-[#13c1ac] w-[130px] h-[152px] flex-col py-4",
-  imgWrapper: "flex justify-center items-center w-full",
+  swiperContainer: "items-center justify-center text-center px-10 flex",
+  swiperSlideWrapper: "xl:hover:border md:hover:border rounded-[10px] items-center justify-center text-center text-[#90A4AE] hover:text-[#13c1ac] w-[130px] h-[152px] flex-col py-4",
+  imgWrapper: "xl:flex md:flex justify-center items-center w-full hidden",
   imgContainer: "w-[68px]",
-  swiperText: "text-center text-[1rem] py-[16px] w-full"
+  swiperText: "text-center xl:text-[1rem] md:text-[1rem] text-xs py-[16px] inline-block align-baseline tracking-tighter"
 }
 
 // Import Swiper styles
@@ -38,11 +39,13 @@ import "swiper/css/navigation";
 // import required modules
 
 export default function Carousel() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Swiper
         slidesPerView={7}
-        spaceBetween={60}
+        spaceBetween={40}
         slidesPerGroup={1}
         loop={true}
         loopFillGroupWithBlank={true}
@@ -57,7 +60,7 @@ export default function Carousel() {
           <span className={style.swiperText}>Todas las categorías</span>
         </SwiperSlide>
 
-        <SwiperSlide className={style.swiperSlideWrapper}>
+        <SwiperSlide className={style.swiperSlideWrapper} onClick={() => navigate("/product/:id")}>
           <div className={style.imgWrapper}>
             <img className={style.imgContainer} src={Cars} /> 
           </div>

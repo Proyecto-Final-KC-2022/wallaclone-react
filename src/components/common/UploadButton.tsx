@@ -1,3 +1,5 @@
+import { Link, useNavigate } from "react-router-dom";
+
 import { AiOutlinePlusCircle }from 'react-icons/ai'
 
 const style = {
@@ -6,8 +8,10 @@ const style = {
 }
 
 const UploadButton = () => {
+  const navigate = useNavigate();
+
   return (
-    <button className={style.uploadButtonWrapper}>
+    <button className={style.uploadButtonWrapper} onClick={() => navigate("/products")}>
       <div className="flex items-center text-white">
         <div className="text-2xl mr-1 items-center">
           <AiOutlinePlusCircle />

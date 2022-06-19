@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-
 import { AiOutlineSearch } from "react-icons/ai";
 
 import Logo from "../../images/logo.png";
@@ -60,16 +59,10 @@ const Header = () => {
           >
             <MailBoxButton />
           </Link>
-          <button
-            className={style.headerItem} 
-            onClick={() => navigate("/products")}
-          >
+          <button className={style.headerItem} >
             <LoginButton />
           </button>
-          <button
-            className={style.headerItem}
-            onClick={() => navigate("/login")}
-          >
+          <button className={style.headerItem}>
             <UploadButton />
           </button>
         </div>
