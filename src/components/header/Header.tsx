@@ -10,7 +10,7 @@ import LoginButton from "../common/LoginButton";
 
 const style = {
   navWrapper:
-    "flex h-[66px] w-full text-center items-center justify-between bg-[#fff] sticky top-0",
+    "flex h-[66px] w-full text-center items-center justify-between bg-[#fff] sticky top-0 z-10",
   navContainer: "flex h-full w-full px-[16px]",
   logoWrapper: "flex items-center justify-center",
   logoContainer: "block w-[38px] h-[38px]",

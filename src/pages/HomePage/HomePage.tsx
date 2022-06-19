@@ -2,6 +2,7 @@ import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer"
 import Navbar from "../../components/header/Navbar"
 import Carousel from "../../components/carousel/Carousel"
+import Hero from "../../components/hero/Hero"
 
 import Login from "../../components/login/Login";
 
@@ -21,6 +22,9 @@ const HomePage = () => {
             <div className="font-bold text-[2.25rem] leading-normal pb-[32px]">¿Qué estás buscando hoy?</div>
             <div className="pb-[32px] px-4 items-center">
               <Carousel /> 
+            </div>
+            <div className="bg-gray-300 w-full min-h-[100vh] items-center justify-center pt-[60px] pb-[44px]">
+              <Hero />
             </div>
           </div>
         </div> 
