@@ -11,7 +11,7 @@ const UploadButton = () => {
   const navigate = useNavigate();
 
   return (
-    <button className={style.uploadButtonWrapper} onClick={() => navigate("/products")}>
+    <button className={style.uploadButtonWrapper}>
       <div className="flex items-center text-white">
         <div className="text-2xl mr-1 items-center">
           <AiOutlinePlusCircle />

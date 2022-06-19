@@ -26,7 +26,7 @@ import Services from "../../images/category_Services.png"
 
 const style = {
   swiperContainer: "items-center justify-center text-center px-10 flex",
-  swiperSlideWrapper: "xl:hover:border md:hover:border rounded-[10px] items-center justify-center text-center text-[#90A4AE] hover:text-[#13c1ac] w-[130px] h-[152px] flex-col py-4",
+  swiperSlideWrapper: "xl:hover:border md:hover:border rounded-[10px] items-center justify-center text-center text-[#90A4AE] hover:text-[#13c1ac] w-[130px] h-[152px] flex-col py-4 cursor-pointer",
   imgWrapper: "xl:flex md:flex justify-center items-center w-full hidden",
   imgContainer: "w-[68px]",
   swiperText: "text-center xl:text-[1rem] md:text-[1rem] text-xs py-[16px] inline-block align-baseline tracking-tighter"
@@ -53,14 +53,14 @@ export default function Carousel() {
         modules={[ Navigation]}
         className={style.swiperContainer}
       >
-        <SwiperSlide className={style.swiperSlideWrapper}>
+        <SwiperSlide className={style.swiperSlideWrapper} onClick={() => navigate("/products")}>
           <div className={style.imgWrapper}>
             <img className={style.imgContainer} src={All} /> 
           </div>
           <span className={style.swiperText}>Todas las categorías</span>
         </SwiperSlide>
 
-        <SwiperSlide className={style.swiperSlideWrapper} onClick={() => navigate("/product/:id")}>
+        <SwiperSlide className={style.swiperSlideWrapper} onClick={() => navigate("/category")}>
           <div className={style.imgWrapper}>
             <img className={style.imgContainer} src={Cars} /> 
           </div>
