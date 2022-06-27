@@ -2,18 +2,17 @@ import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
-const style = {};
 
-const Login = ({ ...open }) => {
-  const [loginModal, setLoginModal] = useState(false);
+import LoginStyles from "./LoginStyles"
 
-  if (!open) return null
+const Login = ({open, onClose}:any) => {
+  if(!open) return null
+  debugger
 
-  return (
-    <>
-    <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex items-center justify-center z-10">
+  return ( 
+    <div className={LoginStyles.loginWrapper}>
       <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl">
+        <div className="flex m-0 justify-end cursor-pointer text-2xl" onClick={onClose}>
           <GrClose />
         </div>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
@@ -49,7 +48,6 @@ const Login = ({ ...open }) => {
         </div>
       </div>
     </div>
-    </>
   );
 };
 

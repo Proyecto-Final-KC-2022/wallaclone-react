@@ -4,11 +4,10 @@ const style = {
   loginText: "flex text-center items-center text-[.875rem]"
 }
 
-const LoginButton = () => {
-  const [loginModal, setLoginModal] = useState(false);
+const LoginButton = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
 
   return (
-    <button className={style.loginButtonWrapper} onClick={() => setLoginModal(true)}>
+    <button className={style.loginButtonWrapper} onClick={() => onClickLoginButton()}>
       <span className={style.loginText}>Regístrate o inicia sesión</span>
     </button>
   )

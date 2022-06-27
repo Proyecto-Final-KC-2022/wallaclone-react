@@ -5,6 +5,8 @@ import SignUp from "./components/signup/SignUp"
 import Products from "./pages/ProductsPage/ProductsPage"
 import Product from "./pages/ProductPage/ProductPage"
 import Products2 from "./pages/CategoryPage/CategoryPage"
+import AccountPage from "./pages/AccountPage/AccountPage"
+
 
 import './index.css'
 
@@ -18,10 +20,10 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
           <Route path="/category" element={<Products2 />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
       </BrowserRouter> 
     </div>
-    
   )
 }
 

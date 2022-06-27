@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { AiOutlineHeart } from "react-icons/ai";
 import { HiOutlineLocationMarker, HiMail } from "react-icons/hi";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
@@ -16,9 +18,14 @@ importar:
 const style = {}
 
 const ProductPage = () => {
+  const [loginModal, setLoginModal] = useState(false);
+  const onClickLoginButton = ()=>{
+    setLoginModal(true);
+  }
+
   return (
     <>
-    <Header />
+    <Header onClickLoginButton={onClickLoginButton} />
     <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
       <div className="w-[681px] h-full">
         <div className="bg-white rounded-[10px] px-[20px] pb-[32px] border border-[#ECEFF1]">
