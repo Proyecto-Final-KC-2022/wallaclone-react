@@ -1,4 +1,4 @@
-/* import { useState } from "react";
+import { useState } from "react";
 
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer"
@@ -40,9 +40,9 @@ const HomePage = () => {
   );
 };
 
-export default HomePage; */
+export default HomePage;
 
-import Header from "../../components/header/Header";
+/* import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer"
 import Navbar from "../../components/header/Navbar"
 import Carousel from "../../components/carousel/Carousel"
@@ -116,10 +116,9 @@ const HomePage = () => {
               <Hero />
             </div>
           </div>
-          {/* <Login open={loginModal} /> */}
         </div> 
 
-      {/* //TODO: BORRAR EJEMPLO PETICION*/}
+      //TODO: BORRAR EJEMPLO PETICION
       <ul>
         {ads.map((ad: any) => {
           return <li key={ad._id}><strong>{ad.name}</strong></li>;
@@ -130,4 +129,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default HomePage; */
