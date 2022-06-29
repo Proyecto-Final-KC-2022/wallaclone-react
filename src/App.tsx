@@ -7,6 +7,15 @@ import Product from "./pages/ProductPage/ProductPage"
 import Products2 from "./pages/CategoryPage/CategoryPage"
 import AccountPage from "./pages/AccountPage/AccountPage"
 
+/*
+  TODO PENDIENTE CORREGIR LAS IMPORTACIONES PARA TODO LO QUE NECESITA EL LOGIN.
+
+  TODO MODIFICAR LOS ARCHIVOS JS A TS
+
+  TODO PROBAR CONEXIÓN CON API
+
+*/
+import LoginPage from "./components/auth/LoginPage"
 
 import './index.css'
 
@@ -16,6 +25,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
+
+          <Route path="/login" element={<LoginPage />} />
+
           <Route path="/signup" element={<SignUp />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
