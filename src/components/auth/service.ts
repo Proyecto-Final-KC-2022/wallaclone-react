@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import client, { configureClient, resetClient } from '../../api/client';
 import storage from '../../utils/storage';
 
@@ -6,7 +7,7 @@ const authPath = '/auth';
 export const login = ({ remember, ...credentials }) => {
   return client
     .post(`${authPath}/login`, credentials)
-    .then(({ accessToken }) => {
+    .then(({ accessToken }:any) => {
       configureClient({ accessToken });
       return accessToken;
     })
