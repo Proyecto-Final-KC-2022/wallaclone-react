@@ -1,7 +1,7 @@
+import { any } from 'prop-types';
 import React from 'react';
-import T from 'prop-types';
 
-const AuthContext = React.createContext();
+const AuthContext = React.createContext({handleLogin?:any});
 
 export const useAuthContext = () => {
   const authValue = React.useContext(AuthContext);
@@ -14,12 +14,5 @@ export const AuthProvider = ({ children, ...props }) => (
 
 export const AuthConsumer = AuthContext.Consumer;
 
-AuthProvider.propTypes = {
-  children: T.node,
-};
-
-AuthProvider.defaultProps = {
-  children: null,
-};
 
 export default AuthContext;

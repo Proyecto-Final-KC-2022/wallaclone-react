@@ -8,14 +8,21 @@ import Products2 from "./pages/CategoryPage/CategoryPage"
 import AccountPage from "./pages/AccountPage/AccountPage"
 
 /*
+  MARCE
+*/
+
+
+import { LoginPage } from "./components/auth";
+
+/*
   TODO PENDIENTE CORREGIR LAS IMPORTACIONES PARA TODO LO QUE NECESITA EL LOGIN.
 
   TODO MODIFICAR LOS ARCHIVOS JS A TS
 
   TODO PROBAR CONEXIÓN CON API
 
+  import LoginPage from "./components/auth/LoginPage"
 */
-import LoginPage from "./components/auth/LoginPage"
 
 import './index.css'
 
