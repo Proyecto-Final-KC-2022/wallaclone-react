@@ -12,13 +12,9 @@ const style = {
 };
 
 const HomePage = () => {
-  const [loginModal, setLoginModal] = useState(false);
-  const onClickLoginButton = ()=>{
-    setLoginModal(true);
-  }
+  
   return (
     <>
-      <Header onClickLoginButton={onClickLoginButton} />
         <div className={style.homepageWrapper}>
           <span className="text-[1rem] text-[#607D8B] font-light pt-[16px]">
             wallaclone, la plataforma líder de compraventa de productos de Segunda mano
@@ -33,7 +29,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      <Login open={loginModal} onClose={() => setLoginModal(false)} />
       <Footer />
       <Navbar />
     </>

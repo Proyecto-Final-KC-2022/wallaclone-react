@@ -1,16 +1,17 @@
-import React from 'react';
+import React from "react";
 
-function useQuery(query) {
-  const [data, setData] = React.useState(undefined);
+function useQuery<T>(query: () => T) {
+  const [data, setData] = React.useState<Awaited<T>>(undefined);
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    const startExecution = () => {
+    const startExecution = (): void => {
       setError(null);
       setIsLoading(true);
     };
-    const finishExecution = (error, data) => {
+
+    const finishExecution = (error: any, data?: Awaited<T>): void => {
       setIsLoading(false);
       if (error) {
         return setError(error);

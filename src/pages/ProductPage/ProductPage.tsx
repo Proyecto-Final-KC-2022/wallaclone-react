@@ -10,22 +10,14 @@ import Footer from "../../components/footer/Footer"
 import Avatar from "../../images/avatar.png"
 import Img from "../../images/bmw-serie2.jpg"
 import Map from "../../images/map.png" 
-/* 
-importar:
-  ProductCard
-  ProdcutDetails
-*/
+
+
 const style = {}
 
-const ProductPage = () => {
-  const [loginModal, setLoginModal] = useState(false);
-  const onClickLoginButton = ()=>{
-    setLoginModal(true);
-  }
-
+const ProductPage = (): JSX.Element => {
+  
   return (
     <>
-    <Header onClickLoginButton={onClickLoginButton} />
     <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
       <div className="w-[681px] h-full">
         <div className="bg-white rounded-[10px] px-[20px] pb-[32px] border border-[#ECEFF1]">

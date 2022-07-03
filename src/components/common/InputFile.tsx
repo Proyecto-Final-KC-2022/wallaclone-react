@@ -1,10 +1,10 @@
 import React from 'react';
 import T from 'prop-types';
 
-import placeholder from '../../assets/images/placeholder.png';
+// import placeholder from '../../assets/images/placeholder.png';
 
 function InputFile({ onChange, ...props }) {
-  const inputRef = React.createRef(null);
+  const inputRef = React.createRef();
   const [src, setSrc] = React.useState(null);
 
   const loadSrcFromFile = file => {
@@ -20,7 +20,7 @@ function InputFile({ onChange, ...props }) {
   };
 
   const handleClick = () => {
-    inputRef.current.click();
+    inputRef.current['click']();
   };
 
   const handleChange = ev => {
@@ -32,7 +32,7 @@ function InputFile({ onChange, ...props }) {
   return (
     <>
       <input
-        ref={inputRef}
+        ref={inputRef as any}
         type="file"
         style={{ display: 'none' }}
         onChange={handleChange}
@@ -40,7 +40,7 @@ function InputFile({ onChange, ...props }) {
       />
       <img
         onClick={handleClick}
-        src={src || placeholder}
+        src={src || 'placeholder'}
         alt=""
         width="200"
         height="200"

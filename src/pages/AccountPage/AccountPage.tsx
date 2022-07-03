@@ -9,13 +9,9 @@ import LogoutButton from "../../components/common/LogoutButton";
 import Avatar from "../../images/avatar.png"
 
 const AccountPage = () => {
-  const [loginModal, setLoginModal] = useState(false);
-  const onClickLoginButton = ()=>{
-    setLoginModal(true);
-  }
+  
   return (
     <>
-      <Header onClickLoginButton={onClickLoginButton} />
       <div className="min-h-[100vh] bg-gray-200 flex">
         <div className="sticky top-[65px] left-0 bottom-0 h:calc(100vh - 65px) block">
           <div className="h-full overflow-auto w-[216px] bg-white border-r-2 flex-col flex">
