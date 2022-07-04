@@ -4,10 +4,10 @@ const style = {
   loginText: "flex text-center items-center text-[.875rem]"
 }
 
-const LoginButton = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
+const LoginButton = ({ onClickModalButton }: { onClickModalButton: Function }) => {
 
   return (
-    <button className={style.loginButtonWrapper} onClick={() => onClickLoginButton()}>
+    <button className={style.loginButtonWrapper} onClick={() => onClickModalButton()}>
       <span className={style.loginText}>Regístrate o inicia sesión</span>
     </button>
   )

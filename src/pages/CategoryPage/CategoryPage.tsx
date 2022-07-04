@@ -1,22 +1,22 @@
-import Header from "../../components/header/Header"
-import Navbar from "../../components/header/Navbar"
-import ProductCard from "../../components/product/ProductCard"
+import Layout from "../../components/layout/Layout";
+import ProductCard from "../../components/product/ProductCard";
 
-const style = {}
+const style = {};
 
 const CategoryPage = () => {
   return (
     <>
-      <div className="flex-col px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <Navbar />
+      <Layout>
+        <div className="flex-col xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </div>
+      </Layout>
     </>
-  )
-}
+  );
+};
 
-export default CategoryPage
+export default CategoryPage;

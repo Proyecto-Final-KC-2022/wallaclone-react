@@ -9,7 +9,7 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-const Header = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
+const Header = ({ onClickModalButton }: { onClickModalButton: Function }) => {
   const navigate = useNavigate();
 
   return (
@@ -42,7 +42,7 @@ const Header = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
             <MailBoxButton />
           </Link>
           <div className={HeaderStyles.headerItem}>
-            <LoginButton onClickLoginButton={onClickLoginButton} />
+            <LoginButton onClickModalButton={onClickModalButton} />
           </div>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />

@@ -1,20 +1,13 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { GrClose } from "react-icons/gr";
+import Modal from "../modal/Modal";
+import LoginStyles from "./LoginStyles";
 
-import LoginStyles from "./LoginStyles"
-
-const Login = ({open, onClose}:any) => {
-  if(!open) return null
-  debugger
-
-  return ( 
-    <div className={LoginStyles.loginWrapper}>
-      <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl" onClick={onClose}>
-          <GrClose />
-        </div>
+const Login = () => {
+  return (
+    <>
+      <Modal>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
           Bienvenido a wallaclone
         </h1>
@@ -43,11 +36,13 @@ const Login = ({open, onClose}:any) => {
               Recuperar contraseña
             </p>
             <span className="mx-4">|</span>
-            <Link to="/signup" className="text-center text-gray-700 my-4">Regístrate</Link>
+            <Link to="/signup" className="text-center text-gray-700 my-4">
+              Regístrate
+            </Link>
           </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 

@@ -1,9 +1,8 @@
-import Header from "../../components/header/Header";
+import Layout from "../../components/layout/Layout";
 import ProductCard2 from "../../components/product/ProductCard2";
 import useQuery from "../../hooks/useQuery";
 import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import { Advert } from "../../models/Advert.model";
-
 
 /**
   TODO: 
@@ -17,7 +16,7 @@ import { Advert } from "../../models/Advert.model";
  */
 const ProductsPage = (): JSX.Element => {
   //TODO: Usar un componente de carga (spinner) mientras cargan los anuncios
-  //TODO: Usar un compoennte de error si ha habido algún error 
+  //TODO: Usar un compoennte de error si ha habido algún error
   const {
     isLoading,
     error,
@@ -26,13 +25,17 @@ const ProductsPage = (): JSX.Element => {
 
   return (
     <>
-      <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-        {adverts.length > 0 ? (
-          adverts.map((advert: Advert) => <ProductCard2 {...advert} key={advert._id} />)
-        ) : (
-          <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
-        )}
-      </div>
+      <Layout>
+        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+          {adverts.length > 0 ? (
+            adverts.map((advert: Advert) => (
+              <ProductCard2 {...advert} key={advert._id} />
+            ))
+          ) : (
+            <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+          )}
+        </div>
+      </Layout>
     </>
   );
 };
