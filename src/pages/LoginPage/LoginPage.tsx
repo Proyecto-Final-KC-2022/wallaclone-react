@@ -1,29 +1,16 @@
-import { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
 
-import Modal from "../modal/Modal";
-import LoginStyles from "./LoginStyles";
-
-import SignUp from "../signup/SignUp";
-
-const Login = ({ open, onClose }: any) => {
-  if (!open) return null;
-
-  const [signupModal, setSignupModal] = useState(false);
-  const onClickModalButton = () => {
-    setSignupModal(true);
-  };
-
+const LoginPage = () => {
   return (
-    <>
-      <Modal>
-        <div
-          className="flex m-0 justify-end cursor-pointer text-2xl"
-          onClick={onClose}
-        >
-          <GrClose />
+    <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
+      <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
+        <div className="flex m-0 justify-end cursor-pointer text-2xl">
+          <Link to="/">
+            <GrClose />
+          </Link>
         </div>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
           Bienvenido a wallaclone
@@ -55,18 +42,14 @@ const Login = ({ open, onClose }: any) => {
               Recuperar contraseña
             </p>
             <span className="mx-4">|</span>
-            <div
-              className="text-center text-gray-700 my-4"
-              onClick={onClickModalButton}
-            >
-              <SignUp open={signupModal} onClose={() => setSignupModal(false)} />
-              Regístrate
+            <div className="text-center text-gray-700 my-4">
+              <Link to="/signup">Regístrate</Link>
             </div>
           </div>
         </div>
-      </Modal>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Login;
+export default LoginPage;

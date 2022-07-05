@@ -1,11 +1,10 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
 
-import Modal from "../modal/Modal";
-
-import { useForm } from "../../hooks/useForm";
+import { Link } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
+
+import { useForm } from "../../hooks/useForm";
 
 interface FormData {
   name: string;
@@ -13,11 +12,7 @@ interface FormData {
   password: string;
 }
 
-export const SignUp = ({ open, onClose, onSubmit }: any) => {
-  if (!open) return null;
-
-  const navigate = useNavigate();
-
+const SignupPage = ({ onSubmit }: any) => {
   const { name, email, password, form, handleChange, handleSubmit } =
     useForm<FormData>({
       name: "",
@@ -26,13 +21,12 @@ export const SignUp = ({ open, onClose, onSubmit }: any) => {
     });
 
   return (
-    <>
-      <Modal>
-        <div
-          className="flex m-0 justify-end cursor-pointer text-2xl"
-          onClick={onClose}
-        >
-          <GrClose />
+    <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
+      <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
+        <div className="flex m-0 justify-end cursor-pointer text-2xl">
+          <Link to="/">
+            <GrClose />
+          </Link>
         </div>
 
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
@@ -46,7 +40,7 @@ export const SignUp = ({ open, onClose, onSubmit }: any) => {
               type="text"
               className="border-b border-gray-700 p-2 mb-5 outline-none"
               placeholder="Nombre y apellidos"
-              name="nombre"
+              name="name"
               value={name}
               onChange={handleChange}
             />
@@ -82,9 +76,9 @@ export const SignUp = ({ open, onClose, onSubmit }: any) => {
             </div>
           </div>
         </form>
-      </Modal>
-    </>
+      </div>
+    </div>
   );
 };
 
-export default SignUp;
+export default SignupPage;
