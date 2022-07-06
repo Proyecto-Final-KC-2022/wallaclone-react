@@ -1,8 +1,12 @@
+import CircularProgress from "@mui/material/CircularProgress";
+
 import Layout from "../../components/layout/Layout";
 import ProductCard2 from "../../components/product/ProductCard2";
 import useQuery from "../../hooks/useQuery";
 import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import { Advert } from "../../models/Advert.model";
+import { LoadMoreButton } from "../../components/common/LoadMoreButton";
+import Spinner from "../../components/spinner/Spinner";
 
 /**
   TODO: 
@@ -35,6 +39,19 @@ const ProductsPage = (): JSX.Element => {
             <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
           )}
         </div>
+        
+        <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
+          <LoadMoreButton />
+        </div>
+
+        <div className="flex justify-center bg-gray-200 py-4 h-full">
+          <CircularProgress />
+        </div>
+
+        <div className="flex justify-center bg-gray-200 py-4 h-full">
+          <Spinner />
+        </div>
+
       </Layout>
     </>
   );
