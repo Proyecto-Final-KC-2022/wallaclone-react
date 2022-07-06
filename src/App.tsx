@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
@@ -25,34 +26,42 @@ import { LoginPage } from "./components/auth";
 
 import { useState } from "react";
 
+import { AuthProvider } from '../src/components/auth/context'
+
 import "./index.css";
-import Login from "./pages/LoginPage/LoginPage";
+import Login from "../src/components/auth/LoginPage/LoginPage";
 import SignUp from "./pages/SignupPage/SignupPage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 
+function App({ isInitiallyLogged }) {
+  const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
+  const handleSignup = () => setIsLogged(true);
+  const handleLogin = () => setIsLogged(true);
+  const handleLogout = () => setIsLogged(false);
 
-/* import Login from "./components/login/Login"; */
+  const authProps = { isLogged, handleSignup, handleLogin, handleLogout };
 
-function App() {
   return (
-    <div className="m-0 p-0 w-full min-h-[100vh] block">
-      <BrowserRouter>
-        <Routes>
-          
-          <Route index element={<ProductsPage />} />
+    <AuthProvider {...authProps}>
+      <div className="m-0 p-0 w-full min-h-[100vh] block">
+        <BrowserRouter>
+          <Routes>
+            
+            <Route index element={<ProductsPage />} />
 
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:name/:id" element={<Product />} />
-          <Route path="/category" element={<Products2 />} />
-          <Route path="/account" element={<AccountPage />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:name/:id" element={<Product />} />
+            <Route path="/category" element={<Products2 />} />
+            <Route path="/account" element={<AccountPage />} />
 
-        </Routes>
-        {/* <Login /> */}
-      </BrowserRouter>
-    </div>
+          </Routes>
+        
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 

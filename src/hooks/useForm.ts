@@ -1,26 +1,48 @@
-import { ChangeEvent, useState } from "react";
+import React from 'react';
 
-export const useForm = <T extends Object>( initState: T ) => {
-    const [form, setForm] = useState( initState );
+const getValueByType = {
+  checkbox: ({ checked }) => checked,
 
-    const handleChange = ( { target }: ChangeEvent<HTMLInputElement> ) => {
-        const { name, value } = target
+  number: ({ value }) => Number(value),
 
-        setForm({
-            ...form,
-            [ name ]: value
-        })
-    }
+  'select-multiple': ({ selectedOptions }) =>
+    [...selectedOptions].map(({ value }) => value),
 
-    const handleSubmit = onSubmit => ev => {
-        ev.preventDefault();
-        onSubmit(form);
-      };
+  file: ({ files }) => files[0] || null,
+};
 
-    return {
-        form,
-        handleChange,
-        handleSubmit,
-        ...form
-    }
+const defaultGetValue = ({ value }) => value;
+
+function useForm(initialFormValue) {
+  const [formValue, setFormValue] = React.useState(initialFormValue);
+
+  const updateFormValue = (name, value) => {
+    setFormValue(currentFormValue => ({
+      ...currentFormValue,
+      [name]: value,
+    }));
+  };
+
+  const handleChange = ev => {
+    const valueGetter = getValueByType[ev.target.type] || defaultGetValue;
+    updateFormValue(ev.target.name, valueGetter(ev.target));
+  };
+
+  const handleSubmit = onSubmit => ev => {
+    ev.preventDefault();
+    onSubmit(formValue);
+  };
+
+  const validate = (...validations) =>
+    validations.map(validation => validation(formValue)).every(valid => valid);
+
+  return {
+    formValue,
+    setFormValue,
+    handleChange,
+    handleSubmit,
+    validate,
+  };
 }
+
+export default useForm;

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import client, { configureClient, resetClient } from '../../api/client';
 import storage from '../../utils/storage';
 
-const authPath = '/auth';
+const authPath = '/api';
 
 export const login = ({ remember, ...credentials }) => {
   return client
@@ -12,9 +12,9 @@ export const login = ({ remember, ...credentials }) => {
       return accessToken;
     })
     .then(accessToken => {
-      storage.remove('auth');
+      storage.remove('api');
       if (remember) {
-        storage.set('auth', accessToken);
+        storage.set('api', accessToken);
       }
     });
 };
