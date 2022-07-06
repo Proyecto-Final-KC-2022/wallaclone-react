@@ -1,9 +1,11 @@
-import Header from "../../components/header/Header";
 import ProductCard2 from "../../components/product/ProductCard2";
-import useQuery from "../../hooks/useQuery";
-import AdvertisementsSrv from "../../api/service/Advertisement.service";
+import AdvertisementsSrv, {
+  Payload,
+} from "../../api/service/Advertisement.service";
 import { Advert } from "../../models/Advert.model";
-
+import { GetAllAdvertisementsQueryParams } from "../../api/service/Advertisement.service";
+import { useCallback, useRef, useState } from "react";
+import usePagination from "../../hooks/usePagination";
 
 /**
   TODO: 
@@ -17,23 +19,115 @@ import { Advert } from "../../models/Advert.model";
  */
 const ProductsPage = (): JSX.Element => {
   //TODO: Usar un componente de carga (spinner) mientras cargan los anuncios
-  //TODO: Usar un compoennte de error si ha habido algún error 
+  //TODO: Usar un compoennte de error si ha habido algún
+  const limitPerPage: number = 8;
+  const [pageNumber, setPageNumber] = useState(1);
+  const startQueryParam = pageNumber > 1 ? (pageNumber - 1) * limitPerPage : 0;
+  let advertisementsPayload: Payload<GetAllAdvertisementsQueryParams> = {
+    queryParams: {
+      start: startQueryParam,
+      limit: limitPerPage,
+    },
+  };
   const {
     isLoading,
     error,
     data: adverts = [],
-  } = useQuery(AdvertisementsSrv.getAllAdvertisements);
+    hasMore,
+  } = usePagination(
+    AdvertisementsSrv.getAllAdvertisements,
+    advertisementsPayload,
+    pageNumber
+  );
+  const observer = useRef<any>();
+  const goToNextPage = () => {
+    setPageNumber((prevPageNumber) => prevPageNumber + 1);
+  };
+  const lastAdvertElementRef = useCallback(
+    (node) => {
+      if (isLoading) {
+        return;
+      }
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          goToNextPage();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
+
+  const filteredAdverts = adverts.sort((a, b) => {
+    const aCreationDate = new Date(a.creationDate)?.getTime();
+    const bCreationDate = new Date(b.creationDate)?.getTime();
+    if (bCreationDate > aCreationDate) {
+      return 1;
+    }
+    if (bCreationDate < aCreationDate) {
+      return -1;
+    }
+    if (isNaN(aCreationDate) || isNaN(bCreationDate)) {
+      return 0;
+    }
+    return 0;
+  });
 
   return (
-    <>
-      <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-        {adverts.length > 0 ? (
-          adverts.map((advert: Advert) => <ProductCard2 {...advert} key={advert._id} />)
-        ) : (
-          <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
-        )}
-      </div>
-    </>
+    <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+      {!isLoading && !error && (
+        <>
+          {filteredAdverts.length > 0 ? (
+            filteredAdverts.map((advert: Advert, index) => {
+              if (filteredAdverts.length === index + 1 && pageNumber > 1) {
+                return (
+                  <div ref={lastAdvertElementRef} key={advert._id}>
+                    <ProductCard2 {...advert} />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={advert._id}>
+                    <ProductCard2 {...advert} />
+                  </div>
+                );
+              }
+            })
+          ) : (
+            <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+          )}
+        </>
+      )}
+
+      {!isLoading && !error && (
+        <>
+          {filteredAdverts.length > 0 ? (
+            hasMore &&
+            pageNumber === 1 && (
+              <button onClick={goToNextPage}>Cargar más</button>
+            )
+          ) : (
+            <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+          )}
+        </>
+      )}
+
+      {isLoading && (
+        // <Spinner animation="border" role="status" variant="warning">
+        <span className="visually-hidden">Loading...</span>
+        // </Spinner>
+      )}
+
+      {error && !isLoading && (
+        // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
+        //   <Toast.Header>
+        <strong className="me-auto">Error</strong>
+        //   </Toast.Header>
+        //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
+        // </Toast>
+      )}
+    </div>
   );
 };
 

@@ -36,7 +36,6 @@ function App() {
   };
   return (
     <div className="m-0 p-0 w-full min-h-[100vh] block">
-      <BrowserRouter>
         <Header onClickLoginButton={onClickLoginButton} />
         <Routes>
           <Route index element={<ProductsPage />} />
@@ -50,7 +49,6 @@ function App() {
           <Route path="/account" element={<AccountPage />} />
         </Routes>
         <Login open={loginModal} onClose={() => setLoginModal(false)} />
-      </BrowserRouter>
     </div>
   );
 }
