@@ -7,14 +7,14 @@ const authPath = '/api';
 export const login = ({ remember, ...credentials }) => {
   return client
     .post(`${authPath}/login`, credentials)
-    .then(({ accessToken }:any) => {
-      configureClient({ accessToken });
-      return accessToken;
+    .then(({ token }:any) => {
+      configureClient({ token });
+      return token;
     })
     .then(accessToken => {
-      storage.remove('api');
+      storage.remove('auth');
       if (remember) {
-        storage.set('api', accessToken);
+        storage.set('auth', accessToken);
       }
     });
 };
