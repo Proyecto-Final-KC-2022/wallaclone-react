@@ -6,7 +6,7 @@ const TagsFilter = () => {
       </div>
       <div className="overflow-auto px-[1.5rem] block">
         <div className="block">
-          <form className="max-w-[405px] w-full block">
+          <form className="w-full block">
             <div className="max-w-[720px] px-[15px] mx-auto block">
               <div className="flex flex-wrap">
 
