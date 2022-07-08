@@ -8,7 +8,6 @@ import { Advert } from "../../models/Advert.model";
 import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
 import FilterBar from "../../components/filter/FilterBar";
-import TagsFilter from "../../components/filter/TagsFilter";
 
 /**
   TODO: 
