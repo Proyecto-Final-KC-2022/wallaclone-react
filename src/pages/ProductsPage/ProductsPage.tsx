@@ -7,6 +7,8 @@ import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import { Advert } from "../../models/Advert.model";
 import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
+import FilterBar from "../../components/filter/FilterBar";
+import TagsFilter from "../../components/filter/TagsFilter";
 
 /**
   TODO: 
@@ -30,6 +32,7 @@ const ProductsPage = (): JSX.Element => {
   return (
     <>
       <Layout>
+        <FilterBar />
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
           {adverts.length > 0 ? (
             adverts.map((advert: Advert) => (
@@ -51,7 +54,6 @@ const ProductsPage = (): JSX.Element => {
         <div className="flex justify-center bg-gray-200 py-4 h-full">
           <Spinner />
         </div>
-
       </Layout>
     </>
   );
