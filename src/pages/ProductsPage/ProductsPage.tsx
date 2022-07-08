@@ -1,3 +1,6 @@
+import CircularProgress from "@mui/material/CircularProgress";
+
+import Layout from "../../components/layout/Layout";
 import ProductCard2 from "../../components/product/ProductCard2";
 import AdvertisementsSrv, {
   Payload,
@@ -6,6 +9,9 @@ import { Advert } from "../../models/Advert.model";
 import { GetAllAdvertisementsQueryParams } from "../../api/service/Advertisement.service";
 import { useCallback, useRef, useState } from "react";
 import usePagination from "../../hooks/usePagination";
+import { LoadMoreButton } from "../../components/common/LoadMoreButton";
+import Spinner from "../../components/spinner/Spinner";
+import FilterBar from "../../components/filter/FilterBar";
 
 /**
   TODO: 
@@ -59,65 +65,97 @@ const ProductsPage = (): JSX.Element => {
     [isLoading, hasMore]
   );
 
-  const filteredAdverts = [...adverts as Array<Advert>]//sortProducts(adverts);
+  const filteredAdverts = [...(adverts as Array<Advert>)]; //sortProducts(adverts);
 
   return (
-    <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-      {!isLoading && !error && (
-        <>
-          {filteredAdverts.length > 0 ? (
-            filteredAdverts.map((advert: Advert, index) => {
-              if (filteredAdverts.length === index + 1 && pageNumber > 1) {
-                return (
-                  <div ref={lastAdvertElementRef} key={advert._id}>
-                    <ProductCard2 {...advert} />
-                  </div>
-                );
-              } else {
-                return (
-                  <div key={advert._id}>
-                    <ProductCard2 {...advert} />
-                  </div>
-                );
-              }
-            })
-          ) : (
-            <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+    <>
+      <Layout>
+        <FilterBar />
+        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+          {!isLoading && !error && (
+            <>
+              {filteredAdverts.length > 0 ? (
+                filteredAdverts.map((advert: Advert, index) => {
+                  if (filteredAdverts.length === index + 1 && pageNumber > 1) {
+                    return (
+                      <div ref={lastAdvertElementRef} key={advert._id}>
+                        <ProductCard2 {...advert} />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div key={advert._id}>
+                        <ProductCard2 {...advert} />
+                      </div>
+                    );
+                  }
+                })
+              ) : (
+                <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {!isLoading && !error && (
-        <>
-          {filteredAdverts.length > 0 ? (
-            hasMore &&
-            pageNumber === 1 && (
-              <button onClick={goToNextPage}>Cargar más</button>
-            )
-          ) : (
-            <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+          {!isLoading && !error && (
+            <>
+              {filteredAdverts.length > 0 ? (
+                hasMore &&
+                pageNumber === 1 && (
+                  <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
+                    <LoadMoreButton onClickFn={goToNextPage}/>
+                  </div>
+                  // <button onClick={goToNextPage}>Cargar más</button>
+                )
+              ) : (
+                <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+              )}
+            </>
           )}
-        </>
-      )}
 
-      {isLoading && (
-        // <Spinner animation="border" role="status" variant="warning">
-        <span className="visually-hidden">Loading...</span>
-        // </Spinner>
-      )}
+          {isLoading && (
+            <div className="flex justify-center bg-gray-200 py-4 h-full">
+              <Spinner />
+            </div>
+          )}
 
-      {error && !isLoading && (
-        // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
-        //   <Toast.Header>
-        <strong className="me-auto">Error</strong>
-        //   </Toast.Header>
-        //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
-        // </Toast>
-      )}
-    </div>
+          {error && !isLoading && (
+            // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
+            //   <Toast.Header>
+            <strong className="me-auto">Error</strong>
+            //   </Toast.Header>
+            //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
+            // </Toast>
+          )}
+        </div>
+      </Layout>
+    </>
   );
-};
 
+  //   <Layout>
+  //   <FilterBar />
+  //   <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+  //     {adverts.length > 0 ? (
+  //       adverts.map((advert: Advert) => (
+  //         <ProductCard2 {...advert} key={advert._id} />
+  //       ))
+  //     ) : (
+  //       <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+  //     )}
+  //   </div>
+
+  //   <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
+  //     <LoadMoreButton />
+  //   </div>
+
+  //   <div className="flex justify-center bg-gray-200 py-4 h-full">
+  //     <CircularProgress />
+  //   </div>
+
+  //   <div className="flex justify-center bg-gray-200 py-4 h-full">
+  //     <Spinner />
+  //   </div>
+  // </Layout>
+};
 
 function sortProducts(adverts: any[]) {
   return adverts.sort((a, b) => {
@@ -135,6 +173,5 @@ function sortProducts(adverts: any[]) {
     return 0;
   });
 }
-
 
 export default ProductsPage;

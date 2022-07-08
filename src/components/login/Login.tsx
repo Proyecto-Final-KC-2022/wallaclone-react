@@ -1,23 +1,34 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { GrClose } from "react-icons/gr";
 
-import LoginStyles from "./LoginStyles"
+import Modal from "../modal/Modal";
+import LoginStyles from "./LoginStyles";
 
-const Login = ({open, onClose}:any) => {
-  if(!open) return null
-  debugger
+import SignUp from "../signup/SignUp";
 
-  return ( 
-    <div className={LoginStyles.loginWrapper}>
-      <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl" onClick={onClose}>
+const Login = ({ open, onClose }: any) => {
+  if (!open) return null;
+
+  const [signupModal, setSignupModal] = useState(false);
+  const onClickModalButton = () => {
+    setSignupModal(true);
+  };
+
+  return (
+    <>
+      <Modal>
+        <div
+          className="flex m-0 justify-end cursor-pointer text-2xl"
+          onClick={onClose}
+        >
           <GrClose />
         </div>
         <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
           Bienvenido a wallaclone
         </h1>
+
         <p className="text-center text-gray-700 mb-5">
           Regístrate o inicia sesión
         </p>
@@ -34,6 +45,7 @@ const Login = ({open, onClose}:any) => {
             placeholder="Contraseña"
           />
         </div>
+
         <div className="text-center pt-8">
           <button className="w-full h-[42px] px-5 py-2 bg-[#13c1ac] hover:bg-[#0f9989] text-white rounded-[21px]">
             Iniciar sesión
@@ -43,11 +55,17 @@ const Login = ({open, onClose}:any) => {
               Recuperar contraseña
             </p>
             <span className="mx-4">|</span>
-            <Link to="/signup" className="text-center text-gray-700 my-4">Regístrate</Link>
+            <div
+              className="text-center text-gray-700 my-4"
+              onClick={onClickModalButton}
+            >
+              <SignUp open={signupModal} onClose={() => setSignupModal(false)} />
+              Regístrate
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Modal>
+    </>
   );
 };
 

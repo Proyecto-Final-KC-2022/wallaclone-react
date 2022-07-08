@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import HeaderStyles from "./HeaderStyles";
@@ -9,7 +9,8 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-const Header = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
+/* const Header = ({ onClickModalButton }: { onClickModalButton: Function }) => { */
+const Header = () => {
   const navigate = useNavigate();
 
   return (
@@ -38,12 +39,13 @@ const Header = ({ onClickLoginButton }: { onClickLoginButton: Function }) => {
           <div className={HeaderStyles.headerItem}>
             <LanguageButton />
           </div>
-          <Link to="/category" className={HeaderStyles.headerItem}>
+          <NavLink to="/category" className={HeaderStyles.headerItem}>
             <MailBoxButton />
-          </Link>
-          <div className={HeaderStyles.headerItem}>
-            <LoginButton onClickLoginButton={onClickLoginButton} />
-          </div>
+          </NavLink>
+          <NavLink to="/login" className={HeaderStyles.headerItem}>
+            {/* <LoginButton onClickModalButton={onClickModalButton} /> */}
+              <LoginButton />
+          </NavLink>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />
           </div>

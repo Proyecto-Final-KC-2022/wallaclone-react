@@ -2,14 +2,14 @@ import { AxiosResponse } from 'axios';
 import client, { configureClient, resetClient } from '../../api/client';
 import storage from '../../utils/storage';
 
-const authPath = '/auth';
+const authPath = '/api';
 
 export const login = ({ remember, ...credentials }) => {
   return client
     .post(`${authPath}/login`, credentials)
-    .then(({ accessToken }:any) => {
-      configureClient({ accessToken });
-      return accessToken;
+    .then(({ token }:any) => {
+      configureClient({ token });
+      return token;
     })
     .then(accessToken => {
       storage.remove('auth');

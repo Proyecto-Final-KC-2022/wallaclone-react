@@ -11,7 +11,7 @@ const ProductCard2 = (advert: Advert) => {
     advert?.name?.toLowerCase()?.replaceAll(" ", "-") || "product_name";
   return (
     <div
-      className="flex-col rounded-[10px] bg-white cursor-pointer overflow-hidden text-[0.875rem] px-1 pt-1 pb-4 w-full h-full border border-gray-300"
+      className="flex-col rounded-[10px] bg-white cursor-pointer overflow-hidden text-[0.875rem] px-1 pt-1 pb-4 max-w-[360px] w-full max-h-[400px] h-full border border-gray-300"
       onClick={() => navigate(`/product/${advertName}/${advert._id}`)}
     >
       <div className="bg-white rounded-[10px]">

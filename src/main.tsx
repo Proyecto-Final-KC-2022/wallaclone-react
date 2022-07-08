@@ -1,13 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./index.css";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { configureClient } from './api/client';
+import App from './App'
+import './index.css'
+import storage from './utils/storage';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const token = storage.get('auth');
+configureClient({ token });
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <App isInitiallyLogged={!!token} />
   // </React.StrictMode>
-);
+)

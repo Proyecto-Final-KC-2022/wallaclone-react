@@ -1,7 +1,8 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
-import SignUp from "./components/signup/SignUp";
+
 import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
@@ -23,33 +24,44 @@ import { LoginPage } from "./components/auth";
   import LoginPage from "./components/auth/LoginPage"
 */
 
-import "./index.css";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
-import Header from "./components/header/Header";
 import { useState } from "react";
-import Login from "./components/login/Login";
 
-function App() {
-  const [loginModal, setLoginModal] = useState(false);
-  const onClickLoginButton = () => {
-    setLoginModal(true);
-  };
+import { AuthProvider } from '../src/components/auth/context'
+
+import "./index.css";
+import Login from "../src/components/auth/LoginPage/LoginPage";
+import SignUp from "./pages/SignupPage/SignupPage";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
+
+function App({ isInitiallyLogged }) {
+  const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
+  const handleSignup = () => setIsLogged(true);
+  const handleLogin = () => setIsLogged(true);
+  const handleLogout = () => setIsLogged(false);
+
+  const authProps = { isLogged, handleSignup, handleLogin, handleLogout };
+
   return (
-    <div className="m-0 p-0 w-full min-h-[100vh] block">
-        <Header onClickLoginButton={onClickLoginButton} />
-        <Routes>
-          <Route index element={<ProductsPage />} />
+    <AuthProvider {...authProps}>
+      <div className="m-0 p-0 w-full min-h-[100vh] block">
+        <BrowserRouter>
+          <Routes>
+            
+            <Route index element={<ProductsPage />} />
 
-          {/* <Route path="/login" element={<LoginPage />} /> */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:name/:id" element={<Product />} />
-          <Route path="/category" element={<Products2 />} />
-          <Route path="/account" element={<AccountPage />} />
-        </Routes>
-        <Login open={loginModal} onClose={() => setLoginModal(false)} />
-    </div>
+            <Route path="/products" element={<Products />} />
+            <Route path="/product/:name/:id" element={<Product />} />
+            <Route path="/category" element={<Products2 />} />
+            <Route path="/account" element={<AccountPage />} />
+
+          </Routes>
+        
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 
