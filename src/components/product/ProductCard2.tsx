@@ -7,7 +7,8 @@ import { Advert } from "../../models/Advert.model";
 
 const ProductCard2 = (advert: Advert) => {
   const navigate = useNavigate();
-  const advertName = advert?.name?.toLowerCase()?.replaceAll(' ','-') || 'product_name';
+  const advertName =
+    advert?.name?.toLowerCase()?.replaceAll(" ", "-") || "product_name";
   return (
     <div
       className="flex-col rounded-[10px] bg-white cursor-pointer overflow-hidden text-[0.875rem] px-1 pt-1 pb-4 w-full h-full border border-gray-300"
@@ -16,7 +17,16 @@ const ProductCard2 = (advert: Advert) => {
       <div className="bg-white rounded-[10px]">
         <div className="block">
           {/* TODO: De momento la imagen de notfound ya que ahora el cmapo imagen tiene strings random => seria algo asi { advert.image || NotFoundImg}*/}
-          <img src={ NotFoundImg} className="rounded-[10px] h-[196px] w-full" />
+          <img
+            src={
+              advert.image.includes(
+                "https://wallaclone-s3-bucket.s3.amazonaws.com"
+              )
+                ? advert.image
+                : NotFoundImg
+            }
+            className="rounded-[10px] h-[196px] w-full"
+          />
         </div>
         <div className="block py-2 px-[0.75rem]">
           <div className="flex items-center gap-2 justify-between">

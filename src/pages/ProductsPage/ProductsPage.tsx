@@ -59,20 +59,7 @@ const ProductsPage = (): JSX.Element => {
     [isLoading, hasMore]
   );
 
-  const filteredAdverts = adverts.sort((a, b) => {
-    const aCreationDate = new Date(a.creationDate)?.getTime();
-    const bCreationDate = new Date(b.creationDate)?.getTime();
-    if (bCreationDate > aCreationDate) {
-      return 1;
-    }
-    if (bCreationDate < aCreationDate) {
-      return -1;
-    }
-    if (isNaN(aCreationDate) || isNaN(bCreationDate)) {
-      return 0;
-    }
-    return 0;
-  });
+  const filteredAdverts = [...adverts as Array<Advert>]//sortProducts(adverts);
 
   return (
     <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
@@ -130,5 +117,24 @@ const ProductsPage = (): JSX.Element => {
     </div>
   );
 };
+
+
+function sortProducts(adverts: any[]) {
+  return adverts.sort((a, b) => {
+    const aCreationDate = new Date(a.creationDate)?.getTime();
+    const bCreationDate = new Date(b.creationDate)?.getTime();
+    if (bCreationDate > aCreationDate) {
+      return 1;
+    }
+    if (bCreationDate < aCreationDate) {
+      return -1;
+    }
+    if (isNaN(aCreationDate) || isNaN(bCreationDate)) {
+      return 0;
+    }
+    return 0;
+  });
+}
+
 
 export default ProductsPage;
