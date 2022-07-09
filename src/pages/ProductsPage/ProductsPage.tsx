@@ -1,5 +1,3 @@
-import CircularProgress from "@mui/material/CircularProgress";
-
 import Layout from "../../components/layout/Layout";
 import ProductCard2 from "../../components/product/ProductCard2";
 import AdvertisementsSrv, {
@@ -11,7 +9,7 @@ import { useCallback, useRef, useState } from "react";
 import usePagination from "../../hooks/usePagination";
 import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
-import FilterBar from "../../components/filter/FilterBar";
+import FilterBar, { BarFilters } from "../../components/filter/FilterBar";
 
 /**
   TODO: 
@@ -28,13 +26,17 @@ const ProductsPage = (): JSX.Element => {
   //TODO: Usar un compoennte de error si ha habido algún
   const limitPerPage: number = 8;
   const [pageNumber, setPageNumber] = useState(1);
-  const startQueryParam = pageNumber > 1 ? (pageNumber - 1) * limitPerPage : 0;
-  let advertisementsPayload: Payload<GetAllAdvertisementsQueryParams> = {
+  const [refreshData, setRefreshData] = useState(false);
+  // const startQueryParam = pageNumber > 1 ? (pageNumber - 1) * limitPerPage : 0;
+  const [advertisementsPayload, setAdvertisementsPayload] = useState<
+    Payload<GetAllAdvertisementsQueryParams>
+  >({
     queryParams: {
-      start: startQueryParam,
+      start: 0,
       limit: limitPerPage,
     },
-  };
+  });
+
   const {
     isLoading,
     error,
@@ -43,11 +45,20 @@ const ProductsPage = (): JSX.Element => {
   } = usePagination(
     AdvertisementsSrv.getAllAdvertisements,
     advertisementsPayload,
-    pageNumber
+    pageNumber, 
+    refreshData
   );
   const observer = useRef<any>();
   const goToNextPage = () => {
     setPageNumber((prevPageNumber) => prevPageNumber + 1);
+    setAdvertisementsPayload((prevPayload) => {
+      return {
+        queryParams: {
+          ...prevPayload.queryParams,
+          start: prevPayload.queryParams.start + limitPerPage,
+        },
+      };
+    });
   };
   const lastAdvertElementRef = useCallback(
     (node) => {
@@ -65,12 +76,33 @@ const ProductsPage = (): JSX.Element => {
     [isLoading, hasMore]
   );
 
-  const filteredAdverts = [...(adverts as Array<Advert>)]; //sortProducts(adverts);
+  const filteredAdverts = [...(adverts as Array<Advert>)];
+  const getFilters = (filtersFromBar: BarFilters) => {
+    //localhost:3000/api/anuncios?price=50-250
+    //encodear el array de tags y modificar el api para que busque por coincidencias sobre ese array
+    const priceFilter = `${filtersFromBar?.priceRange?.min}-${filtersFromBar?.priceRange?.max}`;
+    const tagsFilter = `${encodeURIComponent(
+      JSON.stringify(filtersFromBar?.tags)
+    )}`;
+    setRefreshData(!refreshData);
+    setPageNumber(1);
+    setAdvertisementsPayload((prevPayload) => {
+      return {
+        queryParams: {
+          ...prevPayload.queryParams,
+          start: 0,
+          price: priceFilter,
+          tags: tagsFilter,
+        },
+      };
+    });
+    console.log(filtersFromBar);
+  };
 
   return (
     <>
-      <Layout>
-        <FilterBar />
+      <Layout isMainPage={true}>
+        <FilterBar getFilters={getFilters} />
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
           {!isLoading && !error && (
             <>
@@ -102,7 +134,7 @@ const ProductsPage = (): JSX.Element => {
                 hasMore &&
                 pageNumber === 1 && (
                   <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
-                    <LoadMoreButton onClickFn={goToNextPage}/>
+                    <LoadMoreButton onClickFn={goToNextPage} />
                   </div>
                   // <button onClick={goToNextPage}>Cargar más</button>
                 )
@@ -130,48 +162,6 @@ const ProductsPage = (): JSX.Element => {
       </Layout>
     </>
   );
-
-  //   <Layout>
-  //   <FilterBar />
-  //   <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-  //     {adverts.length > 0 ? (
-  //       adverts.map((advert: Advert) => (
-  //         <ProductCard2 {...advert} key={advert._id} />
-  //       ))
-  //     ) : (
-  //       <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
-  //     )}
-  //   </div>
-
-  //   <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
-  //     <LoadMoreButton />
-  //   </div>
-
-  //   <div className="flex justify-center bg-gray-200 py-4 h-full">
-  //     <CircularProgress />
-  //   </div>
-
-  //   <div className="flex justify-center bg-gray-200 py-4 h-full">
-  //     <Spinner />
-  //   </div>
-  // </Layout>
 };
-
-function sortProducts(adverts: any[]) {
-  return adverts.sort((a, b) => {
-    const aCreationDate = new Date(a.creationDate)?.getTime();
-    const bCreationDate = new Date(b.creationDate)?.getTime();
-    if (bCreationDate > aCreationDate) {
-      return 1;
-    }
-    if (bCreationDate < aCreationDate) {
-      return -1;
-    }
-    if (isNaN(aCreationDate) || isNaN(bCreationDate)) {
-      return 0;
-    }
-    return 0;
-  });
-}
 
 export default ProductsPage;

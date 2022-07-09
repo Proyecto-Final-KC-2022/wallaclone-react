@@ -7,7 +7,7 @@ import Navbar from "../navbar/Navbar";
 
 import Login from "../login/Login";
 
-function Layout({ children }) {
+function Layout({ children , isMainPage}) {
   /* const [popupModal, setPopupModal] = useState(false);
   const onClickModalButton = () => {
     setPopupModal(true);
@@ -16,7 +16,7 @@ function Layout({ children }) {
   return (
     <>
       {/* <Header onClickModalButton={onClickModalButton} /> */}
-      <Header />
+      <Header isMainPage={isMainPage} />
         <main>
           {children}
           {/* <Login open={popupModal} onClose={() => setPopupModal(false)} /> */}

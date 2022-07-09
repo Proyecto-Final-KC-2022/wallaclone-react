@@ -3,12 +3,17 @@ import { useEffect, useState } from "react";
 export default function usePagination<T>(
   apiQuery: (payload: any) => T,
   payload: any,
-  pageNumber: number
+  pageNumber?: number,
+  refreshData?: boolean
 ) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
   const [data, setData] = useState<Awaited<T> | Array<any>>([]);
   const [hasMore, setHasMore] = useState(false);
+
+  useEffect(() => {
+    setData([]);
+  }, [refreshData]);
 
   useEffect(() => {
     const startExecution = (): void => {
@@ -39,34 +44,32 @@ export default function usePagination<T>(
     };
 
     execute();
-  }, [
-    // payload, 
-    pageNumber]);
+  }, [payload, pageNumber]);
   return {
     isLoading,
     error,
     data,
-    hasMore
+    hasMore,
   };
-    //   axios({
-    //     method: "GET",
-    //     url: "http://openlibrary.org/search.json",
-    //     params: { q: query, page: pageNumber },
-    //     cancelToken: new axios.CancelToken((c) => (cancel = c)),
-    //   })
-    //     .then((res) => {
-    //       setData((prevBooks) => {
-    //         return [
-    //           ...new Set([...prevBooks, ...res.data.docs.map((b) => b.title)]),
-    //         ];
-    //       });
-    //       setHasMore(res.data.docs.length > 0);
-    //       setIsLoading(false);
-    //     })
-    //     .catch((e) => {
-    //       if (axios.isCancel(e)) return;
-    //       setError(true);
-    //     });
+  //   axios({
+  //     method: "GET",
+  //     url: "http://openlibrary.org/search.json",
+  //     params: { q: query, page: pageNumber },
+  //     cancelToken: new axios.CancelToken((c) => (cancel = c)),
+  //   })
+  //     .then((res) => {
+  //       setData((prevBooks) => {
+  //         return [
+  //           ...new Set([...prevBooks, ...res.data.docs.map((b) => b.title)]),
+  //         ];
+  //       });
+  //       setHasMore(res.data.docs.length > 0);
+  //       setIsLoading(false);
+  //     })
+  //     .catch((e) => {
+  //       if (axios.isCancel(e)) return;
+  //       setError(true);
+  //     });
   //
   //     return () => cancel();
   //   }, [query, pageNumber]);

@@ -19,8 +19,8 @@ class AdvertisementService {
     return ApiClient.get(url);
   }
 
-  getTags(): Promise<string> {
-    const url = `${advertsBaseUrl}/tags`;
+  getTags(): Promise<Array<string>> {
+    const url = `/availableTags`;
     return ApiClient.get(url);
   }
 
@@ -45,7 +45,7 @@ export type GetAllAdvertisementsQueryParams = {
   sort?: string;
   tags?: string;
   forSale?: boolean;
-  price?: number;
+  price?: string;
   name?: string;
 };
 export default new AdvertisementService();

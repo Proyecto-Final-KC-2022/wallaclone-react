@@ -10,7 +10,7 @@ import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
 /* const Header = ({ onClickModalButton }: { onClickModalButton: Function }) => { */
-const Header = () => {
+const Header = ({ isMainPage }) => {
   const navigate = useNavigate();
 
   return (
@@ -21,20 +21,22 @@ const Header = () => {
             <img src={Logo} alt="logo" />
           </Link>
         </div>
-        <div className={HeaderStyles.searchbarWrapper}>
-          <div className={HeaderStyles.searchbarContainer}>
-            <div className={HeaderStyles.inputWrapper}>
-              <div className={HeaderStyles.searchIcon}>
-                <AiOutlineSearch />
+        {isMainPage && (
+          <div className={HeaderStyles.searchbarWrapper}>
+            <div className={HeaderStyles.searchbarContainer}>
+              <div className={HeaderStyles.inputWrapper}>
+                <div className={HeaderStyles.searchIcon}>
+                  <AiOutlineSearch />
+                </div>
+                <input
+                  className={HeaderStyles.placeholderWrapper}
+                  type="text"
+                  placeholder="Buscar anuncios por nombre"
+                />
               </div>
-              <input
-                className={HeaderStyles.placeholderWrapper}
-                type="text"
-                placeholder="Buscar en Todas las categorías"
-              />
             </div>
           </div>
-        </div>
+        )}
         <div className={HeaderStyles.headerItemsWrapper}>
           <div className={HeaderStyles.headerItem}>
             <LanguageButton />
@@ -44,7 +46,7 @@ const Header = () => {
           </NavLink>
           <NavLink to="/login" className={HeaderStyles.headerItem}>
             {/* <LoginButton onClickModalButton={onClickModalButton} /> */}
-              <LoginButton />
+            <LoginButton />
           </NavLink>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />

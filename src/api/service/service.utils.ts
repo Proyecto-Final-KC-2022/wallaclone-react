@@ -3,7 +3,7 @@ export function getQueryParams(query: any): string {
   if (query) {
     url = "?";
     for (const [key, value] of Object.entries(query)) {
-      if (value) {
+      if (value && value !== "null" && value !== "undefined") {
         url = url + `${key}=${value}&`;
       }
     }
