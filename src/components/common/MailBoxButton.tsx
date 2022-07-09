@@ -1,7 +1,7 @@
 import Inbox from "../../images/inbox.png";
 
 const style = {
-    mailButtonWrapper: "flex w-[80px] h-[65px] items-center justify-center text-center hover:border-b-[4px] border-black",
+    mailButtonWrapper: "flex w-[80px] h-[65px] items-center justify-center text-center hover:border-b-[3px] border-black",
     mailButtonText: "flex text-center items-center text-[.875rem] pr-2"
 }
 
