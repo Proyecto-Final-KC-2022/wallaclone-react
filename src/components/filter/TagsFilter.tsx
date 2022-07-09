@@ -2,6 +2,7 @@ import useQuery from "../../hooks/useQuery";
 import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import { useState, useEffect } from "react";
 import useMutation from "../../hooks/useMutation";
+import useComponentVisible from "../../hooks/useComponentVisible";
 export type TagWithStatus = {
   active: boolean;
   name: string;
@@ -16,6 +17,7 @@ const TagsFilter = ({
   const mutation = useMutation(AdvertisementsSrv.getTags);
   const [tagsStatus, setTagsStatus] = useState<Array<TagWithStatus>>([]);
   const [allTagsEnabled, setAllTagsEnabled] = useState(false);
+  const { ref, isComponentVisible } = useComponentVisible(true);
   useEffect(() => {
     (async () => {
       const tagsData = await mutation.execute();
@@ -31,6 +33,12 @@ const TagsFilter = ({
       }
     })();
   }, []);
+
+  useEffect(() => {
+    if (!isComponentVisible) {
+      closeFilter();
+    }
+  }, [isComponentVisible]);
 
   const updateTagsStatus = (index: number, isActive: boolean) => {
     const tagsCopy = [...tagsStatus];
@@ -49,9 +57,8 @@ const TagsFilter = ({
     const tagsSelected = tagsStatus.filter((t) => t.active);
     getTagsSelected(tagsSelected);
   };
-
   return (
-    <div className="block fixed top-[130px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]">
+    <div ref={ref} className="block fixed top-[130px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]">
       <div className="flex h-[70px] px-[1.5rem] items-center">
         <p className="font-bold m-0 block">Tags disponibles</p>
       </div>

@@ -7,20 +7,22 @@ import Navbar from "../navbar/Navbar";
 
 import Login from "../login/Login";
 
-function Layout({ children , isMainPage}) {
-  /* const [popupModal, setPopupModal] = useState(false);
-  const onClickModalButton = () => {
-    setPopupModal(true);
-  }; */
-
+function Layout({
+  children,
+  isMainPage,
+  getSearchInputValue,
+}: {
+  children;
+  isMainPage: boolean;
+  getSearchInputValue: (value: string) => void;
+}) {
   return (
     <>
-      {/* <Header onClickModalButton={onClickModalButton} /> */}
-      <Header isMainPage={isMainPage} />
-        <main>
-          {children}
-          {/* <Login open={popupModal} onClose={() => setPopupModal(false)} /> */}
-        </main>  
+      <Header
+        isMainPage={isMainPage}
+        getSearchInputValue={getSearchInputValue}
+      />
+      <main>{children}</main>
       <Footer />
       <Navbar />
     </>

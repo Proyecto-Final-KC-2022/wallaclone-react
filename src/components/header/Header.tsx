@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import HeaderStyles from "./HeaderStyles";
@@ -9,9 +9,12 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-/* const Header = ({ onClickModalButton }: { onClickModalButton: Function }) => { */
-const Header = ({ isMainPage }) => {
-  const navigate = useNavigate();
+const Header = ({ isMainPage, getSearchInputValue }: { isMainPage: boolean; getSearchInputValue: (value: string)=>void }) => {
+  const handleKeyDown = (event )=> {
+    if (event.key === 'Enter') {
+      getSearchInputValue(event?.target?.value)
+    }
+  }
 
   return (
     <div className={HeaderStyles.navWrapper}>
@@ -31,6 +34,7 @@ const Header = ({ isMainPage }) => {
                 <input
                   className={HeaderStyles.placeholderWrapper}
                   type="text"
+                  onKeyDown={handleKeyDown}
                   placeholder="Buscar anuncios por nombre"
                 />
               </div>

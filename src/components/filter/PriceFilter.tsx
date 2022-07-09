@@ -1,6 +1,8 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import useComponentVisible from "../../hooks/useComponentVisible";
+import { useEffect } from "react";
 const MIN_VALUE = 0;
 const MAX_VALUE = 20000;
 
@@ -20,6 +22,13 @@ const PriceFilter = ({
   closeFilter: () => void;
 }) => {
   const [value, setValue] = React.useState<number[]>([MIN_VALUE, MAX_VALUE]);
+  const { ref, isComponentVisible } = useComponentVisible(true);
+  
+  useEffect(() => {
+    if (!isComponentVisible) {
+      closeFilter();
+    }
+  }, [isComponentVisible]);
 
   const handleChange = (_event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -46,13 +55,16 @@ const PriceFilter = ({
   };
 
   return (
-    <div className="block fixed top-[130px] left-[234px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]">
+    <div
+      ref={ref}
+      className="block fixed top-[130px] left-[234px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]"
+    >
       <div className="flex h-[70px] px-[1.5rem] items-center">
         <p className="font-bold m-0 block">¿Cuánto quieres pagar?</p>
       </div>
       <div className="overflow-auto px-[1.5rem] block">
         <div className="block">
-          <form className="overflow-hidden block">
+          <div className="overflow-hidden block">
             <form className="flex items-center justify-center">
               <Box
                 className="py-[40px] px-[1.5rem] inline-block relative w-full"
@@ -89,7 +101,7 @@ const PriceFilter = ({
                 />
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
       <div className="h-[88px] px-[1.5rem] items-center justify-end flex">
