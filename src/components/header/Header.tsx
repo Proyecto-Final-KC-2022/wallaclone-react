@@ -9,9 +9,13 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-/* const Header = ({ onClickModalButton }: { onClickModalButton: Function }) => { */
-const Header = () => {
-  const navigate = useNavigate();
+const Header = ({ isLogged }, { getSearchInputValue }: { getSearchInputValue: (value: string) => void }) => {
+  
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      getSearchInputValue(event?.target?.value);
+    }
+  };
 
   return (
     <div className={HeaderStyles.navWrapper}>
@@ -21,6 +25,7 @@ const Header = () => {
             <img src={Logo} alt="logo" />
           </Link>
         </div>
+
         <div className={HeaderStyles.searchbarWrapper}>
           <div className={HeaderStyles.searchbarContainer}>
             <div className={HeaderStyles.inputWrapper}>
@@ -30,11 +35,13 @@ const Header = () => {
               <input
                 className={HeaderStyles.placeholderWrapper}
                 type="text"
-                placeholder="Buscar en Todas las categorías"
+                onKeyDown={handleKeyDown}
+                placeholder="Buscar anuncios por nombre"
               />
             </div>
           </div>
         </div>
+
         <div className={HeaderStyles.headerItemsWrapper}>
           <div className={HeaderStyles.headerItem}>
             <LanguageButton />
@@ -43,8 +50,7 @@ const Header = () => {
             <MailBoxButton />
           </NavLink>
           <NavLink to="/login" className={HeaderStyles.headerItem}>
-            {/* <LoginButton onClickModalButton={onClickModalButton} /> */}
-              <LoginButton />
+            <LoginButton isLogged={isLogged} />
           </NavLink>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />

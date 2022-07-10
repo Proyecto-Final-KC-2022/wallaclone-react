@@ -1,6 +1,6 @@
 import React from 'react';
 
-function useMutation(mutation) {
+function useMutation<T>(mutation: (payload?: any) => T, payload?: any) {
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
