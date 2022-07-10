@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AiFillHeart } from "react-icons/ai";
 
@@ -38,16 +38,27 @@ const ProductCard2 = (advert: Advert) => {
         </div>
       </div>
       <div className="block px-[0.75rem] text-[0.875rem]">
-        <p className="font-[700] text-[1.25rem] overflow-hidden">{advert.name}</p>
-        <p className="overflow-hidden mt-0">{advert.description}</p>
-        <p>Tags:</p>
+        <p className="font-[700] text-[1.25rem]">{advert.name}</p>
+        <p className="overflow-hidden">
+          <a className="mr-2">Tags:</a>
+          {advert.tags.map((tag, index) => {
+            return (
+              <span key={index} className="text-[#14C1AD] mr-2 items-center">
+                {tag}
+              </span>
+            );
+          })}
+        </p>
+
+        <p className="overflow-hidden mt-0">Descripción: {advert.description}</p>
+        {/* <p>Tags:</p>
         {advert.tags.map((tag, index) => {
           return (
             <span key={index} style={{ backgroundColor: "#14C1AD", margin: "0.2rem" }}>
               {tag}
             </span>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

@@ -9,12 +9,13 @@ import Layout from "../../components/layout/Layout";
 import Avatar from "../../images/avatar.png";
 import Img from "../../images/bmw-serie2.jpg";
 import Map from "../../images/map.png";
+import Layout2 from "../../components/layout/Layout2";
 
 
 const ProductPage = (): JSX.Element => {
   return (
     <>
-      <Layout>
+      <Layout2>
         <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
           <div className="w-[681px] h-full">
             <div className="bg-white rounded-[10px] px-[20px] pb-[32px] border border-[#ECEFF1]">
@@ -152,7 +153,7 @@ const ProductPage = (): JSX.Element => {
             </div>
           </div>
         </div>
-      </Layout>
+      </Layout2>
     </>
   );
 };

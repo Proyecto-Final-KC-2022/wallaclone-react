@@ -71,7 +71,7 @@ const Filter = ({
   };
 
   return (
-    <div className="block sticky top-[66px] text-left border-t-[1px] border-gray-300">
+    <div className="block sticky top-[66px] text-left">
       <div className="flex items-center w-full h-full bg-white overflow-auto px-[1rem] py-[0.5rem]">
         <div className="m-[0.25rem]">
           <div className="flex shadow-md shadow-gray-400/20 bg-white h-[36px] rounded-[21px] items-center justify-center px-[1rem] hover:bg-slate-100">

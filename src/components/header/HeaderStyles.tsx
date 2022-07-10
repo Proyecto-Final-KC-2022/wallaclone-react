@@ -1,6 +1,6 @@
 const HeaderStyles = {
   navWrapper:
-    "flex h-[66px] w-full text-center items-center justify-between bg-[#fff] sticky top-0 z-10",
+    "flex h-[66px] w-full text-center items-center justify-between bg-[#fff] sticky top-0 z-10 border-b-[2px] border-gray-200",
   navContainer: "flex h-full w-full px-[16px]",
   logoWrapper: "flex items-center justify-center",
   logoContainer: "block w-[38px] h-[38px]",
@@ -12,7 +12,7 @@ const HeaderStyles = {
   placeholderWrapper:
     "w-full h-[42px] text-[0.875rem] outline-0 ring-0 placeholder:text-[#253238] bg-gray-300 mr-4",
   headerItemsWrapper:
-    "hidden md:flex xl:flex w-2/3 items-center justify-between gap-2 pl-2",
+    "hidden md:flex xl:flex max-w-2/3 items-center justify-between gap-2 pl-2",
   headerItem: "flex w-full items-center text-[#253238]",
 };
 
