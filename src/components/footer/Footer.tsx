@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="pt-[60px] flex pb-[44px] mx-[10px]">
         <div className="max-w-[20%] mb-[44px] flex w-full relative px-[10px]">
           <img className="max-w-full mb-[16px] block" />
-          <span className="text-[#607D8B] text-[.75rem]">Copyright 2022 Wallaclone de sus respectivos propietarios</span>
+          <span className="text-[#607D8B] text-[.75rem]">Copyright &copy; 2022 Wallaclone &copy; de sus respectivos propietarios</span>
         </div>
         <div className="max-w-full relative w-full px-[10px]">
           <div className="flex flex-wrap mx-[10px] justify-between">
