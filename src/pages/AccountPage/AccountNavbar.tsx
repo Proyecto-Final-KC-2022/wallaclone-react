@@ -6,7 +6,7 @@ import Avatar from "../../images/avatar.png";
 
 const AccountNavbar = () => {
   return (
-    <div className="sticky top-[65px] left-0 bottom-0 h:calc(100vh - 65px) block">
+    <div className="sticky top-[65px] left-0 bottom-0 h:calc(100vh - 65px) lg:block hidden">
       <div className="h-full overflow-auto w-[216px] bg-white border-r-2 flex-col flex">
         <div className="flex relative min-h-[60px] cursor-pointer my-[1.5rem] mx-[0.5rem] items-center hover:rounded-xl hover:bg-gray-200">
           <div className="px-[0.5rem] inline-block text-left">

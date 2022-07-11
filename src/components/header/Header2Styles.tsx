@@ -6,7 +6,7 @@ const Header2Styles = {
   logoContainer: "block w-[38px] h-[38px]",
   headerItemsWrapper:
     "hidden md:flex xl:flex max-w-2/3 items-center justify-between gap-2 pl-2",
-  headerItem: "flex w-full items-center text-[#253238]",
+  headerItem: "flex w-full items-center text-[#253238] mr-4",
 };
 
 export default Header2Styles;
