@@ -1,9 +1,31 @@
-import React from "react";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { ImCheckboxUnchecked } from "react-icons/im";
 
 import Img from "../../images/bmw-serie2.jpg";
+
+const style = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 const AccountProducts = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <div className="max-w-full w-full flex-1 block text-left">
       <div className="min-h-full block">
@@ -96,7 +118,7 @@ const AccountProducts = () => {
                                 </div>
                               </button>
 
-                              <button className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white">
+                              <button className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white" onClick={handleOpen}>
                                 <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
                                   <BsTrash className="text-[24px]" />
                                 </div>
@@ -113,6 +135,26 @@ const AccountProducts = () => {
           </div>
         </div>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Borrar productos
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Se borrarán los productos.
+          </Typography>
+          <div className='flex gap-2 mt-4'>
+            <span>Cancelar</span>
+            <span> | </span>
+            <span>Borrar</span>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
 };

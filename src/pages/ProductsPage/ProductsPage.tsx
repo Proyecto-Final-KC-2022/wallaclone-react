@@ -124,7 +124,7 @@ const ProductsPage = (): JSX.Element => {
             getFilters({ filtersFromBar });
           }}
         />
-        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
           {!isLoading && !error && (
             <>
               {filteredAdverts.length > 0 ? (
@@ -148,33 +148,33 @@ const ProductsPage = (): JSX.Element => {
               )}
             </>
           )}
-
-          {!isLoading && !error && (
-            <>
-              {filteredAdverts.length > 0 && hasMore && pageNumber === 1 && (
-                <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
-                  <LoadMoreButton onClickFn={goToNextPage} />
-                </div>
-                // <button onClick={goToNextPage}>Cargar más</button>
-              )}
-            </>
-          )}
-
-          {isLoading && (
-            <div className="flex justify-center bg-gray-200 py-4 h-full">
-              <Spinner />
-            </div>
-          )}
-
-          {error && !isLoading && (
-            // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
-            //   <Toast.Header>
-            <strong className="me-auto">Error</strong>
-            //   </Toast.Header>
-            //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
-            // </Toast>
-          )}
         </div>
+
+        {!isLoading && !error && (
+          <>
+            {filteredAdverts.length > 0 && hasMore && pageNumber === 1 && (
+              <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
+                <LoadMoreButton onClickFn={goToNextPage} />
+              </div>
+              // <button onClick={goToNextPage}>Cargar más</button>
+            )}
+          </>
+        )}
+
+        {isLoading && (
+          <div className="flex justify-center bg-gray-200 py-4 h-full">
+            <Spinner />
+          </div>
+        )}
+
+        {error && !isLoading && (
+          // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
+          //   <Toast.Header>
+          <strong className="me-auto">Error</strong>
+          //   </Toast.Header>
+          //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
+          // </Toast>
+        )}
       </Layout>
     </>
   );
