@@ -17,7 +17,6 @@ export type PriceRange = {
   min: number;
   max: number;
 };
-
 const PriceFilter = ({
   getPricesRange,
   closeFilter,
@@ -27,7 +26,7 @@ const PriceFilter = ({
 }) => {
   const [value, setValue] = React.useState<number[]>([MIN_VALUE, MAX_VALUE]);
   const { ref, isComponentVisible } = useComponentVisible(true);
-
+  
   useEffect(() => {
     if (!isComponentVisible) {
       closeFilter();
@@ -68,7 +67,7 @@ const PriceFilter = ({
         </div>
         <div className="overflow-auto px-[1.5rem] block">
           <div className="block">
-            <form className="overflow-hidden block">
+            <div className="overflow-hidden block">
               <form className="flex items-center justify-center">
                 <Box
                   className="py-[40px] px-[1.5rem] inline-block relative w-full"
@@ -105,7 +104,7 @@ const PriceFilter = ({
                   />
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
         <div className="h-[88px] px-[1.5rem] items-center justify-end flex">

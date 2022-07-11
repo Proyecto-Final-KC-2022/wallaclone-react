@@ -1,13 +1,12 @@
-import { useCallback, useRef, useState } from "react";
-
 import Layout from "../../components/layout/Layout";
 import ProductCard2 from "../../components/product/ProductCard2";
-import usePagination from "../../hooks/usePagination";
 import AdvertisementsSrv, {
   Payload,
 } from "../../api/service/Advertisement.service";
 import { Advert } from "../../models/Advert.model";
 import { GetAllAdvertisementsQueryParams } from "../../api/service/Advertisement.service";
+import { useCallback, useRef, useState } from "react";
+import usePagination from "../../hooks/usePagination";
 import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
 import FilterBar, { BarFilters } from "../../components/filter/FilterBar";
@@ -114,13 +113,18 @@ const ProductsPage = (): JSX.Element => {
 
   return (
     <>
-      <Layout>
+      <Layout
+        isMainPage={true}
+        getSearchInputValue={(value: string) => {
+          getFilters({ searchInputFilter: value });
+        }}
+      >
         <FilterBar
           getFilters={(filtersFromBar: BarFilters) => {
             getFilters({ filtersFromBar });
           }}
         />
-        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
           {!isLoading && !error && (
             <>
               {filteredAdverts.length > 0 ? (
@@ -144,13 +148,12 @@ const ProductsPage = (): JSX.Element => {
               )}
             </>
           )}
-        </div>
-        <div>
+
           {!isLoading && !error && (
             <>
               {filteredAdverts.length > 0 && hasMore && pageNumber === 1 && (
                 <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
-                  <LoadMoreButton />
+                  <LoadMoreButton onClickFn={goToNextPage} />
                 </div>
                 // <button onClick={goToNextPage}>Cargar más</button>
               )}

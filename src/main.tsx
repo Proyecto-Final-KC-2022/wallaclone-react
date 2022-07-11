@@ -5,11 +5,11 @@ import App from './App'
 import './index.css'
 import storage from './utils/storage';
 
-const accessToken = storage.get('auth');
-configureClient({ accessToken });
+const token = storage.get('auth');
+configureClient({ token });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App isInitiallyLogged={!!accessToken} />
-  </React.StrictMode>
+  // <React.StrictMode>
+    <App isInitiallyLogged={!!token} />
+  // </React.StrictMode>
 )

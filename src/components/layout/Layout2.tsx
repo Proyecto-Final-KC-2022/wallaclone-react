@@ -2,10 +2,10 @@ import Header2 from "../header/Header2";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 
-function Layout2({ children }, {isLogged}) {
+function Layout2({ children }) {
   return (
     <>
-      <Header2 isLogged={isLogged} />
+      <Header2 />
       <main>{children}</main>
       <Footer />
       <Navbar />

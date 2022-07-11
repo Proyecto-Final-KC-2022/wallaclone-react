@@ -46,12 +46,12 @@ const Filter = ({
     getFilters(filters);
   };
 
-  const closePriceFilter = () => {
+  const closePriceFilter =() => {
     setPriceToggle(false);
-  };
+  }
   const closeTagsFilter = () => {
     setTagsToggle(false);
-  };
+  }
 
   const getPriceFilterText = () => {
     const max = filters?.priceRange?.max;
@@ -82,7 +82,7 @@ const Filter = ({
                 setPriceToggle(false);
               }}
             >
-              <div className="text-[.875rem]">{getTagsFilterText()}</div>
+              <div className="text-[.875rem]">{getTagsFilterText()} </div>
               <div className="pl-2">
                 {tagsToggle ? <IoIosArrowUp /> : <IoIosArrowDown />}
               </div>
@@ -130,8 +130,8 @@ const Filter = ({
 
       {priceToggle && (
         <PriceFilter
-          getPricesRange={getPricesRange}
           closeFilter={closePriceFilter}
+          getPricesRange={getPricesRange}
         />
       )}
     </div>

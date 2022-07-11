@@ -2,10 +2,23 @@ import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 
-function Layout({ children }, {isLogged}) {
+import Login from "../login/Login";
+
+function Layout({
+  children,
+  isMainPage,
+  getSearchInputValue,
+}: {
+  children;
+  isMainPage: boolean;
+  getSearchInputValue: (value: string) => void;
+}) {
   return (
     <>
-      <Header isLogged={isLogged} />
+      <Header
+        isMainPage={isMainPage}
+        getSearchInputValue={getSearchInputValue}
+      />
       <main>{children}</main>
       <Footer />
       <Navbar />

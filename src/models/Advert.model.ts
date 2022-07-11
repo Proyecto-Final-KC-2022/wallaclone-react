@@ -7,7 +7,7 @@ export type Advert = {
   price: number;
   tags: Array<string>;
   creationDate: string;
-  ownerId: string;
+  owner: string;
   preOrdered: boolean;
   sold: boolean;
 };

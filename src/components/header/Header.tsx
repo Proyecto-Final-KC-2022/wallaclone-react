@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import HeaderStyles from "./HeaderStyles";
@@ -9,13 +9,12 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-const Header = ({ isLogged }, { getSearchInputValue }: { getSearchInputValue: (value: string) => void }) => {
-  
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      getSearchInputValue(event?.target?.value);
+const Header = ({ isMainPage, getSearchInputValue }: { isMainPage: boolean; getSearchInputValue: (value: string)=>void }) => {
+  const handleKeyDown = (event )=> {
+    if (event.key === 'Enter') {
+      getSearchInputValue(event?.target?.value)
     }
-  };
+  }
 
   return (
     <div className={HeaderStyles.navWrapper}>
@@ -25,23 +24,23 @@ const Header = ({ isLogged }, { getSearchInputValue }: { getSearchInputValue: (v
             <img src={Logo} alt="logo" />
           </Link>
         </div>
-
-        <div className={HeaderStyles.searchbarWrapper}>
-          <div className={HeaderStyles.searchbarContainer}>
-            <div className={HeaderStyles.inputWrapper}>
-              <div className={HeaderStyles.searchIcon}>
-                <AiOutlineSearch />
+        {isMainPage && (
+          <div className={HeaderStyles.searchbarWrapper}>
+            <div className={HeaderStyles.searchbarContainer}>
+              <div className={HeaderStyles.inputWrapper}>
+                <div className={HeaderStyles.searchIcon}>
+                  <AiOutlineSearch />
+                </div>
+                <input
+                  className={HeaderStyles.placeholderWrapper}
+                  type="text"
+                  onKeyDown={handleKeyDown}
+                  placeholder="Buscar anuncios por nombre"
+                />
               </div>
-              <input
-                className={HeaderStyles.placeholderWrapper}
-                type="text"
-                onKeyDown={handleKeyDown}
-                placeholder="Buscar anuncios por nombre"
-              />
             </div>
           </div>
-        </div>
-
+        )}
         <div className={HeaderStyles.headerItemsWrapper}>
           <div className={HeaderStyles.headerItem}>
             <LanguageButton />
@@ -50,7 +49,8 @@ const Header = ({ isLogged }, { getSearchInputValue }: { getSearchInputValue: (v
             <MailBoxButton />
           </NavLink>
           <NavLink to="/login" className={HeaderStyles.headerItem}>
-            <LoginButton isLogged={isLogged} />
+            {/* <LoginButton onClickModalButton={onClickModalButton} /> */}
+            <LoginButton />
           </NavLink>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />

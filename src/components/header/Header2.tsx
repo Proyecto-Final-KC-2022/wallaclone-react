@@ -9,7 +9,7 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-const Header2 = ({ isLogged }) => {
+const Header2 = () => {
   return (
     <div className={Header2Styles.navWrapper}>
       <div className={Header2Styles.navContainer}>
@@ -27,7 +27,7 @@ const Header2 = ({ isLogged }) => {
             <MailBoxButton />
           </NavLink>
           <NavLink to="/login" className={Header2Styles.headerItem}>
-            <LoginButton isLogged={isLogged} />
+            <LoginButton  />
           </NavLink>
           <div className={Header2Styles.headerItem}>
             <UploadButton />
