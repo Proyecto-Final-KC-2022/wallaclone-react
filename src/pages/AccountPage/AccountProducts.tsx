@@ -13,7 +13,7 @@ const AccountProducts = () => {
 
   return (
     <div className="max-w-full w-full flex-1 block text-left">
-      <div className="min-h-full block">
+      <div className="min-h-full h-full block">
         <div className="py-[32px] max-w-[960px] w-full px-[15px] mx-auto block">
           <div className="mb-[1rem] flex flex-wrap mx-[-15px]">
             <div className="flex flex-col max-w-[75%] relative w-full min-h-[1px] px-[15px]">
@@ -42,11 +42,11 @@ const AccountProducts = () => {
           </div>
 
           <div className="h-full w-full block py-2">
-            <div className="h-full flex flex-col bg-gray-200 rounded-[10px]">
+            <div className="h-full flex bg-gray-200 rounded-[10px]">
               <div className="max-w-[960px] w-full px-[15px] mx-auto block container">
                 <div className="block">
                   <div className="rounded-[10px]">
-                    <div className="flex flex-wrap mx-[-15px]">
+                    <div className="flex mx-[-15px]">
                       <div className="items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center">
                         <div className="w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]">
                           <input
@@ -55,12 +55,13 @@ const AccountProducts = () => {
                           />
                         </div>
                       </div>
+                      
                       <div className="block grow max-w-full basis-0 relative w-full min-h-[1px] px-[15px] text-left">
-                        <div className="bg-white rounded-[10px] border border-1 flex flex-wrap mx-[15px]">
+                        <div className="bg-white rounded-[10px] border border-1 flex flex-wrap ">
                           <div className="flex cursor-pointer p-0 items-center justify-center max-w-full w-full">
                             <div className="p-[4px]">
                               <img
-                                className="m-0 w-[80px] h-[80px] bg-cover rounded-[4px] flex relative"
+                                className="m-0 lg:w-[80px] w-full lg:h-[80px] h-full bg-cover rounded-[4px] relative hidden lg:flex"
                                 src={Img}
                               />
                             </div>
@@ -71,7 +72,7 @@ const AccountProducts = () => {
                                   <span className="text-[1.25rem] font-bold w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
                                     Precio €
                                   </span>
-                                  <span className="text-[#90a4ae] max-w-[250px] w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                                  <span className="text-[#90a4ae] max-w-[250px] xl:w-full w-[110px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
                                     Lorem ipsum dolor sit amet consectetur
                                     adipisicing elit. Dicta, odit debitis fuga
                                     maiores unde deleniti adipisci, fugiat
@@ -124,20 +125,20 @@ const AccountProducts = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="sticky bottom-0 z-20 mt-auto block h-full">
-          <div className="bg-white border-t-2 border-gray-200 h-[100px] block">
-            <div className="h-full max-w-[960px] w-full px-[15px] mx-auto block">
-              <div className="h-full justify-around flex">
-                <div className="ml-auto items-center justify-end flex">
-                  <div className="items-center flex">
-                    <button className="px-[12px] py-[12px] cursor-not-allowed w-[120px] mr-[12px] border rounded-[10px] bg-white text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0 h-">
-                      <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
-                        <BsTrash className="text-[20px]" />
-                      </div>
-                      <span className="ml-2">Borrar</span>
-                    </button>
+          <div className="sticky bottom-0 z-20 mt-auto block">
+            <div className="bg-white border-t-2 border-gray-200 h-[100px] block rounded-[10px]">
+              <div className="h-full max-w-[960px] w-full px-[15px] mx-auto block">
+                <div className="h-full justify-around flex">
+                  <div className="ml-auto items-center justify-end flex">
+                    <div className="items-center flex">
+                      <button className="px-[12px] py-[12px] cursor-not-allowed w-[120px] mr-[12px] border rounded-[10px] bg-white text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0">
+                        <div className="w-[24px] h-[24px] flex items-center justify-center">
+                          <BsTrash className="text-[20px]" />
+                        </div>
+                        <span className="ml-2">Borrar</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
