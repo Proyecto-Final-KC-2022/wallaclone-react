@@ -1,25 +1,10 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import * as React from "react";
+import Modal from "@mui/material/Modal";
 
 import { BsPencil, BsTrash } from "react-icons/bs";
 import { ImCheckboxUnchecked } from "react-icons/im";
 
 import Img from "../../images/bmw-serie2.jpg";
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
 
 const AccountProducts = () => {
   const [open, setOpen] = React.useState(false);
@@ -56,16 +41,19 @@ const AccountProducts = () => {
             </div>
           </div>
 
-          <div className="h-full w-full block">
+          <div className="h-full w-full block py-2">
             <div className="h-full flex flex-col bg-gray-200 rounded-[10px]">
               <div className="max-w-[960px] w-full px-[15px] mx-auto block container">
                 <div className="block">
                   <div className="rounded-[10px]">
                     <div className="flex flex-wrap mx-[-15px]">
-                      <div className="items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px]">
-                        <button className="w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]">
-                          <ImCheckboxUnchecked className="overflow-hidden flex w-[23px] h-[23px] text-transparent rounded-[6px]" />
-                        </button>
+                      <div className="items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center">
+                        <div className="w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]">
+                          <input
+                            className="overflow-hidden flex w-[22px] h-[22px] rounded-[6px]"
+                            type="checkbox"
+                          />
+                        </div>
                       </div>
                       <div className="block grow max-w-full basis-0 relative w-full min-h-[1px] px-[15px] text-left">
                         <div className="bg-white rounded-[10px] border border-1 flex flex-wrap mx-[15px]">
@@ -118,7 +106,10 @@ const AccountProducts = () => {
                                 </div>
                               </button>
 
-                              <button className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white" onClick={handleOpen}>
+                              <button
+                                className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white"
+                                onClick={handleOpen}
+                              >
                                 <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
                                   <BsTrash className="text-[24px]" />
                                 </div>
@@ -135,25 +126,30 @@ const AccountProducts = () => {
           </div>
         </div>
       </div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Borrar productos
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Se borrarán los productos.
-          </Typography>
-          <div className='flex gap-2 mt-4'>
-            <span>Cancelar</span>
-            <span> | </span>
-            <span>Borrar</span>
+
+      <Modal open={open} onClose={handleClose}>
+        <div className="absolute top-[30%] right-[50%] translate-x-1/2 translate-y-1/2 w-[400px] bg-white rounded-[8px] p-4">
+          <div className="p-[20px] relative flex-1 block">
+            <h2 className="font-bold text-[1rem] text-[#253238]">
+              Borrar productos
+            </h2>
+            <p className="mt-[16px] text-[.875rem] text-[#253238]">
+              Se borrarán permanentemente los productos.
+            </p>
           </div>
-        </Box>
+          <div className="p-[20px] flex items-center justify-end mt-4">
+            <button
+              className="text-[#253238] pr-[20px] cursor-pointer"
+              onClick={handleClose}
+            >
+              Cancelar
+            </button>
+            <span> | </span>
+            <button className="text-[#fd6c67] pl-[20px] cursor-pointer">
+              Borrar
+            </button>
+          </div>
+        </div>
       </Modal>
     </div>
   );

@@ -3,6 +3,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 
+import "./index.css";
+
+import { AuthProvider } from '../src/components/auth/context'
+import Login from "../src/components/auth/LoginPage/LoginPage";
+import SignUp from "./pages/SignupPage/SignupPage";
+import ProductsPage from "./pages/ProductsPage/ProductsPage";
+import UploadPage from './pages/UploadPage/UploadPage';
 import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
@@ -11,8 +18,6 @@ import AccountPage from "./pages/AccountPage/AccountPage";
 /*
   MARCE
 */
-
-import { LoginPage } from "./components/auth";
 
 /*
   TODO PENDIENTE CORREGIR LAS IMPORTACIONES PARA TODO LO QUE NECESITA EL LOGIN.
@@ -23,15 +28,6 @@ import { LoginPage } from "./components/auth";
 
   import LoginPage from "./components/auth/LoginPage"
 */
-
-import { useState } from "react";
-
-import { AuthProvider } from '../src/components/auth/context'
-
-import "./index.css";
-import Login from "../src/components/auth/LoginPage/LoginPage";
-import SignUp from "./pages/SignupPage/SignupPage";
-import ProductsPage from "./pages/ProductsPage/ProductsPage";
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
@@ -56,6 +52,7 @@ function App({ isInitiallyLogged }) {
             <Route path="/product/:name/:id" element={<Product />} />
             <Route path="/category" element={<Products2 />} />
             <Route path="/account" element={<AccountPage />} />
+            <Route path="/upload" element={<UploadPage />} />
 
           </Routes>
         
