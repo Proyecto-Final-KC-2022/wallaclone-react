@@ -125,6 +125,25 @@ const AccountProducts = () => {
             </div>
           </div>
         </div>
+
+        <div className="sticky bottom-0 z-20 mt-auto block h-full">
+          <div className="bg-white border-t-2 border-gray-200 h-[100px] block">
+            <div className="h-full max-w-[960px] w-full px-[15px] mx-auto block">
+              <div className="h-full justify-around flex">
+                <div className="ml-auto items-center justify-end flex">
+                  <div className="items-center flex">
+                    <button className="px-[12px] py-[12px] cursor-not-allowed w-[120px] mr-[12px] border rounded-[10px] bg-white text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0 h-">
+                      <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
+                        <BsTrash className="text-[20px]" />
+                      </div>
+                      <span className="ml-2">Borrar</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Modal open={open} onClose={handleClose}>

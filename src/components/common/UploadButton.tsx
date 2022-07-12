@@ -10,7 +10,7 @@ const style = {
 
 const UploadButton = () => {
   return (
-    <NavLink to="/upload">
+    <NavLink to="/account/upload">
       <button className={style.uploadButtonWrapper}>
         <div className="flex items-center text-white">
           <div className="text-2xl mr-1 items-center">

@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 
 import "./index.css";
 
-import { AuthProvider } from '../src/components/auth/context'
+import { AuthProvider } from "../src/components/auth/context";
 import Login from "../src/components/auth/LoginPage/LoginPage";
 import SignUp from "./pages/SignupPage/SignupPage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
-import UploadPage from './pages/UploadPage/UploadPage';
+import UploadPage from "./pages/UploadPage/UploadPage";
 import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
@@ -42,20 +42,14 @@ function App({ isInitiallyLogged }) {
       <div className="m-0 p-0 w-full min-h-[100vh] block">
         <BrowserRouter>
           <Routes>
-            
             <Route index element={<ProductsPage />} />
-
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
-
             <Route path="/products" element={<Products />} />
             <Route path="/product/:name/:id" element={<Product />} />
             <Route path="/category" element={<Products2 />} />
-            <Route path="/account" element={<AccountPage />} />
-            <Route path="/upload" element={<UploadPage />} />
-
+            <Route path="/account/*" element={<AccountPage />} />
           </Routes>
-        
         </BrowserRouter>
       </div>
     </AuthProvider>
