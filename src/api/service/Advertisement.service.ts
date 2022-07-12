@@ -34,9 +34,9 @@ class AdvertisementService {
     return ApiClient.post(url, body);
   }
 
-  deleteAdvert(id): Promise<any> {
-    const url = `${advertsBaseUrl}/${id}`;
-    return ApiClient.delete(url);
+  deleteAdverts(body): Promise<any> {
+    const url = `${advertsBaseUrl}`;
+    return ApiClient.delete(url, { data: body });
   }
 }
 
