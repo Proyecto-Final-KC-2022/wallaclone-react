@@ -10,10 +10,15 @@ class AdvertisementService {
   ): Promise<Array<Advert>> {
     const queryParams = payload.queryParams;
     const urlParams = payload.urlParams;
-    const path = `${advertsBaseUrl}${getUrlParams(urlParams)}${getQueryParams(queryParams)}`;
+    const path = `${advertsBaseUrl}${getUrlParams(urlParams)}${getQueryParams(
+      queryParams
+    )}`;
     return ApiClient.get(path);
   }
 
+  getUserAdvertisements(): Promise<Array<Advert>> {
+    return ApiClient.get(`/getAdvertisementsByUser`);
+  }
   getAdvert(id: string): Promise<Advert> {
     const url = `${advertsBaseUrl}/${id}`;
     return ApiClient.get(url);
@@ -29,9 +34,9 @@ class AdvertisementService {
     return ApiClient.post(url, body);
   }
 
-  deleteAdvert(id): Promise<any> {
-    const url = `${advertsBaseUrl}/${id}`;
-    return ApiClient.delete(url);
+  deleteAdverts(body): Promise<any> {
+    const url = `${advertsBaseUrl}`;
+    return ApiClient.delete(url, { data: body });
   }
 }
 

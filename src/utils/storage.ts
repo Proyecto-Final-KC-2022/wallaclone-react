@@ -18,6 +18,25 @@ const storage = {
   clear() {
     localStorage.clear();
   },
+  getSession(key) {
+    const value = sessionStorage.getItem(key);
+    if (!value) {
+      return null;
+    }
+    return JSON.parse(value);
+  },
+
+  setSession(key, value) {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  },
+
+  removeSession(key) {
+    sessionStorage.removeItem(key);
+  },
+
+  clearSession() {
+    sessionStorage.clear();
+  },
 };
 
 export default storage;
