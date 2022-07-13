@@ -23,7 +23,7 @@ const UploadPage = () => {
           </div>
 
           <form className="block mt-[0em]">
-            <div></div>
+            <div className=""></div>
           </form>
 
         </div>

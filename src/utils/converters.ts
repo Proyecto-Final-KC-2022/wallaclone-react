@@ -6,7 +6,7 @@ const isValidValue = complement(isNullOrUndefined);
 const objectToFormData = object =>
   Object.entries(object).reduce((formData, [key, value]) => {
     if (isValidValue(value)) {
-      formData.append(key, value);
+      formData.append(key, value as any);
     }
     return formData;
   }, new FormData());

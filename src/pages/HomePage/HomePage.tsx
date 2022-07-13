@@ -13,7 +13,7 @@ const HomePage = () => {
   
   return (
     <>
-      <Layout>
+      <div>
         <div className={style.homepageWrapper}>
           <span className="text-[1rem] text-[#607D8B] font-light pt-[16px]">
             wallaclone, la plataforma líder de compraventa de productos de Segunda mano
@@ -28,7 +28,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     </>
   );
 };
