@@ -20,19 +20,19 @@ const Header2 = () => {
         </div>
       </div>
       <div className={Header2Styles.headerItemsWrapper}>
-          <div className={Header2Styles.headerItem}>
-            <LanguageButton />
-          </div>
-          <NavLink to="/category" className={Header2Styles.headerItem}>
-            <MailBoxButton />
-          </NavLink>
-          <NavLink to="/login" className={Header2Styles.headerItem}>
-            <LoginButton  />
-          </NavLink>
-          <div className={Header2Styles.headerItem}>
-            <UploadButton />
-          </div>
+        <div className={Header2Styles.headerItem}>
+          <LanguageButton />
         </div>
+        <div className={Header2Styles.headerItem}>
+          <MailBoxButton />
+        </div>
+        <div className={Header2Styles.headerItem}>
+          <LoginButton />
+        </div>
+        <div className={Header2Styles.headerItem}>
+          <UploadButton />
+        </div>
+      </div>
     </div>
   );
 };

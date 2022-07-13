@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 
 import HeaderStyles from "./HeaderStyles";
@@ -9,12 +9,18 @@ import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import LoginButton from "../common/LoginButton";
 
-const Header = ({ isMainPage, getSearchInputValue }: { isMainPage: boolean; getSearchInputValue: (value: string)=>void }) => {
-  const handleKeyDown = (event )=> {
-    if (event.key === 'Enter') {
-      getSearchInputValue(event?.target?.value)
+const Header = ({
+  isMainPage,
+  getSearchInputValue,
+}: {
+  isMainPage: boolean;
+  getSearchInputValue: (value: string) => void;
+}) => {
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      getSearchInputValue(event?.target?.value);
     }
-  }
+  };
 
   return (
     <div className={HeaderStyles.navWrapper}>
@@ -45,13 +51,12 @@ const Header = ({ isMainPage, getSearchInputValue }: { isMainPage: boolean; getS
           <div className={HeaderStyles.headerItem}>
             <LanguageButton />
           </div>
-          <NavLink to="/category" className={HeaderStyles.headerItem}>
+          <div className={HeaderStyles.headerItem}>
             <MailBoxButton />
-          </NavLink>
-          <NavLink to="/login" className={HeaderStyles.headerItem}>
-            {/* <LoginButton onClickModalButton={onClickModalButton} /> */}
+          </div>
+          <div className={HeaderStyles.headerItem}>
             <LoginButton />
-          </NavLink>
+          </div>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />
           </div>
