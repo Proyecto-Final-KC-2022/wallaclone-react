@@ -6,7 +6,6 @@ import { GrClose } from "react-icons/gr";
 import Modal from "../modal/Modal";
 import LoginStyles from "./LoginStyles";
 
-import SignUp from "../signup/SignUp";
 
 const Login = ({ open, onClose }: any) => {
   if (!open) return null;
@@ -59,7 +58,6 @@ const Login = ({ open, onClose }: any) => {
               className="text-center text-gray-700 my-4"
               onClick={onClickModalButton}
             >
-              <SignUp open={signupModal} onClose={() => setSignupModal(false)} />
               Regístrate
             </div>
           </div>
