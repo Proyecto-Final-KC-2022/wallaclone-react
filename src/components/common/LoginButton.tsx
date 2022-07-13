@@ -10,12 +10,10 @@ const style = {
 const LoginButton = () => {
   const { isLogged } = useAuthContext();
 
-  return !isLogged ? (
-    <NavLink to="/login">
-      <button className={style.loginButtonWrapper}>
-        <span className={style.loginText}>Regístrate o inicia sesión</span>
-      </button>
-    </NavLink>
+  return isLogged ? (
+    <button className={style.loginButtonWrapper}>
+      <span className={style.loginText}>Regístrate o inicia sesión</span>
+    </button>
   ) : (
     <AccountButton />
   );

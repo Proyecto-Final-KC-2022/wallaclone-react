@@ -9,7 +9,6 @@ import { AuthProvider } from "../src/components/auth/context";
 import Login from "../src/components/auth/LoginPage/LoginPage";
 import SignUp from "./pages/SignupPage/SignupPage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
-import UploadPage from "./pages/UploadPage/UploadPage";
 import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";

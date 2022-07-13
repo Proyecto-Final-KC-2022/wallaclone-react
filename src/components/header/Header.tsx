@@ -7,7 +7,7 @@ import Logo from "../../images/logo.png";
 import LanguageButton from "../common/LanguageButton";
 import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
-import LoginButton from "../common/LoginButton";
+import ConnectedAuthButton from "../auth/AuthButton/AuthButton";
 
 const Header = ({
   isMainPage,
@@ -55,7 +55,7 @@ const Header = ({
             <MailBoxButton />
           </div>
           <div className={HeaderStyles.headerItem}>
-            <LoginButton />
+            <ConnectedAuthButton />
           </div>
           <div className={HeaderStyles.headerItem}>
             <UploadButton />

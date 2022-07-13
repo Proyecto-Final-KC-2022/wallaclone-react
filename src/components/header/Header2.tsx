@@ -7,7 +7,6 @@ import Logo from "../../images/logo.png";
 import LanguageButton from "../common/LanguageButton";
 import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
-import LoginButton from "../common/LoginButton";
 
 const Header2 = () => {
   return (
@@ -25,9 +24,6 @@ const Header2 = () => {
         </div>
         <div className={Header2Styles.headerItem}>
           <MailBoxButton />
-        </div>
-        <div className={Header2Styles.headerItem}>
-          <LoginButton />
         </div>
         <div className={Header2Styles.headerItem}>
           <UploadButton />

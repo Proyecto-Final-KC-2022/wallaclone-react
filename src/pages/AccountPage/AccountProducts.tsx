@@ -55,7 +55,7 @@ const AccountProducts = () => {
                           />
                         </div>
                       </div>
-                      
+
                       <div className="block grow max-w-full basis-0 relative w-full min-h-[1px] px-[15px] text-left">
                         <div className="bg-white rounded-[10px] border border-1 flex flex-wrap ">
                           <div className="flex cursor-pointer p-0 items-center justify-center max-w-full w-full">
