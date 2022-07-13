@@ -241,7 +241,7 @@ const AccountProducts = () => {
                                 advertIdsToDelete.length <= 0
                                   ? "cursor-not-allowed"
                                   : ""
-                              } w-[120px] mr-[12px] border rounded-[10px] bg-white text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0`}
+                              } w-[120px] mr-[12px] border rounded-[10px] text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0 bg-white active:bg-[#fd6c67]`}
                             >
                               <div className="w-[24px] h-[24px] flex items-center justify-center">
                                 <BsTrash className="text-[20px]" />
