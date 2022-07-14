@@ -166,7 +166,7 @@ const UploadPage = () => {
                       <div className="w-full px-[8px] text-center mb-[8px] block">
                         <div className="border-2 border-dashed h-[50px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px]">
                           {/* <img className="w-[20px] h-[20px]" src={Camera} /> */}
-                          <input className="hidden" type="file"/>
+                          <input type="file"/>
                         </div>
                       </div>
                     </div>
