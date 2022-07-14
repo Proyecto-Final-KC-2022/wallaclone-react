@@ -1,9 +1,8 @@
 import axios from 'axios';
 
 const client = axios.create({
-  // Ruta para pruebas
-  // Meter en .env como process.env.REACT_APP_API_BASE_URL
-  baseURL: import.meta.env.VITE_REACT_APP_API_BASE_URL ||  `http://localhost:3000`,
+  // Meter en .env
+  baseURL: import.meta.env.VITE_REACT_APP_API_BASE_URL
 });
 
 const setAuthorizationHeader = token => {
