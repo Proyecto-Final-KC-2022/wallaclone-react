@@ -27,6 +27,7 @@ import AccountPage from "./pages/AccountPage/AccountPage";
 
   import LoginPage from "./components/auth/LoginPage"
 */
+import { SocketProvider } from './socket-context/socketContext';
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
@@ -37,21 +38,23 @@ function App({ isInitiallyLogged }) {
   const authProps = { isLogged, handleSignup, handleLogin, handleLogout };
 
   return (
-    <AuthProvider {...authProps}>
-      <div className="m-0 p-0 w-full min-h-[100vh] block">
-        <BrowserRouter>
-          <Routes>
-            <Route index element={<ProductsPage />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/product/:name/:id" element={<Product />} />
-            <Route path="/category" element={<Products2 />} />
-            <Route path="/account/*" element={<AccountPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </AuthProvider>
+    <SocketProvider>
+      <AuthProvider {...authProps}>
+        <div className="m-0 p-0 w-full min-h-[100vh] block">
+          <BrowserRouter>
+            <Routes>
+              <Route index element={<ProductsPage />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/product/:name/:id" element={<Product />} />
+              <Route path="/category" element={<Products2 />} />
+              <Route path="/account/*" element={<AccountPage />} />
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AuthProvider>
+    </SocketProvider>
   );
 }
 
