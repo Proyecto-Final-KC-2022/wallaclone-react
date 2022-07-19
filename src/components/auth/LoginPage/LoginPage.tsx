@@ -5,7 +5,9 @@ import { useAuthContext } from "../context";
 import { login } from "../service";
 import LoginForm from "./LoginForm";
 import useMutation from "../../../hooks/useMutation";
-import { useSocketContext } from "../../../socket-context/socketContext";
+// import { useSocketContext } from "../../../socket-context/socketContext";
+import socket from '../../../socket-context/socketContext';
+
 import storage from "../../../utils/storage";
 import { parseJwt } from "../../../utils/utils";
 
@@ -14,7 +16,7 @@ function LoginPage() {
   const location = useLocation();
   const { handleLogin } = useAuthContext();
   const { isLoading, error, execute, resetError } = useMutation(login);
-  const socket = useSocketContext().socket;
+  // const socket = useSocketContext().socket.current;
   const handleSubmit = (credentials) => {
     execute(credentials)
       .then(handleLogin)

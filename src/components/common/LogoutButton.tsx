@@ -1,11 +1,13 @@
 import useMutation from "../../hooks/useMutation";
-import { useSocketContext } from "../../socket-context/socketContext";
+// import { useSocketContext } from "../../socket-context/socketContext";
+import socket from '../../socket-context/socketContext';
+
 import { logout } from "../auth/service";
 import ConfirmationButton from "./ConfirmationButton";
 
 const LogoutButton = () => {
   const mutation = useMutation(logout);
-  const socket = useSocketContext().socket;
+  // const socket = useSocketContext().socket.current;
 
   const handleLogoutConfirm = async () => {
     const userLoggedOutId = await mutation.execute();

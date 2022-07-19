@@ -8,7 +8,8 @@ import { useState, useEffect } from "react";
 import { Chat, Message } from "../../models/Chat.model";
 import UserService from "../../api/service/User.service";
 import Spinner from "../../components/spinner/Spinner";
-import { useSocketContext } from "../../socket-context/socketContext";
+// import { useSocketContext } from "../../socket-context/socketContext";
+import socket from "../../socket-context/socketContext";
 export type UserChat = {
   chatId?: string;
   otherUserName: string; //nombre del usuario con el que tengo el chat (diferente al usuario actual)
@@ -29,9 +30,13 @@ const ChatPage = ({ currentUserId }) => {
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState<Message>(null);
 
-  const socket = useSocketContext().socket;
+  // const socket = useSocketContext().socket.current;
 
   useEffect(() => {
+    socket.emit("joinChatRoom", { userId: currentUserId });
+    socket.on("getPrivateMessage", (data) => {
+      setArrivalMessage(data);
+    });
     (async () => {
       try {
         setIsLoading(true);
@@ -57,10 +62,6 @@ const ChatPage = ({ currentUserId }) => {
         setIsLoading(false);
       }
     })();
-
-    socket.on("getPrivateMessage", (data) => {
-      setArrivalMessage(data);
-    });
   }, []);
 
   useEffect(() => {
@@ -81,9 +82,12 @@ const ChatPage = ({ currentUserId }) => {
         content: newMessage,
         sender: currentUserId,
         receiver: currentChat.otherUserId,
-      },
+        creationDate: new Date().toISOString(),
+        read: false,
+      } as Message,
     };
     socket.emit("sendMessage", messageData);
+    setCurrentChatMessages((prev) => [...prev, messageData.message]);
   };
 
   useEffect(() => {
@@ -123,7 +127,8 @@ const ChatPage = ({ currentUserId }) => {
               {chatsList?.length > 0 &&
                 chatsList.map((chat, idx) => {
                   return (
-                    <div key={idx}
+                    <div
+                      key={idx}
                       onClick={() => setCurrentChat(chat)}
                       className="scroll-smooth block overflow-y-scroll max-h-[750px] overflow-x-hidden"
                     >
@@ -218,7 +223,10 @@ const ChatPage = ({ currentUserId }) => {
                             {currentChatMessages?.length > 0 &&
                               currentChatMessages.map((message, idx) => {
                                 return (
-                                  <div key={idx} className="pb-[12px] px-[20px] max-h-[500px] w-full flex grow">
+                                  <div
+                                    key={idx}
+                                    className="pb-[12px] px-[20px] max-h-[500px] w-full flex grow"
+                                  >
                                     <div className="grow block">
                                       <div
                                         style={

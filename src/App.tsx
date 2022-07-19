@@ -27,7 +27,7 @@ import AccountPage from "./pages/AccountPage/AccountPage";
 
   import LoginPage from "./components/auth/LoginPage"
 */
-import { SocketProvider } from './socket-context/socketContext';
+// import { SocketProvider } from './socket-context/socketContext';
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
@@ -38,7 +38,7 @@ function App({ isInitiallyLogged }) {
   const authProps = { isLogged, handleSignup, handleLogin, handleLogout };
 
   return (
-    <SocketProvider>
+    // <SocketProvider>
       <AuthProvider {...authProps}>
         <div className="m-0 p-0 w-full min-h-[100vh] block">
           <BrowserRouter>
@@ -54,7 +54,7 @@ function App({ isInitiallyLogged }) {
           </BrowserRouter>
         </div>
       </AuthProvider>
-    </SocketProvider>
+    // </SocketProvider>
   );
 }
 
