@@ -1,25 +1,35 @@
 import useMutation from "../../hooks/useMutation";
 import { logout } from "../auth/service";
 import ConfirmationButton from "./ConfirmationButton";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const LogoutButton = () => {
   const mutation = useMutation(logout);
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleLogoutConfirm = async () => {
     await mutation.execute();
     logout();
+    const from = location.state?.["from"]?.pathname || "/";
+    const refreshPage = () => {
+      navigate(0);
+    }
+    navigate(from, { replace: true });
 
-    // Cambiar esto
-    window.location.href = 'http://localhost:8080/'; 
+    // Si no se hace refresh entiende que sigue estando logueado y muestra el perfil en home
+    
+    refreshPage()
   };
 
   return (
-    <ConfirmationButton className="cursor-pointer py-[12px] px-[20px] bg-transparent hover:bg-red-500 border border-1 border-[#607d8b] text-[.875rem] text-[#607d8b] hover:text-white rounded-[25px] inline-block text-center whitespace-nowrap"
-    confirmation="Are you sure?"
-    onConfirm={handleLogoutConfirm} >
+    <ConfirmationButton
+      className='cursor-pointer py-[12px] px-[20px] bg-transparent hover:bg-red-500 border border-1 border-[#607d8b] text-[.875rem] text-[#607d8b] hover:text-white rounded-[25px] inline-block text-center whitespace-nowrap'
+      confirmation='Are you sure?'
+      onConfirm={handleLogoutConfirm}
+    >
       Cerrar sesión
     </ConfirmationButton>
-  )
-}
+  );
+};
 
-export default LogoutButton
+export default LogoutButton;
