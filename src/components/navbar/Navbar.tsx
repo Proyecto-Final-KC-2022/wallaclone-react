@@ -37,14 +37,14 @@ const Navbar = () => {
                 Favoritos
             </span>
         </div>
-        <div className={style.navItems}>
+        <Link to="/account/upload" className={style.navItems}>
             <div className={style.navIcon}>
                 <AiOutlinePlusCircle />
             </div>
             <span className={style.navText}>
                 Súbelo
             </span>
-        </div>
+        </Link>
         <div className={style.navItems}>
             <div className={style.navIcon}>
                 <AiOutlineMail />
@@ -53,14 +53,14 @@ const Navbar = () => {
                 Buzón
             </span>
         </div>
-        <div className={style.navItems}>
+        <Link to="/account" className={style.navItems}>
             <div className={style.navIcon}>
                 <BsEmojiLaughing />
             </div>
             <span className={style.navText}>
                 Tú
             </span>
-        </div>
+        </Link>
       </div>
     </div>
   );

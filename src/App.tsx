@@ -13,6 +13,7 @@ import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import { RequireAuth } from "./components/auth";
 
 /*
   MARCE
@@ -47,7 +48,14 @@ function App({ isInitiallyLogged }) {
             <Route path="/products" element={<Products />} />
             <Route path="/product/:name/:id" element={<Product />} />
             <Route path="/category" element={<Products2 />} />
-            <Route path="/account/*" element={<AccountPage />} />
+            <Route
+              path="/account/*"
+              element={
+                <RequireAuth>
+                  <AccountPage />
+                </RequireAuth>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </div>
