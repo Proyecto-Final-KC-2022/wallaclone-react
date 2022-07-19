@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import AccountNavbar from "./AccountNavbar";
 import Layout2 from "../../components/layout/Layout2";
 import AccountProducts from "./AccountProducts";
-import UploadPage from "../UploadPage/UploadPage";
+import NewAdvertForm from "../UploadPage/NewAdvertForm";
 
 const AccountPage = () => {
   return (
@@ -14,7 +14,7 @@ const AccountPage = () => {
           <Routes>
             <Route index element={<Profile />} />
             <Route path="products" element={<AccountProducts />} />
-            <Route path="upload" element={<UploadPage />} />
+            <Route path="upload" element={<NewAdvertForm />} />
           </Routes>
         </div>
       </Layout2>

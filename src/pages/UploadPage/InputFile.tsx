@@ -1,7 +1,7 @@
 import React from 'react';
 import T from 'prop-types';
 
-import placeholder from '../../assets/images/placeholder.png';
+import placeholder from '../../images/placeholder.png';
 
 function InputFile({ onChange, ...props }) {
   const inputRef = React.createRef(null);
