@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const style = {
     footerWrapper: "block w-full h-full bg-white border-t-[2px] border-gray-200 px-[10px] mx-auto"
 }
@@ -17,7 +19,7 @@ const Footer = () => {
               <div className="text-[#607D8B] font-bold">Wallaclone</div>
               <ul>
                 <li className="pt-[16px]">
-                  <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Quienes somos</a>
+                  <Link to="/404" className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Quienes somos</Link>
                 </li>
                 <li className="pt-[16px]">
                   <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Cómo funciona</a>
