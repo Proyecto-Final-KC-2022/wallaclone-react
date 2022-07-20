@@ -14,6 +14,7 @@ const validPrice = ({ price }) =>
   !Number.isNaN(price) && Number.isFinite(price) && price >= 0;
 const validTags = ({ tags }) => !!tags.length;
 
+
 function NewAdvertForm({ onSubmit }) {
   const {
     formValue: advert,
@@ -92,10 +93,7 @@ function NewAdvertForm({ onSubmit }) {
                     Tags
                   </label>
                   <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
-                    <select name="tags" value={tags} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Tags
-                      </option>
+                    <select multiple={true} name="tags" value={tags} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
                       <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
                         Trabajo
                       </option>
@@ -154,9 +152,6 @@ function NewAdvertForm({ onSubmit }) {
                   </label>
                   <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
                     <select name="forSale" value={forSale} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Estado del producto
-                      </option>
                       <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
                         Compra
                       </option>

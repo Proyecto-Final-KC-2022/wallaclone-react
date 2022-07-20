@@ -4,7 +4,7 @@ import T from 'prop-types';
 import placeholder from '../../images/placeholder.png';
 
 function InputFile({ onChange, ...props }) {
-  const inputRef = React.createRef(null);
+  const inputRef:any = React.createRef();
   const [src, setSrc] = React.useState(null);
 
   const loadSrcFromFile = file => {
