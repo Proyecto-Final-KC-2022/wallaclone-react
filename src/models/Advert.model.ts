@@ -1,3 +1,5 @@
+import { User } from "./User.model";
+
 export type Advert = {
   _id: string;
   name?: string;
@@ -7,7 +9,7 @@ export type Advert = {
   price?: number;
   tags?: Array<string>;
   creationDate?: string;
-  owner?: string;
+  owner?: User;
   preOrdered?: boolean;
   sold?: boolean;
 };

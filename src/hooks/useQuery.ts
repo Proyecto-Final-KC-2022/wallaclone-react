@@ -26,7 +26,7 @@ function useQuery<T>(
       const execute = async () => {
         startExecution();
         try {
-          const result = payload ? await query() : await query(payload);
+          const result = payload ? await query(payload) : await query();
           finishExecution(null, result);
         } catch (error) {
           finishExecution(error);

@@ -10,6 +10,7 @@ import UserService from "../../api/service/User.service";
 import Spinner from "../../components/spinner/Spinner";
 // import { useSocketContext } from "../../socket-context/socketContext";
 import socket from "../../socket-context/socketContext";
+import { useSearchParams } from "react-router-dom";
 export type UserChat = {
   chatId?: string;
   otherUserName: string; //nombre del usuario con el que tengo el chat (diferente al usuario actual)
@@ -20,6 +21,9 @@ export type UserChat = {
   messages: Array<Message>;
 };
 const ChatPage = ({ currentUserId }) => {
+  const [searchParams] = useSearchParams();
+  const advertId = searchParams.get("advertid");
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [chatsList, setChatsList] = useState<Array<UserChat>>([]);
@@ -40,7 +44,9 @@ const ChatPage = ({ currentUserId }) => {
     (async () => {
       try {
         setIsLoading(true);
-        const chats = await UserService.getUserChats();
+        const chats = await UserService.getUserChats({
+          queryParams: { advertId: advertId },
+        });
         const currentUserChats: Array<UserChat> = chats.map((chat) => {
           const otherUser = chat?.members?.find((member) => {
             return member._id !== currentUserId;

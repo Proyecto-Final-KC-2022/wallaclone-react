@@ -13,6 +13,7 @@ import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import RequireAuth from "./components/auth/RequireAuth";
 
 /*
   MARCE
@@ -38,23 +39,28 @@ function App({ isInitiallyLogged }) {
   const authProps = { isLogged, handleSignup, handleLogin, handleLogout };
 
   return (
-    // <SocketProvider>
-      <AuthProvider {...authProps}>
-        <div className="m-0 p-0 w-full min-h-[100vh] block">
-          <BrowserRouter>
-            <Routes>
-              <Route index element={<ProductsPage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/product/:name/:id" element={<Product />} />
-              <Route path="/category" element={<Products2 />} />
-              <Route path="/account/*" element={<AccountPage />} />
-            </Routes>
-          </BrowserRouter>
-        </div>
-      </AuthProvider>
-    // </SocketProvider>
+    <AuthProvider {...authProps}>
+      <div className='m-0 p-0 w-full min-h-[100vh] block'>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<ProductsPage />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/products' element={<Products />} />
+            <Route path='/product/:name/:advertId' element={<Product />} />
+            <Route path='/category' element={<Products2 />} />
+            <Route
+              path='/account/*'
+              element={
+                <RequireAuth>
+                  <AccountPage />
+                </RequireAuth>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </AuthProvider>
   );
 }
 
