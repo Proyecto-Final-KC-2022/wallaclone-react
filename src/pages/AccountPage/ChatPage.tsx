@@ -18,6 +18,7 @@ export type UserChat = {
   advertId: string;
   advertName: string;
   advertPrice: number;
+  advertImage: string;
   messages: Array<Message>;
 };
 const ChatPage = ({ currentUserId }) => {
@@ -58,10 +59,12 @@ const ChatPage = ({ currentUserId }) => {
             advertId: chat?.advertId?._id,
             advertName: chat?.advertId?.name,
             advertPrice: chat?.advertId?.price,
+            advertImage: chat?.advertId?.image,
             messages: chat?.messages,
           };
         });
         setChatsList(currentUserChats);
+        advertId && setCurrentChat(currentUserChats.find((c) => !c.chatId));
       } catch (err) {
         setError(error);
       } finally {
@@ -144,7 +147,7 @@ const ChatPage = ({ currentUserId }) => {
                             <div className="grow overflow-hidden flex py-[20px] float-left rounded-[10px] w-[60px] h-[60px] bg-cover mr-[12px] relative items-center">
                               <img
                                 className="float-left rounded-[10px] w-[60px] h-[60px] flex relative mr-[12px]"
-                                src={FakeImg}
+                                src={chat?.advertImage || FakeImg}
                               />
                             </div>
                           </div>
@@ -193,7 +196,7 @@ const ChatPage = ({ currentUserId }) => {
                                 <div className="w-[150px] h-[150px] bg-cover mr-[12px] flex relative">
                                   <img
                                     className="rounded-[4px]"
-                                    src={FakeImg}
+                                    src={currentChat?.advertImage || FakeImg}
                                   />
                                 </div>
                               </div>
@@ -213,14 +216,7 @@ const ChatPage = ({ currentUserId }) => {
                                     {currentChat.otherUserName}
                                   </h5>
                                 </div>
-                                <div className="relative block">
-                                  <div className="bg-cover w-[40px] h-[40px] block">
-                                    <img
-                                      className="rounded-[50%]"
-                                      src={FakeImg}
-                                    />
-                                  </div>
-                                </div>
+                                
                               </div>
                             </div>
                           </div>
