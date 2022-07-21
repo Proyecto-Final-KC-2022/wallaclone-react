@@ -72,7 +72,6 @@ function NewAdvertForm({ onSubmit }) {
                     <span className="text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]">
                       0/50
                     </span>
-
                     <input
                       type="text"
                       name="name"
@@ -86,53 +85,30 @@ function NewAdvertForm({ onSubmit }) {
                   </div>
                 </div>
               </div>
-
               <div className="flex flex-wrap mx-[15px] grow-0 shrink-0 basis-2/4 relative w-full min-h-[1px] px-[15px] gap-2">
                 <div className="mb-[1rem] block basis-2/4">
                   <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                     Tags
                   </label>
                   <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
-                    <select multiple={true} name="tags" value={tags} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Trabajo
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Estilo de vida
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Motor
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Telefonía móvil
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Ocio
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Informática
-                      </option>
-                    </select>
+                    <SelectTags name="tags" value={tags} onChange={handleChange} />
                   </div>
                 </div>
-
                 <div className="mb-[1rem] block basis-1/3">
                   <div className="mb-[1rem] block ">
                     <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                       Precio
                     </label>
-
                     <input
                       type="number" 
                       name="price" 
-                      value={price} 
+                      value={price}
                       onChange={handleChange}
                       className="block h-[50px] w-full text-[1rem] bg-white border rounded-[6px] px-4 text-[#495057] whitespace-nowrap overflow-hidden outline-none"
                       placeholder="(No te pases)"
                     ></input>
                   </div>
                 </div>
-
                 <div className="mb-[1rem] block basis-3 w-full max-w-full">
                   <div className="mb-[1rem] block">
                     <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
@@ -145,24 +121,22 @@ function NewAdvertForm({ onSubmit }) {
                     ></input>
                   </div>
                 </div>
-
                 <div className="mb-[1rem] block basis-2/4">
                   <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                     Estado del producto
                   </label>
                   <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
                     <select name="forSale" value={forSale} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
-                        Compra
-                      </option>
-                      <option className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
+                      <option value='true' className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
                         Venta
+                      </option>
+                      <option value='false' className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
+                        Compra
                       </option>
                     </select>
                   </div>
                 </div>
               </div>
-
               <div className="flex flex-wrap mx-[15px]">
                 <div className="grow-0 shrink-0 basis-full max-w-full w-full relative min-h-[1px] px-[15px] block">
                   <div className="mb-[1rem] block">
@@ -172,7 +146,6 @@ function NewAdvertForm({ onSubmit }) {
                     <span className="text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]">
                       0/640
                     </span>
-
                     <textarea
                       name="description"
                       value={description}
@@ -185,7 +158,6 @@ function NewAdvertForm({ onSubmit }) {
                 </div>
               </div>
             </div>
-
             <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
               <div className="flex flex-wrap mx-[15px]">
                 <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
@@ -194,7 +166,6 @@ function NewAdvertForm({ onSubmit }) {
                   </h2>
                 </div>
               </div>
-
               <div className="w-full block">
                 <div className="mb-[20px] block">
                   <div className="block px-4">
@@ -202,7 +173,6 @@ function NewAdvertForm({ onSubmit }) {
                       <div className="w-full px-[8px] text-center mb-[8px] block">
                         <div className="border-2 border-dashed h-[50px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px]">
                           {/* <img className="w-[20px] h-[20px]" src={Camera} /> */}
-
                           <InputFile name="image" onChange={handleChange}  />
                         </div>
                       </div>
@@ -211,7 +181,6 @@ function NewAdvertForm({ onSubmit }) {
                 </div>
               </div>
             </div>
-
             <div className="flex flex-wrap mx-[15px]">
               <div className="flex max-w-[41.66%] relative w-full min-h-[1px] px-[15px]">
                 <button
