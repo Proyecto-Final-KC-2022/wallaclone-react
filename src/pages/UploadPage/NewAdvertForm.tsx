@@ -85,16 +85,16 @@ function NewAdvertForm({ onSubmit }) {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-wrap mx-[15px] grow-0 shrink-0 basis-2/4 relative w-full min-h-[1px] px-[15px] gap-2">
-                <div className="mb-[1rem] block basis-2/4">
+              <div className="flex flex-wrap mx-[15px] grow-0 shrink-0 relative min-h-[1px] px-[15px] gap-2">
+                <div className="mb-[1rem] block">
                   <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                     Tags
                   </label>
-                  <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] py-4 px-4">
-                    <SelectTags className="my-2 block" name="tags" value={tags} onChange={handleChange} />
+                  <div className="flex w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] py-4 px-4">
+                    <SelectTags className="mx-3" name="tags" value={tags} onChange={handleChange} />
                   </div>
                 </div>
-                <div className="mb-[1rem] block basis-1/3">
+                <div className="mb-[1rem] block basis-1/2">
                   <div className="mb-[1rem] block ">
                     <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                       Precio
