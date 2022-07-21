@@ -90,8 +90,8 @@ function NewAdvertForm({ onSubmit }) {
                   <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                     Tags
                   </label>
-                  <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
-                    <SelectTags name="tags" value={tags} onChange={handleChange} />
+                  <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] py-4 px-4">
+                    <SelectTags className="my-2 block" name="tags" value={tags} onChange={handleChange} />
                   </div>
                 </div>
                 <div className="mb-[1rem] block basis-1/3">
@@ -171,7 +171,7 @@ function NewAdvertForm({ onSubmit }) {
                   <div className="block px-4">
                     <div className="flex flex-wrap relative m-[4px]">
                       <div className="w-full px-[8px] text-center mb-[8px] block">
-                        <div className="border-2 border-dashed h-[50px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px]">
+                        <div className="border-2 border-dashed h-[120px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px]">
                           {/* <img className="w-[20px] h-[20px]" src={Camera} /> */}
                           <InputFile name="image" onChange={handleChange}  />
                         </div>

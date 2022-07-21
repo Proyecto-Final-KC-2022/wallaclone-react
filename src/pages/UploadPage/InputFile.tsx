@@ -44,7 +44,7 @@ function InputFile({ onChange, ...props }) {
         alt=""
         width="100"
         height="100"
-        style={{ objectFit: 'contain' }}
+        style={{ objectFit: 'contain', borderRadius: '10px' }}
       />
     </>
   );
