@@ -33,18 +33,15 @@ function InputFile({ onChange, ...props }) {
     <>
       <input
         ref={inputRef}
+        className="hidden w-full"
         type="file"
-        style={{ display: 'none' }}
         onChange={handleChange}
         {...props}
       />
       <img
         onClick={handleClick}
         src={src || placeholder}
-        alt=""
-        width="100"
-        height="100"
-        style={{ objectFit: 'contain', borderRadius: '10px' }}
+        className="object-contain rounded-[10px] w-[100px] cursor-pointer"
       />
     </>
   );

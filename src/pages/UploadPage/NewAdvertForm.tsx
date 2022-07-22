@@ -171,7 +171,7 @@ function NewAdvertForm({ onSubmit }) {
                   <div className="block px-4">
                     <div className="flex flex-wrap relative m-[4px]">
                       <div className="w-full px-[8px] text-center mb-[8px] block">
-                        <div className="border-2 border-dashed h-[120px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px]">
+                        <div className="border-2 border-dashed h-[120px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px] hover:bg-[#eceff1]">
                           {/* <img className="w-[20px] h-[20px]" src={Camera} /> */}
                           <InputFile name="image" onChange={handleChange}  />
                         </div>
