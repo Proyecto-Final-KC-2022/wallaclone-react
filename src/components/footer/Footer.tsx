@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-
-const style = {
-    footerWrapper: "block w-full h-full bg-white border-t-[2px] border-gray-200 px-[10px] mx-auto"
-}
+import FooterStyles from "../../styles/FooterStyles";
 
 const Footer = () => {
   return (
-    <div className={style.footerWrapper}>
+    <div className={FooterStyles.footerWrapper}>
       <div className="pt-[60px] flex pb-[44px] mx-[10px]">
         <div className="max-w-[20%] mb-[44px] flex w-full relative px-[10px]">
           <img className="max-w-full mb-[16px] block" />

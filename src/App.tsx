@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "./pages/HomePage/HomePage";
-
 import "./index.css";
 
 import { AuthProvider } from "../src/components/auth/context";
@@ -11,7 +9,6 @@ import SignUp from "./pages/SignupPage/SignupPage";
 import ProductsPage from "./pages/ProductsPage/ProductsPage";
 import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
-import Products2 from "./pages/CategoryPage/CategoryPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RequireAuth from "./components/auth/RequireAuth";
@@ -49,7 +46,6 @@ function App({ isInitiallyLogged }) {
             <Route path='/signup' element={<SignUp />} />
             <Route path='/products' element={<Products />} />
             <Route path='/product/:name/:advertId' element={<Product />} />
-            <Route path='/category' element={<Products2 />} />
             <Route
               path='/account/*'
               element={

@@ -5,6 +5,7 @@ import socket from '../../socket-context/socketContext';
 import { logout } from "../auth/service";
 import ConfirmationButton from "./ConfirmationButton";
 import { useLocation, useNavigate } from "react-router-dom";
+import LogoutButtonStyles from "../../styles/LogoutButtonStyles";
 
 const LogoutButton = () => {
   const mutation = useMutation(logout);
@@ -28,7 +29,7 @@ const LogoutButton = () => {
 
   return (
     <ConfirmationButton
-      className='cursor-pointer py-[12px] px-[20px] bg-transparent hover:bg-red-500 border border-1 border-[#607d8b] text-[.875rem] text-[#607d8b] hover:text-white rounded-[25px] inline-block text-center whitespace-nowrap'
+      className={LogoutButtonStyles.logoutButton}
       confirmation='Are you sure?'
       onConfirm={handleLogoutConfirm}
     >
