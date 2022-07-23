@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FcLock } from "react-icons/fc";
 import { TbSend } from "react-icons/tb";
@@ -21,6 +21,7 @@ export type UserChat = {
   advertPrice: number;
   advertImage: string;
   messages: Array<Message>;
+  hasUnreadMessages: boolean;
 };
 const ChatPage = ({ currentUserId }) => {
   const [searchParams] = useSearchParams();
@@ -34,7 +35,13 @@ const ChatPage = ({ currentUserId }) => {
     Array<Message>
   >([]);
   const [newMessage, setNewMessage] = useState("");
-  const [arrivalMessage, setArrivalMessage] = useState<Message>(null);
+  const [arrivalMessage, setArrivalMessage] = useState<{
+    chatId: string;
+    message: Message;
+  }>(null);
+  // const [clearedUnreadMessagesChatId, setClearedUnreadMessagesChatId] =
+  //   useState<string>(null);
+  const scrollRef = useRef(null);
 
   // const socket = useSocketContext().socket.current;
 
@@ -53,6 +60,9 @@ const ChatPage = ({ currentUserId }) => {
           const otherUser = chat?.members?.find((member) => {
             return member._id !== currentUserId;
           });
+          const everyMessageRead = chat?.messages
+            ?.filter((e) => e.receiver === currentUserId)
+            ?.every((e) => e.read);
           return {
             chatId: chat._id,
             otherUserId: otherUser?._id,
@@ -62,10 +72,14 @@ const ChatPage = ({ currentUserId }) => {
             advertPrice: chat?.advertId?.price,
             advertImage: chat?.advertId?.image,
             messages: chat?.messages,
+            hasUnreadMessages: !everyMessageRead,
           };
         });
         setChatsList(currentUserChats);
-        advertId && setCurrentChat(currentUserChats.find((c) => !c.chatId));
+        advertId &&
+          setCurrentChatAndReadMessages(
+            currentUserChats.find((c) => !c.chatId)
+          );
       } catch (err) {
         setError(error);
       } finally {
@@ -98,12 +112,65 @@ const ChatPage = ({ currentUserId }) => {
     };
     socket.emit("sendMessage", messageData);
     setCurrentChatMessages((prev) => [...prev, messageData.message]);
+    setNewMessage("");
   };
 
   useEffect(() => {
-    arrivalMessage &&
-      setCurrentChatMessages((prev) => [...prev, arrivalMessage]);
+    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
+      arrivalMessage?.message?.sender
+    );
+    if (arrivalMessageInCurrentChat) {
+      arrivalMessage &&
+        !currentChatMessages.some(
+          (m) => m._id === arrivalMessage?.message?._id
+        ) &&
+        setCurrentChatMessages((prev) => [...prev, arrivalMessage?.message]);
+    }
+  }, [arrivalMessage, currentChatMessages]);
+
+  useEffect(() => {
+    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
+      arrivalMessage?.message?.sender
+    );
+    if (!arrivalMessageInCurrentChat) {
+      const chatsListClone = chatsList.map((c) => {
+        return { ...c };
+      });
+      chatsListClone.forEach((cc) => {
+        if (cc.chatId === arrivalMessage?.chatId) {
+          cc.hasUnreadMessages = true;
+          cc.messages.push(arrivalMessage.message);
+        }
+      });
+      socket.emit("setUnreadChatMessage", currentUserId); 
+      setChatsList(chatsListClone);
+    }
   }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [currentChatMessages]);
+
+  const setCurrentChatAndReadMessages = (chat: UserChat) => {
+    const hasPreviousUnreadMessages = chatsList.some(
+      (cl) => cl.hasUnreadMessages
+    );
+    chat.hasUnreadMessages = false;
+    setCurrentChat(chat);
+
+    socket.emit("clearPrivateUnreadMessages", {
+      chatId: chat.chatId,
+      receiverId: currentUserId,
+    });
+    const allMessagesAreRead = chatsList.every((cl) => !cl.hasUnreadMessages);
+    if (hasPreviousUnreadMessages && allMessagesAreRead) {
+      socket.emit("allMessagesAreRead", {
+        read: allMessagesAreRead,
+        currentUserId: currentUserId,
+      });
+    }
+  };
+
   return (
     <div className="max-w-full flex-1 block bg-white">
       <Toaster position="top-center" reverseOrder={false} />
@@ -140,13 +207,15 @@ const ChatPage = ({ currentUserId }) => {
                     return (
                       <div
                         key={idx}
-                        onClick={() => setCurrentChat(chat)}
+                        onClick={() => setCurrentChatAndReadMessages(chat)}
                         className="block"
                       >
                         <div className="w-full py-5 px-4 items-center hover:bg-gray-200 cursor-pointer border-b border-[#CFD8DC]">
                           <div className="flex">
                             <div className="flex overflow-hidden relative cursor-pointer">
-                              <div className="left-[20px] top-[17px] h-[8px] w-[8px] rounded-[8px] bg-[#fd6c67] block"></div>
+                              {chat.hasUnreadMessages && (
+                                <div className="left-[20px] top-[17px] h-[8px] w-[8px] rounded-[8px] bg-[#fd6c67] block"></div>
+                              )}
                               <div className="grow overflow-hidden flex py-[20px] float-left rounded-[10px] w-[60px] h-[60px] bg-cover mr-[12px] relative items-center">
                                 <img
                                   className="float-left rounded-[10px] w-[60px] h-[60px] flex relative mr-[12px]"
@@ -229,6 +298,7 @@ const ChatPage = ({ currentUserId }) => {
                               currentChatMessages.map((message, idx) => {
                                 return (
                                   <div
+                                    ref={scrollRef}
                                     key={idx}
                                     className="pb-[12px] px-[20px] w-full flex grow"
                                   >
