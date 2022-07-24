@@ -2,7 +2,6 @@ import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 
-import Login from "../login/Login";
 
 function Layout({
   children,
