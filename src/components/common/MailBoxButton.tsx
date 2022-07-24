@@ -9,7 +9,7 @@ const style = {
 
 const MailBoxButton = () => {
   return (
-    <NavLink to="/category">
+    <NavLink to="/account/chat">
       <div className={style.mailButtonWrapper}>
         <div className="justify-center items-center mr-1">
           <img src={Inbox} alt="inbox" />

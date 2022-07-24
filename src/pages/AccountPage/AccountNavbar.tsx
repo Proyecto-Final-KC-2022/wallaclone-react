@@ -64,7 +64,7 @@ const AccountNavbar = () => {
           </div>
         </Link>
 
-        <div className="flex relative min-h-[48px] cursor-pointer mb-[0.25rem] mx-[0.5rem] items-center hover:rounded-xl hover:bg-gray-200 text-left">
+        <Link to="/account/chat" className="flex relative min-h-[48px] cursor-pointer mb-[0.25rem] mx-[0.5rem] items-center hover:rounded-xl hover:bg-gray-200 text-left">
           <div className="flex relative rounded-[8px] min-h-[48px] mx-[0.5rem] mb-[0.25rem] items-center">
             <div className="flex px-[0.5rem]">
               <IoMailOutline className="text-2xl" />
@@ -73,7 +73,7 @@ const AccountNavbar = () => {
               Buzón
             </span>
           </div>
-        </div>
+        </Link>
 
         <div className="flex relative min-h-[48px] cursor-pointer mb-[0.25rem] mx-[0.5rem] items-center hover:rounded-xl hover:bg-gray-200 text-left">
           <div className="flex relative rounded-[8px] min-h-[48px] mx-[0.5rem] mb-[0.25rem] items-center">
