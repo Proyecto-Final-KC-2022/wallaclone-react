@@ -4,16 +4,16 @@ import FooterStyles from "../../styles/FooterStyles";
 const Footer = () => {
   return (
     <div className={FooterStyles.footerWrapper}>
-      <div className="pt-[60px] flex pb-[44px] mx-[10px]">
-        <div className="max-w-[20%] mb-[44px] flex w-full relative px-[10px]">
-          <img className="max-w-full mb-[16px] block" />
-          <span className="text-[#607D8B] text-[.75rem]">Copyright &copy; 2022 Wallaclone &copy; de sus respectivos propietarios</span>
+      <div className={FooterStyles.footerContainer}>
+        <div className={FooterStyles.logoWrapper}>
+          <div className={FooterStyles.logoContainer}>Wallaclone</div>
+          <span className={FooterStyles.copyrightText}>Copyright &copy; 2022 Wallaclone &copy; de sus respectivos propietarios</span>
         </div>
-        <div className="max-w-full relative w-full px-[10px]">
-          <div className="flex flex-wrap mx-[10px] justify-between">
+        <div className={FooterStyles.linksWrapper}>
+          <div className={FooterStyles.linksContainer}>
 
-            <div className="mb-[16px]">
-              <div className="text-[#607D8B] font-bold">Wallaclone</div>
+            <div className={FooterStyles.linksBlock}>
+              <div className={FooterStyles.linksTitle}>Wallaclone</div>
               <ul>
                 <li className="pt-[16px]">
                   <Link to="/404" className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Quienes somos</Link>
@@ -33,8 +33,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-[16px]">
-              <div className="text-[#607D8B] font-bold">Soporte</div>
+            <div className={FooterStyles.linksBlock}>
+              <div className={FooterStyles.linksTitle}>Soporte</div>
               <ul>
                 <li className="pt-[16px]">
                   <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Preguntas frecuentes</a>
@@ -48,8 +48,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-[16px]">
-              <div className="text-[#607D8B] font-bold">Legal</div>
+            <div className={FooterStyles.linksBlock}>
+              <div className={FooterStyles.linksTitle}>Legal</div>
               <ul>
                 <li className="pt-[16px]">
                   <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Condiciones de uso</a>
@@ -63,8 +63,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-[16px]">
-              <div className="text-[#607D8B] font-bold">Motor</div>
+            <div className={FooterStyles.linksBlock}>
+              <div className={FooterStyles.linksTitle}>Motor</div>
               <ul>
                 <li className="pt-[16px]">
                   <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Particulares</a>
@@ -75,8 +75,8 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="mb-[16px]">
-              <div className="text-[#607D8B] font-bold">Wallaclone PRO</div>
+            <div className={FooterStyles.linksBlock}>
+              <div className={FooterStyles.linksTitle}>Wallaclone PRO</div>
               <ul>
                 <li className="pt-[16px]">
                   <a className="text-[.875rem] text-[#90A4AE] hover:text-[#13c1ac] cursor-pointer">Impulsa tu negocio</a>
