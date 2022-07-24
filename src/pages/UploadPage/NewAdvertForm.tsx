@@ -26,7 +26,7 @@ function NewAdvertForm({ onSubmit }) {
     image: null,
     description: '',
     forSale: true,
-    price: 0,
+    price: '',
     tags: [],
   });
   const { name, image, description, forSale, price, tags } = advert;

@@ -19,10 +19,10 @@ const ProductCard2 = (advert: Advert) => {
           {/* TODO: De momento la imagen de notfound ya que ahora el cmapo imagen tiene strings random => seria algo asi { advert.image || NotFoundImg}*/}
           <img
             src={
-              advert.image.includes(
+              advert?.image?.includes(
                 "https://wallaclone-s3-bucket.s3.amazonaws.com"
               )
-                ? advert.image
+                ? advert?.image
                 : NotFoundImg
             }
             className="rounded-[10px] h-[196px] w-full"
