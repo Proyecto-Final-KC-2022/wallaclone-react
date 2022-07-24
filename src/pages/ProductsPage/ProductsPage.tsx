@@ -10,6 +10,7 @@ import usePagination from "../../hooks/usePagination";
 import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
 import FilterBar, { BarFilters } from "../../components/filter/FilterBar";
+import { Toaster, toast } from "react-hot-toast";
 
 /**
   TODO: 
@@ -113,6 +114,7 @@ const ProductsPage = (): JSX.Element => {
 
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <Layout
         isMainPage={true}
         getSearchInputValue={(value: string) => {
@@ -144,7 +146,10 @@ const ProductsPage = (): JSX.Element => {
                   }
                 })
               ) : (
-                <p> UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!</p>
+                <p className="text-center">
+                  {" "}
+                  UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!
+                </p>
               )}
             </>
           )}
@@ -168,12 +173,7 @@ const ProductsPage = (): JSX.Element => {
         )}
 
         {error && !isLoading && (
-          // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
-          //   <Toast.Header>
-          <strong className="me-auto">Error</strong>
-          //   </Toast.Header>
-          //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
-          // </Toast>
+          <div>{toast.error("Se ha producido un error en la aplicación")}</div>
         )}
       </Layout>
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BsArrowLeft } from "react-icons/bs";
 import { FcLock } from "react-icons/fc";
 import { TbSend } from "react-icons/tb";
@@ -11,6 +11,7 @@ import Spinner from "../../components/spinner/Spinner";
 // import { useSocketContext } from "../../socket-context/socketContext";
 import socket from "../../socket-context/socketContext";
 import { useSearchParams } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 export type UserChat = {
   chatId?: string;
   otherUserName: string; //nombre del usuario con el que tengo el chat (diferente al usuario actual)
@@ -20,6 +21,7 @@ export type UserChat = {
   advertPrice: number;
   advertImage: string;
   messages: Array<Message>;
+  hasUnreadMessages: boolean;
 };
 const ChatPage = ({ currentUserId }) => {
   const [searchParams] = useSearchParams();
@@ -33,7 +35,13 @@ const ChatPage = ({ currentUserId }) => {
     Array<Message>
   >([]);
   const [newMessage, setNewMessage] = useState("");
-  const [arrivalMessage, setArrivalMessage] = useState<Message>(null);
+  const [arrivalMessage, setArrivalMessage] = useState<{
+    chatId: string;
+    message: Message;
+  }>(null);
+  // const [clearedUnreadMessagesChatId, setClearedUnreadMessagesChatId] =
+  //   useState<string>(null);
+  const scrollRef = useRef(null);
 
   // const socket = useSocketContext().socket.current;
 
@@ -52,6 +60,9 @@ const ChatPage = ({ currentUserId }) => {
           const otherUser = chat?.members?.find((member) => {
             return member._id !== currentUserId;
           });
+          const everyMessageRead = chat?.messages
+            ?.filter((e) => e.receiver === currentUserId)
+            ?.every((e) => e.read);
           return {
             chatId: chat._id,
             otherUserId: otherUser?._id,
@@ -61,10 +72,14 @@ const ChatPage = ({ currentUserId }) => {
             advertPrice: chat?.advertId?.price,
             advertImage: chat?.advertId?.image,
             messages: chat?.messages,
+            hasUnreadMessages: !everyMessageRead,
           };
         });
         setChatsList(currentUserChats);
-        advertId && setCurrentChat(currentUserChats.find((c) => !c.chatId));
+        advertId &&
+          setCurrentChatAndReadMessages(
+            currentUserChats.find((c) => !c.chatId)
+          );
       } catch (err) {
         setError(error);
       } finally {
@@ -97,14 +112,68 @@ const ChatPage = ({ currentUserId }) => {
     };
     socket.emit("sendMessage", messageData);
     setCurrentChatMessages((prev) => [...prev, messageData.message]);
+    setNewMessage("");
   };
 
   useEffect(() => {
-    arrivalMessage &&
-      setCurrentChatMessages((prev) => [...prev, arrivalMessage]);
+    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
+      arrivalMessage?.message?.sender
+    );
+    if (arrivalMessageInCurrentChat) {
+      arrivalMessage &&
+        !currentChatMessages.some(
+          (m) => m._id === arrivalMessage?.message?._id
+        ) &&
+        setCurrentChatMessages((prev) => [...prev, arrivalMessage?.message]);
+    }
+  }, [arrivalMessage, currentChatMessages]);
+
+  useEffect(() => {
+    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
+      arrivalMessage?.message?.sender
+    );
+    if (!arrivalMessageInCurrentChat) {
+      const chatsListClone = chatsList.map((c) => {
+        return { ...c };
+      });
+      chatsListClone.forEach((cc) => {
+        if (cc.chatId === arrivalMessage?.chatId) {
+          cc.hasUnreadMessages = true;
+          cc.messages.push(arrivalMessage.message);
+        }
+      });
+      socket.emit("setUnreadChatMessage", currentUserId); 
+      setChatsList(chatsListClone);
+    }
   }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+  }, [currentChatMessages]);
+
+  const setCurrentChatAndReadMessages = (chat: UserChat) => {
+    const hasPreviousUnreadMessages = chatsList.some(
+      (cl) => cl.hasUnreadMessages
+    );
+    chat.hasUnreadMessages = false;
+    setCurrentChat(chat);
+
+    socket.emit("clearPrivateUnreadMessages", {
+      chatId: chat.chatId,
+      receiverId: currentUserId,
+    });
+    const allMessagesAreRead = chatsList.every((cl) => !cl.hasUnreadMessages);
+    if (hasPreviousUnreadMessages && allMessagesAreRead) {
+      socket.emit("allMessagesAreRead", {
+        read: allMessagesAreRead,
+        currentUserId: currentUserId,
+      });
+    }
+  };
+
   return (
     <div className="max-w-full flex-1 block bg-white">
+      <Toaster position="top-center" reverseOrder={false} />
       {!isLoading && !error && (
         <div className="relative min-h-full flex">
           <div className="absolute z-1 left-[16px] top-[16px] block">
@@ -131,49 +200,53 @@ const ChatPage = ({ currentUserId }) => {
                 </div>
               </div>
 
-              {/* LISTADO DE CHATS */}
-
-              {chatsList?.length > 0 &&
-                chatsList.map((chat, idx) => {
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => setCurrentChat(chat)}
-                      className="scroll-smooth block overflow-y-scroll max-h-[750px] overflow-x-hidden"
-                    >
-                      <div className="w-full py-5 px-4 items-center hover:bg-gray-200 cursor-pointer border-b border-[#CFD8DC]">
-                        <div className="flex">
-                          <div className="flex overflow-hidden relative cursor-pointer">
-                            <div className="grow overflow-hidden flex py-[20px] float-left rounded-[10px] w-[60px] h-[60px] bg-cover mr-[12px] relative items-center">
-                              <img
-                                className="float-left rounded-[10px] w-[60px] h-[60px] flex relative mr-[12px]"
-                                src={chat?.advertImage || FakeImg}
-                              />
-                            </div>
-                          </div>
-                          <div className="grow overflow-hidden flex flex-col justify-between">
-                            <div className="text-[#90a4ae] overflow-hidden flex flex-row grow cursor-pointer">
-                              <div className="overflow-hidden text-ellipsis whitespace-nowrap grow flex">
-                                <p className="text-[.75rem] flex overflow-hidden text-ellipsis whitespace-nowrap">
-                                  {chat.otherUserName}
-                                </p>
+              <div className="scroll-smooth overflow-y-scroll max-h-[750px] overflow-x-hidden">
+                {/* LISTADO DE CHATS */}
+                {chatsList?.length > 0 &&
+                  chatsList.map((chat, idx) => {
+                    return (
+                      <div
+                        key={idx}
+                        onClick={() => setCurrentChatAndReadMessages(chat)}
+                        className="block"
+                      >
+                        <div className="w-full py-5 px-4 items-center hover:bg-gray-200 cursor-pointer border-b border-[#CFD8DC]">
+                          <div className="flex">
+                            <div className="flex overflow-hidden relative cursor-pointer">
+                              {chat.hasUnreadMessages && (
+                                <div className="left-[20px] top-[17px] h-[8px] w-[8px] rounded-[8px] bg-[#fd6c67] block"></div>
+                              )}
+                              <div className="grow overflow-hidden flex py-[20px] float-left rounded-[10px] w-[60px] h-[60px] bg-cover mr-[12px] relative items-center">
+                                <img
+                                  className="float-left rounded-[10px] w-[60px] h-[60px] flex relative mr-[12px]"
+                                  src={chat?.advertImage || FakeImg}
+                                />
                               </div>
                             </div>
+                            <div className="grow overflow-hidden flex flex-col justify-between">
+                              <div className="text-[#90a4ae] overflow-hidden flex flex-row grow cursor-pointer">
+                                <div className="overflow-hidden text-ellipsis whitespace-nowrap grow flex">
+                                  <p className="text-[.75rem] flex overflow-hidden text-ellipsis whitespace-nowrap">
+                                    {chat.otherUserName}
+                                  </p>
+                                </div>
+                              </div>
 
-                            <div className="flex flex-row grow">
-                              <div className="flex flex-col">
-                                <div className="flex flex-row leading-4 font-bold overflow-hidden text-[1rem] grow whitespace-nowrap">
-                                  <span>{chat.advertName}</span>
+                              <div className="flex flex-row grow">
+                                <div className="flex flex-col">
+                                  <div className="flex flex-row leading-4 font-bold overflow-hidden text-[1rem] grow whitespace-nowrap">
+                                    <span>{chat.advertName}</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  );
-                })}
-              {/* FIN DEL LISTADO DE CHATS */}
+                    );
+                  })}
+                {/* FIN DEL LISTADO DE CHATS */}
+              </div>
             </div>
           </div>
 
@@ -216,18 +289,18 @@ const ChatPage = ({ currentUserId }) => {
                                     {currentChat.otherUserName}
                                   </h5>
                                 </div>
-                                
                               </div>
                             </div>
                           </div>
 
-                          <div className="overflow-y-scroll pt-[12px]">
+                          <div className="scroll-smooth overflow-y-scroll overflow-x-hidden max-h-[500px] pt-[12px]">
                             {currentChatMessages?.length > 0 &&
                               currentChatMessages.map((message, idx) => {
                                 return (
                                   <div
+                                    ref={scrollRef}
                                     key={idx}
-                                    className="pb-[12px] px-[20px] max-h-[500px] w-full flex grow"
+                                    className="pb-[12px] px-[20px] w-full flex grow"
                                   >
                                     <div className="grow block">
                                       <div
@@ -282,10 +355,10 @@ const ChatPage = ({ currentUserId }) => {
 
                           <div className="relative py-[12px] px-[20px] items-center justify-center w-full">
                             <form className="flex flex-full items-center">
-                              <div className="w-full rounded-[24px] border border-[#ECEFF1] py-[4px] pr-[4px] pl-[20px] flex items-center">
-                                <div className="inline-block items-center w-full">
+                              <div className="w-full rounded-[24px] border py-[4px] pr-[4px] pl-[20px] flex items-center">
+                                <div className="items-center w-full flex">
                                   <textarea
-                                    className="overflow-hidden h-[28px] inline-block bg-transparent p-[2px] w-full outline-none"
+                                    className="overflow-hidden h-[28px] inline-block bg-transparent p-[2px] w-full outline-none focus:ring-1 ring-[#13c1ac] ring-inset"
                                     placeholder="Escribe un mensaje..."
                                     onChange={(evt) =>
                                       setNewMessage(evt?.target?.value)
@@ -295,11 +368,11 @@ const ChatPage = ({ currentUserId }) => {
                                 </div>
 
                                 <button
-                                  className="inline-block cursor-pointer"
+                                  className="inline-block"
                                   onClick={handleSubmit}
                                 >
                                   <div className="right-[5px] bottom-[6px] flex items-center justify-center">
-                                    <div className="rounded-[50%] w-[40px] h-[40px] bg-[#CFD8DC] flex items-center justify-center mx-2">
+                                    <div className="rounded-[50%] w-[40px] h-[40px] bg-[#CFD8DC] flex items-center justify-center mx-2 hover:bg-[#13c1ac]">
                                       <TbSend className="rounded-[50%] w-[22px] h-[22px] text-white" />
                                     </div>
                                   </div>
@@ -326,12 +399,7 @@ const ChatPage = ({ currentUserId }) => {
       )}
 
       {error && !isLoading && (
-        // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
-        //   <Toast.Header>
-        <strong className="me-auto">Error</strong>
-        //   </Toast.Header>
-        //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
-        // </Toast>
+        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
       )}
     </div>
   );

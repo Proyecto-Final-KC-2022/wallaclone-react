@@ -10,6 +10,8 @@ import socket from '../../../socket-context/socketContext';
 
 import storage from "../../../utils/storage";
 import { parseJwt } from "../../../utils/utils";
+import { Toaster, toast } from "react-hot-toast";
+import Spinner from "../../spinner/Spinner";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -32,12 +34,15 @@ function LoginPage() {
 
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} />
       <LoginForm onSubmit={handleSubmit} />
-      {isLoading && <p>...login in nodepop</p>}
-      {error && (
-        <div onClick={resetError} style={{ color: "red" }}>
-          {error.message}
+      {isLoading && (
+        <div className="flex justify-center bg-gray-200 py-4 h-full">
+          <Spinner />
         </div>
+      )}
+      {error && (
+        <div onClick={resetError}>{toast.error("¡Usuario no autorizado!")}</div>
       )}
     </div>
   );

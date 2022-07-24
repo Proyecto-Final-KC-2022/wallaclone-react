@@ -12,8 +12,8 @@ class UserService {
 
   getUserChats(payload?: Payload<GetUserChats>): Promise<Array<Chat>> {
     const path = `/getUserChats${getUrlParams(
-      payload.urlParams
-    )}${getQueryParams(payload.queryParams)}`;
+      payload?.urlParams
+    )}${getQueryParams(payload?.queryParams)}`;
     return ApiClient.get(path);
   }
 }

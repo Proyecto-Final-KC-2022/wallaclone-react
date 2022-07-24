@@ -139,7 +139,7 @@ const TagsFilter = ({
         </div>
       </div>
 
-      <TagsFilterResponsive />
+      {/* <TagsFilterResponsive /> */}
     </>
   );
 };

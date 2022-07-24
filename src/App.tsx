@@ -13,6 +13,7 @@ import Products from "./pages/ProductsPage/ProductsPage";
 import Product from "./pages/ProductPage/ProductPage";
 import Products2 from "./pages/CategoryPage/CategoryPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RequireAuth from "./components/auth/RequireAuth";
 
 /*
@@ -57,6 +58,7 @@ function App({ isInitiallyLogged }) {
                 </RequireAuth>
               }
             />
+            <Route path="/404" element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </div>
