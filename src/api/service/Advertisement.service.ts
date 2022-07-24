@@ -30,7 +30,7 @@ class AdvertisementService {
   }
 
   createAdvert(body): Promise<any> {
-    const url = `${advertsBaseUrl}`;
+    const url = `/advert`;
     return ApiClient.post(url, body);
   }
 

@@ -57,7 +57,7 @@ const SignupForm = ({ onSubmit }) => {
               required
             />
             <input
-              type="text"
+              type="password"
               className="border-b border-gray-700 p-2 mb-5 outline-none"
               placeholder="Contraseña"
               name="password"

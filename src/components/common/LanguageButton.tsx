@@ -1,13 +1,7 @@
 import { useTranslation } from "react-i18next";
-
 import { IoLanguage } from "react-icons/io5";
 
-const style = {
-  languageButton:
-    "text-[#8a939b] text-[28px] font-extrabold xl:flex items-center justify-center w-full hidden mx-4",
-  languageText:
-    "flex font-extrabold text-[15px] pl-3 text-center hover:text-gray-600 duration-500 cursor-pointer",
-};
+import LanguageButtonStyles from "../../styles/LanguageButtonStyles";
 
 function LanguageButton() {
   const { i18n } = useTranslation();
@@ -21,12 +15,18 @@ function LanguageButton() {
   }
 
   return (
-    <div className={style.languageButton}>
+    <div className={LanguageButtonStyles.languageButton}>
       <IoLanguage />
-      <button className={style.languageText} onClick={changeToEnglish}>
+      <button
+        className={LanguageButtonStyles.languageText}
+        onClick={changeToEnglish}
+      >
         EN
       </button>
-      <button className={style.languageText} onClick={changeToSpanish}>
+      <button
+        className={LanguageButtonStyles.languageText}
+        onClick={changeToSpanish}
+      >
         ES
       </button>
     </div>

@@ -6,6 +6,7 @@ import { Advert } from "../../models/Advert.model";
 import NotFoundImg from "../../images/placeholder.png";
 import { useCallback, useState } from "react";
 import Spinner from "../../components/spinner/Spinner";
+import { Toaster, toast } from "react-hot-toast";
 
 const AccountProducts = () => {
   const [refreshList, setRefreshList] = useState(undefined);
@@ -18,7 +19,7 @@ const AccountProducts = () => {
   const [advertIdsToDelete, setAdvertIdsToDelete] = useState<Array<string>>([]);
   const allAdvertsIds = userAdverts.map((ad) => ad._id);
   const allAdvertsAreSelected =
-    allAdvertsIds.filter((ad) => !advertIdsToDelete.includes(ad))?.length === 0;
+    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length === 0;
   const { isLoadingDeletion, hasErrorDeletion, executeMultipleCalls } =
     useDeleteMultipleAdverts(advertIdsToDelete);
   const executeDeletion = () => {
@@ -67,6 +68,7 @@ const AccountProducts = () => {
 
   return (
     <div className="max-w-full w-full flex-1 block text-left">
+      <Toaster position="top-center" reverseOrder={false} />
       {!isLoading && !isLoadingDeletion && !error && (
         <>
           <div className="min-h-full h-full block">
@@ -156,7 +158,7 @@ const AccountProducts = () => {
                                         <img
                                           className="m-0 lg:w-[80px] w-full lg:h-[80px] h-full bg-cover rounded-[4px] relative hidden lg:flex"
                                           src={
-                                            advert.image.includes(
+                                            advert?.image?.includes(
                                               "https://wallaclone-s3-bucket.s3.amazonaws.com"
                                             )
                                               ? advert.image
@@ -219,7 +221,7 @@ const AccountProducts = () => {
                             );
                           })
                         ) : (
-                          <p>No tienes anuncios que gestionar</p>
+                          <p className="text-center">No tienes anuncios que gestionar</p>
                         )}
                       </div>
                     </div>
@@ -291,12 +293,7 @@ const AccountProducts = () => {
       )}
 
       {error && !isLoading && (
-        // <Toast bg="danger" onClose={() => dispatch(uiResetError())}>
-        //   <Toast.Header>
-        <strong className="me-auto">Error </strong>
-        //   </Toast.Header>
-        //   <Toast.Body>Se ha producido un error en la aplicación.</Toast.Body>
-        // </Toast>
+        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
       )}
       {isLoading && (
         <div className="flex justify-center bg-gray-200 py-4 h-full">

@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import client, { configureClient, resetClient } from "../../api/client";
 import storage from "../../utils/storage";
+import { parseJwt } from "../../utils/utils";
 
 const authPath = "/api";
 
@@ -23,8 +24,14 @@ export const login = ({ remember, ...credentials }) => {
 };
 
 export const logout = () => {
-  return Promise.resolve().then(resetClient).then(()=>{
-    storage.clear();
-    storage.clearSession();
-  });
+  return Promise.resolve()
+    .then(resetClient)
+    .then(() => {
+      const auth = storage.get("auth") || storage.getSession("auth");
+      const jwtToken = auth?.replace('"', "");
+      const userId = parseJwt<{ _id?: string }>(jwtToken)?._id;
+      storage.clear();
+      storage.clearSession();
+      return userId;
+    });
 };

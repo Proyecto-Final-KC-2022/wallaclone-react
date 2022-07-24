@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import useComponentVisible from "../../hooks/useComponentVisible";
 import PriceFilterResponsive from "./PriceFilterResponsive";
+import PriceFilterStyles from "../../styles/PriceFilterStyles";
 
 const MIN_VALUE = 0;
 const MAX_VALUE = 20000;
@@ -26,7 +27,7 @@ const PriceFilter = ({
 }) => {
   const [value, setValue] = React.useState<number[]>([MIN_VALUE, MAX_VALUE]);
   const { ref, isComponentVisible } = useComponentVisible(true);
-  
+
   useEffect(() => {
     if (!isComponentVisible) {
       closeFilter();
@@ -58,19 +59,16 @@ const PriceFilter = ({
   };
   return (
     <>
-      <div
-        ref={ref}
-        className="hidden lg:block md:block fixed top-[130px] left-[234px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]"
-      >
-        <div className="flex h-[70px] px-[1.5rem] items-center">
-          <p className="font-bold m-0 block">¿Cuánto quieres pagar?</p>
+      <div ref={ref} className={PriceFilterStyles.priceFilterWrapper}>
+        <div className={PriceFilterStyles.priceFilterHeader}>
+          <p className={PriceFilterStyles.headerText}>¿Cuánto quieres pagar?</p>
         </div>
-        <div className="overflow-auto px-[1.5rem] block">
-          <div className="block">
-            <div className="overflow-hidden block">
-              <form className="flex items-center justify-center">
+        <div className={PriceFilterStyles.formWrapper}>
+          <div className={PriceFilterStyles.formContainer}>
+            <div className={PriceFilterStyles.boxWrapper}>
+              <form className={PriceFilterStyles.boxContainer}>
                 <Box
-                  className="py-[40px] px-[1.5rem] inline-block relative w-full"
+                  className={PriceFilterStyles.boxSlider}
                   sx={{ width: 332, color: "success.main" }}
                 >
                   <Slider
@@ -83,21 +81,21 @@ const PriceFilter = ({
                   />
                 </Box>
               </form>
-              <div className="mt-[1rem] flex items-center justify-center">
-                <div className="mr-[0.5rem] w-full flex flex-col">
-                  <label className="inline-block mb-[0.5rem]">Desde</label>
+              <div className={PriceFilterStyles.inputsWrapper}>
+                <div className={PriceFilterStyles.fromInputContainer}>
+                  <label className={PriceFilterStyles.inputLabel}>Desde</label>
                   <input
-                    className="rounded-[6px] text-[1rem] border border-[#CFD8DC] pl-[0.5rem] h-[50px] max-w-[158px] overflow-visible"
+                    className={PriceFilterStyles.inputsContainer}
                     type="text"
                     value={valuetext(value[0])}
                     onChange={setMinValue}
                   />
                 </div>
 
-                <div className=" flex flex-col">
-                  <label className="inline-block mb-[0.5rem]">Hasta</label>
+                <div className={PriceFilterStyles.toInputContainer}>
+                  <label className={PriceFilterStyles.inputLabel}>Hasta</label>
                   <input
-                    className="rounded-[6px] text-[1rem] border border-[#CFD8DC] pl-[0.5rem] h-[50px] max-w-[158px] overflow-visible"
+                    className={PriceFilterStyles.inputsContainer}
                     type="text"
                     value={valuetext(value[1])}
                     onChange={setMaxValue}
@@ -107,15 +105,15 @@ const PriceFilter = ({
             </div>
           </div>
         </div>
-        <div className="h-[88px] px-[1.5rem] items-center justify-end flex">
+        <div className={PriceFilterStyles.buttonsWrapper}>
           <button
-            className="py-[8px] px-[20px] cursor-pointer"
+            className={PriceFilterStyles.cancelButton}
             onClick={closeFilter}
           >
             Cancelar
           </button>
           <button
-            className="py-[8px] cursor-pointer text-white px-[20px] rounded-[25px] bg-[#13c1ac] hover:bg-[#0f9989] border border-[#13c1ac]"
+            className={PriceFilterStyles.applyButton}
             onClick={emitPriceRangeSelected}
           >
             Aplicar
