@@ -12,6 +12,7 @@ import Spinner from "../../components/spinner/Spinner";
 import socket from "../../socket-context/socketContext";
 import { useSearchParams } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
+import moment from "moment";
 export type UserChat = {
   chatId?: string;
   otherUserName: string; //nombre del usuario con el que tengo el chat (diferente al usuario actual)
@@ -39,11 +40,7 @@ const ChatPage = ({ currentUserId }) => {
     chatId: string;
     message: Message;
   }>(null);
-  // const [clearedUnreadMessagesChatId, setClearedUnreadMessagesChatId] =
-  //   useState<string>(null);
   const scrollRef = useRef(null);
-
-  // const socket = useSocketContext().socket.current;
 
   useEffect(() => {
     socket.emit("joinChatRoom", { userId: currentUserId });
@@ -63,6 +60,11 @@ const ChatPage = ({ currentUserId }) => {
           const everyMessageRead = chat?.messages
             ?.filter((e) => e.receiver === currentUserId)
             ?.every((e) => e.read);
+          chat?.messages?.forEach((message) => {
+            message.creationDate = moment(message.creationDate).format(
+              "DD/MM/YYYY HH:MM"
+            );
+          });
           return {
             chatId: chat._id,
             otherUserId: otherUser?._id,
@@ -98,7 +100,7 @@ const ChatPage = ({ currentUserId }) => {
   }, [currentChat]);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e?.preventDefault &&  e.preventDefault();
     const messageData = {
       chatId: currentChat.chatId,
       advertId: currentChat.advertId,
@@ -106,7 +108,9 @@ const ChatPage = ({ currentUserId }) => {
         content: newMessage,
         sender: currentUserId,
         receiver: currentChat.otherUserId,
-        creationDate: new Date().toISOString(),
+        creationDate: moment(new Date().toISOString()).format(
+          "DD/MM/YYYY HH:MM"
+        ),
         read: false,
       } as Message,
     };
@@ -142,7 +146,7 @@ const ChatPage = ({ currentUserId }) => {
           cc.messages.push(arrivalMessage.message);
         }
       });
-      socket.emit("setUnreadChatMessage", currentUserId); 
+      socket.emit("setUnreadChatMessage", currentUserId);
       setChatsList(chatsListClone);
     }
   }, [arrivalMessage]);
@@ -170,6 +174,13 @@ const ChatPage = ({ currentUserId }) => {
       });
     }
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(event?.target?.value);
+    }
+  };
+
 
   return (
     <div className="max-w-full flex-1 block bg-white">
@@ -363,6 +374,7 @@ const ChatPage = ({ currentUserId }) => {
                                     onChange={(evt) =>
                                       setNewMessage(evt?.target?.value)
                                     }
+                                    onKeyDown={handleKeyDown}
                                     value={newMessage}
                                   ></textarea>
                                 </div>
@@ -372,7 +384,21 @@ const ChatPage = ({ currentUserId }) => {
                                   onClick={handleSubmit}
                                 >
                                   <div className="right-[5px] bottom-[6px] flex items-center justify-center">
-                                    <div className="rounded-[50%] w-[40px] h-[40px] bg-[#CFD8DC] flex items-center justify-center mx-2 hover:bg-[#13c1ac]">
+                                    <div
+                                      style={
+                                        newMessage
+                                          ? {
+                                              backgroundColor: "#13c1ac",
+                                              cursor: "pointer",
+                                            }
+                                          : {
+                                              backgroundColor:
+                                                "rgb(207 216 220)",
+                                              cursor: "not-allowed",
+                                            }
+                                      }
+                                      className="rounded-[50%] w-[40px] h-[40px] bg-[#CFD8DC] flex items-center justify-center mx-2"
+                                    >
                                       <TbSend className="rounded-[50%] w-[22px] h-[22px] text-white" />
                                     </div>
                                   </div>
