@@ -12,7 +12,7 @@ function NewAdvertPage() {
 
   const handleSubmit = newAdvert => {
     const newAdvertFormData = objectToFormData(newAdvert);
-    mutation.execute(newAdvertFormData).then((response) => {navigate(`/advertisements/${response['_id']}`)});
+    mutation.execute(newAdvertFormData).then((response) => {navigate(`/product/${response['name']}/${response['_id']}`)});
   };
 
   if (mutation.error?.statusCode === 401) {

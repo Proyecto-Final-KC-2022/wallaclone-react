@@ -19,7 +19,7 @@ const AccountProducts = () => {
   const [advertIdsToDelete, setAdvertIdsToDelete] = useState<Array<string>>([]);
   const allAdvertsIds = userAdverts.map((ad) => ad._id);
   const allAdvertsAreSelected =
-    allAdvertsIds.filter((ad) => !advertIdsToDelete.includes(ad))?.length === 0;
+    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length === 0;
   const { isLoadingDeletion, hasErrorDeletion, executeMultipleCalls } =
     useDeleteMultipleAdverts(advertIdsToDelete);
   const executeDeletion = () => {
@@ -158,7 +158,7 @@ const AccountProducts = () => {
                                         <img
                                           className="m-0 lg:w-[80px] w-full lg:h-[80px] h-full bg-cover rounded-[4px] relative hidden lg:flex"
                                           src={
-                                            advert.image.includes(
+                                            advert?.image?.includes(
                                               "https://wallaclone-s3-bucket.s3.amazonaws.com"
                                             )
                                               ? advert.image
