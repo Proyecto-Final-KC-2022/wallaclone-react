@@ -5,6 +5,7 @@ import { GrClose } from "react-icons/gr";
 import T from "prop-types";
 
 import useForm from "../../../hooks/useForm";
+import LoginFormStyles from "../../../styles/LoginFormStyles";
 
 const validEmail = ({ email }) => email;
 const validPassword = ({ password }) => password;
@@ -23,26 +24,26 @@ function LoginForm({ onSubmit }) {
   const { email, password, remember } = credentials;
 
   return (
-    <div className="px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex">
-      <div className="bg-white p-8 rounded-xl w-[500px] h-[500px] items-center">
-        <div className="flex m-0 justify-end cursor-pointer text-2xl">
+    <div className={LoginFormStyles.loginFormWrapper}>
+      <div className={LoginFormStyles.loginFormContainer}>
+        <div className={LoginFormStyles.closeContainer}>
           <Link to="/">
             <GrClose />
           </Link>
         </div>
-        <h1 className="font-semibold text-center text-xl text-gray-700 pt-0">
+        <h1 className={LoginFormStyles.headerText}>
           Bienvenido a wallaclone
         </h1>
 
-        <p className="text-center text-gray-700 mb-5">
+        <p className={LoginFormStyles.registerText}>
           Regístrate o inicia sesión
         </p>
 
         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col">
+          <div className={LoginFormStyles.formWrapper}>
             <input
               type="text"
-              className="border-b border-gray-700 p-2 mb-5 outline-none"
+              className={LoginFormStyles.loginInputs}
               placeholder="Dirección de email"
               name="email"
               value={email}
@@ -51,38 +52,38 @@ function LoginForm({ onSubmit }) {
             />
             <input
               type="password"
-              className="border-b border-gray-700 p-2 mb-5 outline-none"
+              className={LoginFormStyles.loginInputs}
               placeholder="Contraseña"
               name="password"
               value={password}
               onChange={handleChange}
               required
             />
-            <div className="flex justify-center items-center">
+            <div className={LoginFormStyles.rememberContainer}>
               <input
                 type="checkbox"
                 name="remember"
                 checked={remember}
                 onChange={handleChange}
               />
-              <p className="text-center text-gray-700 my-2 ml-2">
+              <p className={LoginFormStyles.rememberText}>
                 Recordar contraseña
               </p>
             </div>
 
-            <div className="text-center pt-8">
+            <div className={LoginFormStyles.submitContainer}>
               <button
-                className="w-full h-[42px] px-5 py-2 bg-[#13c1ac] hover:bg-[#0f9989] text-white rounded-[21px]"
+                className={LoginFormStyles.loginButton}
                 disabled={!validate(validEmail, validPassword)}
               >
                 Iniciar sesión
               </button>
-              <div className="flex justify-center items-center">
-                <p className="text-center text-gray-700 my-4">
+              <div className={LoginFormStyles.otherOptions}>
+                <p className={LoginFormStyles.optionsText}>
                   Recuperar contraseña
                 </p>
-                <span className="mx-4">|</span>
-                <div className="text-center text-gray-700 my-4">
+                <span className={LoginFormStyles.spanText}>|</span>
+                <div className={LoginFormStyles.optionsText}>
                   <Link to="/signup">Regístrate</Link>
                 </div>
               </div>

@@ -12,6 +12,7 @@ import storage from "../../../utils/storage";
 import { parseJwt } from "../../../utils/utils";
 import { Toaster, toast } from "react-hot-toast";
 import Spinner from "../../spinner/Spinner";
+import LoaderStyles from "../../../styles/LoaderStyles";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -33,18 +34,18 @@ function LoginPage() {
   };
 
   return (
-    <div>
+    <>
       <Toaster position="top-center" reverseOrder={false} />
       <LoginForm onSubmit={handleSubmit} />
       {isLoading && (
-        <div className="flex justify-center bg-gray-200 py-4 h-full">
+        <div className={LoaderStyles.spinnerWrapper}>
           <Spinner />
         </div>
       )}
       {error && (
         <div onClick={resetError}>{toast.error("¡Usuario no autorizado!")}</div>
       )}
-    </div>
+    </>
   );
 }
 

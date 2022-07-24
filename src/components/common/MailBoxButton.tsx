@@ -7,11 +7,7 @@ import { parseJwt } from "../../utils/utils";
 import { useAuthContext } from "../auth/context";
 import socket from "../../socket-context/socketContext";
 
-const style = {
-  mailButtonWrapper:
-    "flex w-[80px] h-[65px] items-center justify-center text-center hover:border-b-[3px] border-black",
-  mailButtonText: "flex text-center items-center text-[.875rem] pr-2",
-};
+import MailBoxButtonStyles from "../../styles/MailBoxButtonStyles";
 
 const MailBoxButton = () => {
   const { isLogged } = useAuthContext();
@@ -54,19 +50,17 @@ const MailBoxButton = () => {
   }, []);
   return (
     <NavLink to="/account/chat">
-      <div className="h-[65px] relative flex items-center whitespace-nowrap cursor-pointer hover:border-b-[3px] border-black">
-        <div className={style.mailButtonWrapper}>
-          <div className="justify-center items-center mr-1">
+      <button className={MailBoxButtonStyles.mailButtonWrapper}>
+        <div className={MailBoxButtonStyles.mailButtonContainer}>
+          <div className={MailBoxButtonStyles.mailIconContainer}>
             <img src={Inbox} alt="inbox" />
           </div>
-
           {hasUnreadMessages && (
-            <div className="left-[20px] top-[17px] h-[8px] w-[8px] rounded-[8px] bg-[#fd6c67] absolute block"></div>
+          <div className={MailBoxButtonStyles.redDot}></div>
           )}
-
-          <span className={style.mailButtonText}>Buzón</span>
+          <span className={MailBoxButtonStyles.mailButtonText}>Buzón</span>
         </div>
-      </div>
+      </button>
     </NavLink>
   );
 };
