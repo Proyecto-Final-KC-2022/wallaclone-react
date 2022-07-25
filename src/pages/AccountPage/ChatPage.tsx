@@ -435,12 +435,14 @@ const messageClass: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   marginTop: "20px",
-  alignItems: "flex-end",
+  
 };
+
 const messageOwnClass: React.CSSProperties = {
   display: "flex",
   flexDirection: "column",
   marginTop: "20px",
+  alignItems: "flex-end",
 };
 
 const messageText: React.CSSProperties = {
