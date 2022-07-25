@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import "./index.css";
 
@@ -55,6 +55,7 @@ function App({ isInitiallyLogged }) {
               }
             />
             <Route path="/404" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
         </BrowserRouter>
       </div>
