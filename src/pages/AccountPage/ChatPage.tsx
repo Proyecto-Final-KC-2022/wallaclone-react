@@ -137,11 +137,16 @@ const ChatPage = ({ currentUserId }) => {
     const arrivalMessageInCurrentChat =
       currentChat?.otherUserId.includes(arrivalMessage?.message?.sender) &&
       currentChat?.chatId?.includes(arrivalMessage?.chatId);
-    if (arrivalMessageInCurrentChat) {
+    const messageNotAlreadyInCurrentChat = !currentChatMessages.some(
+      (m) => m._id === arrivalMessage?.message?._id
+    );
+    if (arrivalMessageInCurrentChat && messageNotAlreadyInCurrentChat) {
+      const creationDate = arrivalMessage?.message?.creationDate;
+      if (creationDate) {
+        arrivalMessage.message.creationDate =
+          moment(creationDate).format("DD/MM/YYYY HH:MM");
+      }
       arrivalMessage &&
-        !currentChatMessages.some(
-          (m) => m._id === arrivalMessage?.message?._id
-        ) &&
         setCurrentChatMessages((prev) => [...prev, arrivalMessage?.message]);
     }
   }, [arrivalMessage, currentChatMessages]);
