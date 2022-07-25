@@ -1,6 +1,6 @@
 import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import Modal from "@mui/material/Modal";
-import { BsPencil, BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import useQuery from "../../hooks/useQuery";
 import { Advert } from "../../models/Advert.model";
 import NotFoundImg from "../../images/placeholder.png";
@@ -19,7 +19,8 @@ const AccountProducts = () => {
   const [advertIdsToDelete, setAdvertIdsToDelete] = useState<Array<string>>([]);
   const allAdvertsIds = userAdverts.map((ad) => ad._id);
   const allAdvertsAreSelected =
-    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length === 0;
+    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length ===
+    0;
   const { isLoadingDeletion, hasErrorDeletion, executeMultipleCalls } =
     useDeleteMultipleAdverts(advertIdsToDelete);
   const executeDeletion = () => {
@@ -221,7 +222,9 @@ const AccountProducts = () => {
                             );
                           })
                         ) : (
-                          <p className="text-center">No tienes anuncios que gestionar</p>
+                          <p className="text-center">
+                            No tienes anuncios que gestionar
+                          </p>
                         )}
                       </div>
                     </div>
@@ -292,14 +295,16 @@ const AccountProducts = () => {
         </>
       )}
 
-      {error && !isLoading && (
-        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
-      )}
       {isLoading && (
         <div className="flex justify-center bg-gray-200 py-4 h-full">
           <Spinner />
         </div>
       )}
+
+      {error && !isLoading && (
+        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
+      )}
+
     </div>
   );
 };

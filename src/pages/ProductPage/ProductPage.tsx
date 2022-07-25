@@ -54,9 +54,6 @@ const ProductPage = (): JSX.Element => {
                         <h2 className="text-[1.25rem] font-bold w-full overflow-hidden whitespace-nowrap text-ellipsis">
                           <span>{advert?.owner?.name}</span>
                         </h2>
-                        <div className="text-[.875rem] text-[#607D8B] w-full overflow-hidden whitespace-nowrap text-ellipsis">
-                          Nº Productos
-                        </div>
                       </div>
                     </a>
 
@@ -109,12 +106,6 @@ const ProductPage = (): JSX.Element => {
                       <div className="inline-block">
                         Fecha:{" "}
                         {advert.creationDate.replace("T", " ").slice(0, -8)} h.
-                      </div>
-                      <div className="float-right flex items-center">
-                        <i className="text-2xl mr-[4px]">
-                          <AiOutlineHeart />
-                        </i>
-                        <span className="text-xl">0</span>
                       </div>
                     </div>
                   </div>

@@ -121,7 +121,7 @@ const PriceFilter = ({
         </div>
       </div>
 
-      <PriceFilterResponsive />
+      {/* <PriceFilterResponsive /> */}
     </>
   );
 };
