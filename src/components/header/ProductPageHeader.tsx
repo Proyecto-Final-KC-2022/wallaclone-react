@@ -1,4 +1,4 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Header2Styles from "../../styles/Header2Styles";
 
@@ -6,8 +6,9 @@ import Logo from "../../images/logo.png";
 import LanguageButton from "../common/LanguageButton";
 import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
+import ConnectedAuthButton from "../auth/AuthButton/AuthButton";
 
-const Header2 = () => {
+const ProductPageHeader = () => {
   return (
     <div className={Header2Styles.navWrapper}>
       <div className={Header2Styles.navContainer}>
@@ -25,6 +26,9 @@ const Header2 = () => {
           <MailBoxButton />
         </div>
         <div className={Header2Styles.headerItem}>
+          <ConnectedAuthButton />
+        </div>
+        <div className={Header2Styles.headerItem}>
           <UploadButton />
         </div>
       </div>
@@ -32,4 +36,4 @@ const Header2 = () => {
   );
 };
 
-export default Header2;
+export default ProductPageHeader;
