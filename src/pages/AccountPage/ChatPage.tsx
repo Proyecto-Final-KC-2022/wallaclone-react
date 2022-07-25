@@ -50,10 +50,6 @@ const ChatPage = ({ currentUserId }) => {
     });
 
     socket.on("privateMessageSent", (data) => {
-      // const chatsListClone = chatsList.map((c) => {
-      //   return { ...c };
-      // });
-      // chatsListClone.find((chat)=> !chat.chatId).chatId = data.newChat._id;
       data?.newChat?._id &&
         setChatsList((prevChatList) => {
           prevChatList.find((chat) => !chat.chatId).chatId = data.newChat._id;
@@ -76,7 +72,7 @@ const ChatPage = ({ currentUserId }) => {
             ?.every((e) => e.read);
           chat?.messages?.forEach((message) => {
             message.creationDate = moment(message.creationDate).format(
-              "DD/MM/YYYY HH:MM"
+              "DD/MM/YYYY HH:mm"
             );
           });
           return {
@@ -115,22 +111,24 @@ const ChatPage = ({ currentUserId }) => {
 
   const handleSubmit = async (e) => {
     e?.preventDefault && e.preventDefault();
-    const messageData = {
-      chatId: currentChat.chatId,
-      advertId: currentChat.advertId,
-      message: {
-        content: newMessage,
-        sender: currentUserId,
-        receiver: currentChat.otherUserId,
-        creationDate: moment(new Date().toISOString()).format(
-          "DD/MM/YYYY HH:MM"
-        ),
-        read: false,
-      } as Message,
-    };
-    socket.emit("sendMessage", messageData);
-    setCurrentChatMessages((prev) => [...prev, messageData.message]);
-    setNewMessage("");
+    if (newMessage && newMessage !== "\n") {
+      const messageData = {
+        chatId: currentChat.chatId,
+        advertId: currentChat.advertId,
+        message: {
+          content: newMessage,
+          sender: currentUserId,
+          receiver: currentChat.otherUserId,
+          creationDate: moment(new Date().toISOString()).format(
+            "DD/MM/YYYY HH:mm"
+          ),
+          read: false,
+        } as Message,
+      };
+      socket.emit("sendMessage", messageData);
+      setCurrentChatMessages((prev) => [...prev, messageData.message]);
+      setNewMessage("");
+    }
   };
 
   useEffect(() => {
@@ -144,7 +142,7 @@ const ChatPage = ({ currentUserId }) => {
       const creationDate = arrivalMessage?.message?.creationDate;
       if (creationDate) {
         arrivalMessage.message.creationDate =
-          moment(creationDate).format("DD/MM/YYYY HH:MM");
+          moment(creationDate).format("DD/MM/YYYY HH:mm");
       }
       arrivalMessage &&
         setCurrentChatMessages((prev) => [...prev, arrivalMessage?.message]);
@@ -179,6 +177,17 @@ const ChatPage = ({ currentUserId }) => {
 
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: "smooth" });
+    if (chatsList && currentChat) {
+      const chatsListClone = chatsList?.map((c) => {
+        return { ...c };
+      });
+      chatsListClone.forEach((chat) => {
+        if (chat?.chatId === currentChat?.chatId) {
+          chat.messages = [...currentChatMessages];
+        }
+      });
+      setChatsList(chatsListClone);
+    }
   }, [currentChatMessages]);
 
   const setCurrentChatAndReadMessages = (chat: UserChat) => {
@@ -202,8 +211,13 @@ const ChatPage = ({ currentUserId }) => {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      handleSubmit(event?.target?.value);
+    if (event.key === "Enter" ) {
+      if(newMessage !== "\n"){
+        handleSubmit(event?.target?.value);
+      }else{
+        setNewMessage("");
+      }
+      
     }
   };
 
@@ -494,7 +508,7 @@ function setNewChatData(newChat: any, currentUserId: string) {
     ?.every((e) => e.read);
   newChat?.messages?.forEach((message) => {
     message.creationDate = moment(message.creationDate).format(
-      "DD/MM/YYYY HH:MM"
+      "DD/MM/YYYY HH:mm"
     );
   });
   const newChatAux = {
