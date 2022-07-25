@@ -39,6 +39,7 @@ const ChatPage = ({ currentUserId }) => {
   const [arrivalMessage, setArrivalMessage] = useState<{
     chatId: string;
     message: Message;
+    newChat: Chat;
   }>(null);
   const scrollRef = useRef(null);
 
@@ -47,6 +48,19 @@ const ChatPage = ({ currentUserId }) => {
     socket.on("getPrivateMessage", (data) => {
       setArrivalMessage(data);
     });
+
+    socket.on("privateMessageSent", (data) => {
+      // const chatsListClone = chatsList.map((c) => {
+      //   return { ...c };
+      // });
+      // chatsListClone.find((chat)=> !chat.chatId).chatId = data.newChat._id;
+      data?.newChat?._id &&
+        setChatsList((prevChatList) => {
+          prevChatList.find((chat) => !chat.chatId).chatId = data.newChat._id;
+          return prevChatList;
+        });
+    });
+
     (async () => {
       try {
         setIsLoading(true);
@@ -100,7 +114,7 @@ const ChatPage = ({ currentUserId }) => {
   }, [currentChat]);
 
   const handleSubmit = async (e) => {
-    e?.preventDefault &&  e.preventDefault();
+    e?.preventDefault && e.preventDefault();
     const messageData = {
       chatId: currentChat.chatId,
       advertId: currentChat.advertId,
@@ -120,22 +134,27 @@ const ChatPage = ({ currentUserId }) => {
   };
 
   useEffect(() => {
-    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
-      arrivalMessage?.message?.sender
+    const arrivalMessageInCurrentChat =
+      currentChat?.otherUserId.includes(arrivalMessage?.message?.sender) &&
+      currentChat?.chatId?.includes(arrivalMessage?.chatId);
+    const messageNotAlreadyInCurrentChat = !currentChatMessages.some(
+      (m) => m._id === arrivalMessage?.message?._id
     );
-    if (arrivalMessageInCurrentChat) {
+    if (arrivalMessageInCurrentChat && messageNotAlreadyInCurrentChat) {
+      const creationDate = arrivalMessage?.message?.creationDate;
+      if (creationDate) {
+        arrivalMessage.message.creationDate =
+          moment(creationDate).format("DD/MM/YYYY HH:MM");
+      }
       arrivalMessage &&
-        !currentChatMessages.some(
-          (m) => m._id === arrivalMessage?.message?._id
-        ) &&
         setCurrentChatMessages((prev) => [...prev, arrivalMessage?.message]);
     }
   }, [arrivalMessage, currentChatMessages]);
 
   useEffect(() => {
-    const arrivalMessageInCurrentChat = currentChat?.otherUserId.includes(
-      arrivalMessage?.message?.sender
-    );
+    const arrivalMessageInCurrentChat =
+      currentChat?.otherUserId.includes(arrivalMessage?.message?.sender) &&
+      currentChat?.chatId?.includes(arrivalMessage?.chatId);
     if (!arrivalMessageInCurrentChat) {
       const chatsListClone = chatsList.map((c) => {
         return { ...c };
@@ -147,7 +166,14 @@ const ChatPage = ({ currentUserId }) => {
         }
       });
       socket.emit("setUnreadChatMessage", currentUserId);
-      setChatsList(chatsListClone);
+      if (!arrivalMessage?.newChat) {
+        setChatsList(chatsListClone);
+      } else {
+        const newChat = setNewChatData(arrivalMessage.newChat, currentUserId);
+        setChatsList((prevChatList) => {
+          return [...prevChatList, newChat];
+        });
+      }
     }
   }, [arrivalMessage]);
 
@@ -180,7 +206,6 @@ const ChatPage = ({ currentUserId }) => {
       handleSubmit(event?.target?.value);
     }
   };
-
 
   return (
     <div className="max-w-full flex-1 block bg-white">
@@ -459,3 +484,29 @@ const messageTextOwn: React.CSSProperties = {
   color: "white",
 };
 export default ChatPage;
+
+function setNewChatData(newChat: any, currentUserId: string) {
+  const otherUser = newChat?.members?.find((member) => {
+    return member._id !== currentUserId;
+  });
+  const everyMessageRead = newChat?.messages
+    ?.filter((e) => e.receiver === currentUserId)
+    ?.every((e) => e.read);
+  newChat?.messages?.forEach((message) => {
+    message.creationDate = moment(message.creationDate).format(
+      "DD/MM/YYYY HH:MM"
+    );
+  });
+  const newChatAux = {
+    chatId: newChat._id,
+    otherUserId: otherUser?._id,
+    otherUserName: otherUser?.name,
+    advertId: newChat?.advertId?._id,
+    advertName: newChat?.advertId?.name,
+    advertPrice: newChat?.advertId?.price,
+    advertImage: newChat?.advertId?.image,
+    messages: newChat?.messages,
+    hasUnreadMessages: !everyMessageRead,
+  };
+  return newChatAux;
+}
