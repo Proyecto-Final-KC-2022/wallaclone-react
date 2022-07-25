@@ -86,7 +86,7 @@ const Profile = () => {
               </div>
             </div>
 
-            {userId && (
+            {userId && user && (
               <div className="block mt-[0em]">
               <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
                 <div className="flex flex-wrap mx-[15px]">
@@ -123,7 +123,7 @@ const Profile = () => {
                       <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                         Nombre
                       </div>
-                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] overflow-visible">{user.name}</div>
+                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] overflow-visible">{user?.name}</div>
                     </div>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ const Profile = () => {
                       <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                         Email
                       </div>
-                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible">{user.email}</div>
+                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible">{user?.email}</div>
                     </div>
                   </div>
                 </div>
