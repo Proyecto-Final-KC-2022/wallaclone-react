@@ -1,11 +1,11 @@
-import Header2 from "../header/Header2";
+import ProductPageHeader from "../header/ProductPageHeader";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
 
-function Layout2({ children }) {
+function ProductPageLayout({ children }) {
   return (
     <>
-      <Header2 />
+      <ProductPageHeader/>
       <main>{children}</main>
       <Footer />
       <Navbar />
@@ -13,4 +13,4 @@ function Layout2({ children }) {
   );
 }
 
-export default Layout2;
+export default ProductPageLayout;

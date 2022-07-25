@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 
-import HeaderStyles from "./HeaderStyles";
-
 import Logo from "../../images/logo.png";
 import LanguageButton from "../common/LanguageButton";
 import MailBoxButton from "../common/MailBoxButton";
 import UploadButton from "../common/UploadButton";
 import ConnectedAuthButton from "../auth/AuthButton/AuthButton";
+import HeaderStyles from "../../styles/HeaderStyles";
 
 const Header = ({
   isMainPage,

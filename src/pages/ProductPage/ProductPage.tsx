@@ -7,7 +7,7 @@ import { FaFacebookF, FaTwitter } from "react-icons/fa";
 
 import Avatar from "../../images/avatar.png";
 import Map from "../../images/map.png";
-import Layout2 from "../../components/layout/Layout2";
+import ProductPageLayout from "../../components/layout/ProductPageLayout";
 import placeholder from "../../images/placeholder.png";
 
 import { getAdvert, deleteAdvert } from "./service";
@@ -42,7 +42,7 @@ const ProductPage = (): JSX.Element => {
 
   return (
     <>
-      <Layout2>
+      <ProductPageLayout>
         <div className='px-[15px] py-[15px] min-h-[100vh] bg-gray-200 items-center justify-center flex'>
           <div className='w-[681px] h-full'>
             {advert && (
@@ -125,12 +125,11 @@ const ProductPage = (): JSX.Element => {
 
                 <div className='max-w-[636px] pt-[20px] overflow-hidden'>
                   <div className='flex flex-col'>
-                    <div className='mb-[8px]'>Precio</div>
                     <span className='text-[2rem] font-bold inline-block'>
                       {advert.price} €
                     </span>
                     <h1 className='text-[2rem] pb-[16px] border-b mt-[8px] overflow-hidden text-ellipsis'>
-                      Nombre: {advert.name}
+                      {advert.name}
                     </h1>
                     <p className='leading-normal py-[20px] text-[1rem] break-words border-b'>
                       {advert.description}
@@ -196,7 +195,7 @@ const ProductPage = (): JSX.Element => {
             )}
           </div>
         </div>
-      </Layout2>
+      </ProductPageLayout>
     </>
   );
 };
