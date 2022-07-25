@@ -28,9 +28,9 @@ const MailBoxButton = () => {
     socket.on("setMessagesAsRead", () => {
       setHasUnreadMessages(false);
     });
-    socket.on("getPrivateMessage", (data) => {
-      setHasUnreadMessages(true);
-    });
+    // socket.on("getPrivateMessage", (data) => {
+    //   setHasUnreadMessages(true);
+    // });
   };
 
   useEffect(() => {
