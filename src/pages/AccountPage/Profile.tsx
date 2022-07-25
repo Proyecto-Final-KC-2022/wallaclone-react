@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 
 import useMutation from "../../hooks/useMutation";
@@ -7,12 +7,31 @@ import socket from "../../socket-context/socketContext";
 import LogoutButton from "../../components/common/LogoutButton";
 import { logout } from "../../components/auth/service";
 
+import useQuery from "../../hooks/useQuery";
+import UserService from "../../api/service/User.service";
+
 import Avatar from "../../images/avatar.png";
+import storage from "../../utils/storage";
+import { parseJwt } from "../../utils/utils";
 
 const Profile = () => {
+  /* const { userId } = useParams(); */
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const auth = storage.get("auth") || storage.getSession("auth");
+  const jwtToken = auth?.replace('"', "");
+  const userId = jwtToken && parseJwt<{ _id?: string }>(jwtToken)?._id;
+  // Parte de getUser
+  const {
+    isLoading,
+    error,
+    data: user,
+  } = useQuery(UserService.getUser, userId)
+
+  
+  //
 
   const mutation = useMutation(logout);
   const navigate = useNavigate();
@@ -67,7 +86,8 @@ const Profile = () => {
               </div>
             </div>
 
-            <form className="block mt-[0em]">
+            {userId && (
+              <div className="block mt-[0em]">
               <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
                 <div className="flex flex-wrap mx-[15px]">
                   <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
@@ -100,15 +120,10 @@ const Profile = () => {
                 <div className="flex flex-wrap mx-[15px]">
                   <div className="relative w-full min-h-[1px] px-[15px]">
                     <div className="mb-[1rem] block">
-                      <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
+                      <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                         Nombre
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible"
-                        required
-                      ></input>
+                      </div>
+                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] overflow-visible">{user.name}</div>
                     </div>
                   </div>
                 </div>
@@ -116,21 +131,18 @@ const Profile = () => {
                 <div className="flex flex-wrap mx-[15px]">
                   <div className="relative w-full min-h-[1px] px-[15px]">
                     <div className="mb-[1rem] block">
-                      <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
+                      <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                         Email
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible"
-                        required
-                      ></input>
+                      </div>
+                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible">{user.email}</div>
                     </div>
                   </div>
                 </div>
                 
               </div>
-            </form>
+            </div>
+            ) }
+            
 
           </div>
         </div>
