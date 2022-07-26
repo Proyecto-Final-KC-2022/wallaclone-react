@@ -11,6 +11,7 @@ import { LoadMoreButton } from "../../components/common/LoadMoreButton";
 import Spinner from "../../components/spinner/Spinner";
 import FilterBar, { BarFilters } from "../../components/filter/FilterBar";
 import { Toaster, toast } from "react-hot-toast";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 /**
   TODO: 
@@ -126,30 +127,36 @@ const ProductsPage = (): JSX.Element => {
             getFilters({ filtersFromBar });
           }}
         />
-        <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+        <div>
           {!isLoading && !error && (
             <>
               {filteredAdverts.length > 0 ? (
-                filteredAdverts.map((advert: Advert, index) => {
-                  if (filteredAdverts.length === index + 1 && pageNumber > 1) {
-                    return (
-                      <div ref={lastAdvertElementRef} key={advert._id}>
-                        <ProductCard2 {...advert} />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div key={advert._id}>
-                        <ProductCard2 {...advert} />
-                      </div>
-                    );
-                  }
-                })
+                <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
+                  {filteredAdverts.map((advert: Advert, index) => {
+                    if (
+                      filteredAdverts.length === index + 1 &&
+                      pageNumber > 1
+                    ) {
+                      return (
+                        <div ref={lastAdvertElementRef} key={advert._id}>
+                          <ProductCard2 {...advert} />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div key={advert._id}>
+                          <ProductCard2 {...advert} />
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
               ) : (
-                <p className="text-center">
-                  {" "}
-                  UNDER CONSTRUCTION: EMPTY LIST SHOULD BE HERE!!!
-                </p>
+                <NotFoundPage
+                  customText="No se han encontrado productos"
+                  hideButton={true}
+                  insideLayout={false}
+                />
               )}
             </>
           )}

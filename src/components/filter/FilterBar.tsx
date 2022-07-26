@@ -71,6 +71,19 @@ const Filter = ({
       : "Selecciona uno o más tags";
   };
 
+  const setInitialTagsFilters = (tags: Array<string>): Array<TagWithStatus> => {
+    let initialTags: Array<TagWithStatus> = [];
+    if (tags) {
+      initialTags = tags.map((t) => {
+        return {
+          name: t,
+          active: true,
+        };
+      });
+    }
+
+    return initialTags;
+  };
   return (
     <div className={FilterBarStyles.filterBarWrapper}>
       <div className={FilterBarStyles.filterBarContainer}>
@@ -130,6 +143,7 @@ const Filter = ({
         <TagsFilter
           getTagsSelected={getTagsSelected}
           closeFilter={closeTagsFilter}
+          initialValues={setInitialTagsFilters(filters.tags)}
         />
       )}
 
@@ -137,6 +151,7 @@ const Filter = ({
         <PriceFilter
           closeFilter={closePriceFilter}
           getPricesRange={getPricesRange}
+          initialValues={filters.priceRange}
         />
       )}
     </div>

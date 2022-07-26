@@ -25,7 +25,11 @@ const Header = ({
     <div className={HeaderStyles.navWrapper}>
       <div className={HeaderStyles.navContainer}>
         <div className={HeaderStyles.logoWrapper}>
-          <Link to="/" className={HeaderStyles.logoContainer}>
+          <Link
+            to="/"
+            onClick={() => window.location.reload()}
+            className={HeaderStyles.logoContainer}
+          >
             <img src={Logo} alt="logo" />
           </Link>
         </div>

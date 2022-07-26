@@ -21,7 +21,7 @@ const AccountProducts = () => {
   const allAdvertsAreSelected =
     allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length ===
     0;
-  const { isLoadingDeletion, hasErrorDeletion, executeMultipleCalls } =
+  const { isLoadingDeletion, executeMultipleCalls } =
     useDeleteMultipleAdverts(advertIdsToDelete);
   const executeDeletion = () => {
     setRefreshList(false);
@@ -31,9 +31,14 @@ const AccountProducts = () => {
         setOpen(false);
         setRefreshList(true);
         setAdvertIdsToDelete([]);
+        toast.success(
+          "Se han eliminado correctamente los anuncios seleccionados"
+        );
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(
+          "Se ha producido un error al intentar eliminar uno o más anuncios."
+        );
       });
   };
   const addIdsToDelete =
@@ -304,7 +309,6 @@ const AccountProducts = () => {
       {error && !isLoading && (
         <div>{toast.error("Se ha producido un error en la aplicación")}</div>
       )}
-
     </div>
   );
 };
@@ -312,7 +316,6 @@ const AccountProducts = () => {
 export default AccountProducts;
 function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
   const [isLoadingDeletion, setIsLoadingDeletion] = useState(false);
-  const [hasErrorDeletion, setHasErrorDeletion] = useState<string>(null);
   const executeMultipleCalls = useCallback(async () => {
     if (advertIdsToDelete?.length > 0) {
       try {
@@ -321,10 +324,6 @@ function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
           advertisementsIds: advertIdsToDelete,
         });
         return results;
-      } catch {
-        setHasErrorDeletion(
-          "Se ha producido un error al intentar eliminar uno o más anuncios."
-        );
       } finally {
         setIsLoadingDeletion(false);
       }
@@ -332,7 +331,6 @@ function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
   }, [AdvertisementsSrv.deleteAdverts, advertIdsToDelete]);
   return {
     isLoadingDeletion,
-    hasErrorDeletion,
     executeMultipleCalls,
   };
 }

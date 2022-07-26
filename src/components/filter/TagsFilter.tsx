@@ -14,9 +14,11 @@ export type TagWithStatus = {
 const TagsFilter = ({
   getTagsSelected,
   closeFilter,
+  initialValues,
 }: {
   getTagsSelected: (tagsSelected: Array<TagWithStatus>) => void;
   closeFilter: () => void;
+  initialValues: Array<TagWithStatus>;
 }) => {
   const mutation = useMutation(AdvertisementsSrv.getTags);
   const [tagsStatus, setTagsStatus] = useState<Array<TagWithStatus>>([]);
@@ -26,14 +28,22 @@ const TagsFilter = ({
     (async () => {
       const tagsData = await mutation.execute();
       if (tagsStatus?.length <= 0) {
-        setTagsStatus(
-          tagsData.map((tag) => {
-            return {
-              active: false,
-              name: tag,
-            };
-          })
-        );
+        const tagsWithStatus = tagsData.map((tag) => {
+          return {
+            active: false,
+            name: tag,
+          };
+        });
+        if (initialValues?.length > 0 && tagsWithStatus?.length > 0) {
+          tagsWithStatus.forEach((tws) => {
+            initialValues.forEach((t) => {
+              if (tws.name === t.name) {
+                tws.active = t.active;
+              }
+            });
+          });
+        }
+        setTagsStatus(tagsWithStatus);
       }
     })();
   }, []);
