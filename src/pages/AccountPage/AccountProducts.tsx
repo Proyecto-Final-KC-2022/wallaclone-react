@@ -1,6 +1,6 @@
 import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import Modal from "@mui/material/Modal";
-import { BsPencil, BsTrash } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import useQuery from "../../hooks/useQuery";
 import { Advert } from "../../models/Advert.model";
 import NotFoundImg from "../../images/placeholder.png";
@@ -19,8 +19,9 @@ const AccountProducts = () => {
   const [advertIdsToDelete, setAdvertIdsToDelete] = useState<Array<string>>([]);
   const allAdvertsIds = userAdverts.map((ad) => ad._id);
   const allAdvertsAreSelected =
-    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length === 0;
-  const { isLoadingDeletion, hasErrorDeletion, executeMultipleCalls } =
+    allAdvertsIds.filter((ad) => !advertIdsToDelete?.includes(ad))?.length ===
+    0;
+  const { isLoadingDeletion, executeMultipleCalls } =
     useDeleteMultipleAdverts(advertIdsToDelete);
   const executeDeletion = () => {
     setRefreshList(false);
@@ -30,9 +31,14 @@ const AccountProducts = () => {
         setOpen(false);
         setRefreshList(true);
         setAdvertIdsToDelete([]);
+        toast.success(
+          "Se han eliminado correctamente los anuncios seleccionados"
+        );
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(
+          "Se ha producido un error al intentar eliminar uno o más anuncios."
+        );
       });
   };
   const addIdsToDelete =
@@ -221,7 +227,9 @@ const AccountProducts = () => {
                             );
                           })
                         ) : (
-                          <p className="text-center">No tienes anuncios que gestionar</p>
+                          <p className="text-center">
+                            No tienes anuncios que gestionar
+                          </p>
                         )}
                       </div>
                     </div>
@@ -292,13 +300,14 @@ const AccountProducts = () => {
         </>
       )}
 
-      {error && !isLoading && (
-        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
-      )}
       {isLoading && (
         <div className="flex justify-center bg-gray-200 py-4 h-full">
           <Spinner />
         </div>
+      )}
+
+      {error && !isLoading && (
+        <div>{toast.error("Se ha producido un error en la aplicación")}</div>
       )}
     </div>
   );
@@ -307,7 +316,6 @@ const AccountProducts = () => {
 export default AccountProducts;
 function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
   const [isLoadingDeletion, setIsLoadingDeletion] = useState(false);
-  const [hasErrorDeletion, setHasErrorDeletion] = useState<string>(null);
   const executeMultipleCalls = useCallback(async () => {
     if (advertIdsToDelete?.length > 0) {
       try {
@@ -316,10 +324,6 @@ function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
           advertisementsIds: advertIdsToDelete,
         });
         return results;
-      } catch {
-        setHasErrorDeletion(
-          "Se ha producido un error al intentar eliminar uno o más anuncios."
-        );
       } finally {
         setIsLoadingDeletion(false);
       }
@@ -327,7 +331,6 @@ function useDeleteMultipleAdverts(advertIdsToDelete: string[]) {
   }, [AdvertisementsSrv.deleteAdverts, advertIdsToDelete]);
   return {
     isLoadingDeletion,
-    hasErrorDeletion,
     executeMultipleCalls,
   };
 }

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "@mui/material/Modal";
+import { Toaster, toast } from "react-hot-toast";
 
 import useMutation from "../../hooks/useMutation";
 import socket from "../../socket-context/socketContext";
@@ -13,9 +14,9 @@ import UserService from "../../api/service/User.service";
 import Avatar from "../../images/avatar.png";
 import storage from "../../utils/storage";
 import { parseJwt } from "../../utils/utils";
+import Spinner from "../../components/spinner/Spinner";
 
 const Profile = () => {
-  /* const { userId } = useParams(); */
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -28,9 +29,7 @@ const Profile = () => {
     isLoading,
     error,
     data: user,
-  } = useQuery(UserService.getUser, userId)
-
-  
+  } = useQuery(UserService.getUser, userId);
   //
 
   const mutation = useMutation(logout);
@@ -53,6 +52,7 @@ const Profile = () => {
   return (
     <>
       <div className="max-w-full w-full flex-1 block text-left">
+        <Toaster position="top-center" reverseOrder={false} />
         <div className="min-h-full block">
           <div className="py-[32px] max-w-[960px] w-full px-[15px] mx-auto block">
             <div className="mb-[1rem] flex flex-wrap mx-[-15px]">
@@ -88,66 +88,82 @@ const Profile = () => {
 
             {userId && user && (
               <div className="block mt-[0em]">
-              <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
-                <div className="flex flex-wrap mx-[15px]">
-                  <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
-                    <h2 className="mb-[20px] font-bold text-[.875rem] text-[#13c1ac]">
-                      Imágen del perfíl
-                    </h2>
+                <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
+                  <div className="flex flex-wrap mx-[15px]">
+                    <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
+                      <h2 className="mb-[20px] font-bold text-[.875rem] text-[#13c1ac]">
+                        Imágen del perfíl
+                      </h2>
+                    </div>
+                  </div>
+                  <div className="w-full block">
+                    <div className="mb-[20px] block">
+                      <div className="block px-4">
+                        <div className="flex relative m-[4px]">
+                          <div className="w-full px-[8px] text-center mb-[8px] justify-center flex">
+                            <img
+                              className="bg-cover rounded-[50%] object-cover bg-center w-[80px] h-[80px] border bg-gray-200"
+                              src={Avatar}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className="w-full block">
-                  <div className="mb-[20px] block">
-                    <div className="block px-4">
-                      <div className="flex relative m-[4px]">
-                        <div className="w-full px-[8px] text-center mb-[8px] justify-center flex">
-                          <img className="bg-cover rounded-[50%] object-cover bg-center w-[80px] h-[80px] border bg-gray-200" src={Avatar} />
+                <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
+                  <div className="flex flex-wrap mx-[15px]">
+                    <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
+                      <h2 className="mb-[20px] font-bold text-[.875rem] text-[#13c1ac]">
+                        Información pública
+                      </h2>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap mx-[15px]">
+                    <div className="relative w-full min-h-[1px] px-[15px]">
+                      <div className="mb-[1rem] block">
+                        <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
+                          Nombre
+                        </div>
+                        <div className="flex items-center h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] overflow-visible">
+                          {user?.name}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap mx-[15px]">
+                    <div className="relative w-full min-h-[1px] px-[15px]">
+                      <div className="mb-[1rem] block">
+                        <div className="flex text-[1rem] text-[#607d8b] mb-[0.5rem]">
+                          Email
+                        </div>
+                        <div className="flex items-center h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] px-[0.75rem] overflow-visible">
+                          {user?.email}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="rounded-[10px] bg-white border-1 border-[#eceff1] p-[20px] mb-[20px] block">
-                <div className="flex flex-wrap mx-[15px]">
-                  <div className="basis-0 grow max-w-full w-full relative px-[15px] block">
-                    <h2 className="mb-[20px] font-bold text-[.875rem] text-[#13c1ac]">
-                      Información pública
-                    </h2>
-                  </div>
-                </div>
+            )}
 
-                <div className="flex flex-wrap mx-[15px]">
-                  <div className="relative w-full min-h-[1px] px-[15px]">
-                    <div className="mb-[1rem] block">
-                      <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
-                        Nombre
-                      </div>
-                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] overflow-visible">{user?.name}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap mx-[15px]">
-                  <div className="relative w-full min-h-[1px] px-[15px]">
-                    <div className="mb-[1rem] block">
-                      <div className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
-                        Email
-                      </div>
-                      <div className="block h-[50px] w-full text-[1rem] border border-[#eceff1] rounded-[6px] py-[0.375rem] px-[0.75rem] focus:outline-[#64f0df] overflow-visible">{user?.email}</div>
-                    </div>
-                  </div>
-                </div>
-                
+            {isLoading && (
+              <div className="flex justify-center bg-gray-200 py-4 h-full">
+                <Spinner />
               </div>
-            </div>
-            ) }
-            
+            )}
 
+            {error && !isLoading && (
+              <div>
+                {toast.error("Se ha producido un error en la aplicación")}
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
+
       <Modal open={open} onClose={handleClose}>
         <div className="absolute top-[30%] right-[50%] translate-x-1/2 translate-y-1/2 w-[400px] bg-white rounded-[8px] p-4">
           <div className="p-[20px] relative flex-1 block">

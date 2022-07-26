@@ -9,6 +9,13 @@ import useMutation from "../../hooks/useMutation";
 
 import SignupForm from "./SignupForm";
 
+const isValidEmail = (email: string) => {
+  const emailRegEx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailRegEx.test(email)) {
+    return true;
+  }
+  return false;
+};
 function SignupPage() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,21 +25,19 @@ function SignupPage() {
   );
 
   const handleSubmit = (credentials) => {
-    execute(credentials)
-      /* .then(() => {
-        handleSignup();
-      }) */
-
-      .then(async () => {
-        await login(credentials);
-        handleSignup();
-      })
-
-      //TODO: invocar el método de logueo antes de hacer la navegación
-      .then(() => {
-        const from = location.state?.["from"]?.pathname || "/";
-        navigate(from, { replace: true });
-      });
+    if (credentials?.email && isValidEmail(credentials.email)) {
+      execute(credentials)
+        .then(async () => {
+          await login(credentials);
+          handleSignup();
+        })
+        .then(() => {
+          const from = location.state?.["from"]?.pathname || "/";
+          navigate(from, { replace: true });
+        });
+    } else {
+      toast.error("Debes introducir un email válido");
+    }
   };
 
   return (

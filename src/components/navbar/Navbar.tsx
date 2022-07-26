@@ -19,14 +19,6 @@ const Navbar = () => {
                 Inicio
             </span>
         </Link>
-        <div className={NavbarStyles.navItems}>
-            <div className={NavbarStyles.navIcon}>
-                <AiOutlineHeart />
-            </div>
-            <span className={NavbarStyles.navText}>
-                Favoritos
-            </span>
-        </div>
         <Link to="/account/upload" className={NavbarStyles.navItems}>
             <div className={NavbarStyles.navIcon}>
                 <AiOutlinePlusCircle />

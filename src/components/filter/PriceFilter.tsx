@@ -21,11 +21,18 @@ export type PriceRange = {
 const PriceFilter = ({
   getPricesRange,
   closeFilter,
+  initialValues,
 }: {
   getPricesRange: (priceRage: PriceRange) => void;
   closeFilter: () => void;
+  initialValues: PriceRange;
 }) => {
-  const [value, setValue] = React.useState<number[]>([MIN_VALUE, MAX_VALUE]);
+  const [value, setValue] = React.useState<number[]>(
+    (initialValues && [initialValues.min, initialValues.max]) || [
+      MIN_VALUE,
+      MAX_VALUE,
+    ]
+  );
   const { ref, isComponentVisible } = useComponentVisible(true);
 
   useEffect(() => {
@@ -121,7 +128,7 @@ const PriceFilter = ({
         </div>
       </div>
 
-      <PriceFilterResponsive />
+      {/* <PriceFilterResponsive /> */}
     </>
   );
 };

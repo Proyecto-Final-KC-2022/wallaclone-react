@@ -1,6 +1,8 @@
 const TagsFilterStyles = {
+  /* tagsFilterWrapper:
+    "hidden lg:block md:block fixed top-[130px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]", */
   tagsFilterWrapper:
-    "hidden lg:block md:block fixed top-[130px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]",
+    "block fixed top-[130px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]",
   tagsFilterHeader: "flex h-[70px] px-[1.5rem] items-center",
   tagsHeaderText: "font-bold m-0 block",
   tagsFormWrapper: "overflow-auto px-[1.5rem] block",
