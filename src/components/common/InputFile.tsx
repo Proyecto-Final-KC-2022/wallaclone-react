@@ -1,5 +1,5 @@
-import React from 'react';
-import T from 'prop-types';
+import React from "react";
+import T from "prop-types";
 
 // import placeholder from '../../assets/images/placeholder.png';
 
@@ -7,7 +7,7 @@ function InputFile({ onChange, ...props }) {
   const inputRef = React.createRef();
   const [src, setSrc] = React.useState(null);
 
-  const loadSrcFromFile = file => {
+  const loadSrcFromFile = (file) => {
     if (!file) {
       setSrc(null);
       return;
@@ -20,10 +20,10 @@ function InputFile({ onChange, ...props }) {
   };
 
   const handleClick = () => {
-    inputRef.current['click']();
+    inputRef.current["click"]();
   };
 
-  const handleChange = ev => {
+  const handleChange = (ev) => {
     const file = ev.target.files[0];
     loadSrcFromFile(file);
     onChange(ev);
@@ -33,18 +33,18 @@ function InputFile({ onChange, ...props }) {
     <>
       <input
         ref={inputRef as any}
-        type="file"
-        style={{ display: 'none' }}
+        type='file'
+        style={{ display: "none" }}
         onChange={handleChange}
         {...props}
       />
       <img
         onClick={handleClick}
-        src={src || 'placeholder'}
-        alt=""
-        width="200"
-        height="200"
-        style={{ objectFit: 'contain' }}
+        src={src || "placeholder"}
+        alt=''
+        width='200'
+        height='200'
+        style={{ objectFit: "contain" }}
       />
     </>
   );

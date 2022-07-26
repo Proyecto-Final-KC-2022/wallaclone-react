@@ -1,12 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
-
 import UserService from "../../api/service/User.service";
 import { useAuthContext } from "../../components/auth/context";
 import { login } from "../../components/auth/service";
 import Spinner from "../../components/spinner/Spinner";
 import useMutation from "../../hooks/useMutation";
-
 import SignupForm from "./SignupForm";
 
 const isValidEmail = (email: string) => {
@@ -42,10 +40,10 @@ function SignupPage() {
 
   return (
     <div>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position='top-center' reverseOrder={false} />
       <SignupForm onSubmit={handleSubmit} />
       {isLoading && (
-        <div className="flex justify-center bg-gray-200 py-4 h-full">
+        <div className='flex justify-center bg-gray-200 py-4 h-full'>
           <Spinner />
         </div>
       )}

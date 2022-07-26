@@ -84,7 +84,7 @@ const PriceFilter = ({
                     min={0}
                     max={20000}
                     onChange={handleChange}
-                    valueLabelDisplay="off"
+                    valueLabelDisplay='off'
                   />
                 </Box>
               </form>
@@ -93,7 +93,7 @@ const PriceFilter = ({
                   <label className={PriceFilterStyles.inputLabel}>Desde</label>
                   <input
                     className={PriceFilterStyles.inputsContainer}
-                    type="text"
+                    type='text'
                     value={valuetext(value[0])}
                     onChange={setMinValue}
                   />
@@ -103,7 +103,7 @@ const PriceFilter = ({
                   <label className={PriceFilterStyles.inputLabel}>Hasta</label>
                   <input
                     className={PriceFilterStyles.inputsContainer}
-                    type="text"
+                    type='text'
                     value={valuetext(value[1])}
                     onChange={setMaxValue}
                   />

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import AdvertisementService from '../../api/service/Advertisement.service';

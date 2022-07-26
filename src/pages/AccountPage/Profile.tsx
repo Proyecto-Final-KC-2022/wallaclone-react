@@ -24,13 +24,12 @@ const Profile = () => {
   const auth = storage.get("auth") || storage.getSession("auth");
   const jwtToken = auth?.replace('"', "");
   const userId = jwtToken && parseJwt<{ _id?: string }>(jwtToken)?._id;
-  // Parte de getUser
+
   const {
     isLoading,
     error,
     data: user,
   } = useQuery(UserService.getUser, userId);
-  //
 
   const mutation = useMutation(logout);
   const navigate = useNavigate();

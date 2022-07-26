@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import client, { configureClient, resetClient } from "../../api/client";
 import storage from "../../utils/storage";
 import { parseJwt } from "../../utils/utils";

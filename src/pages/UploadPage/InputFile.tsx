@@ -1,13 +1,12 @@
-import React from 'react';
-import T from 'prop-types';
-
-import placeholder from '../../images/placeholder.png';
+import React from "react";
+import T from "prop-types";
+import placeholder from "../../images/placeholder.png";
 
 function InputFile({ onChange, ...props }) {
-  const inputRef:any = React.createRef();
+  const inputRef: any = React.createRef();
   const [src, setSrc] = React.useState(null);
 
-  const loadSrcFromFile = file => {
+  const loadSrcFromFile = (file) => {
     if (!file) {
       setSrc(null);
       return;
@@ -23,7 +22,7 @@ function InputFile({ onChange, ...props }) {
     inputRef.current.click();
   };
 
-  const handleChange = ev => {
+  const handleChange = (ev) => {
     const file = ev.target.files[0];
     loadSrcFromFile(file);
     onChange(ev);
@@ -33,15 +32,15 @@ function InputFile({ onChange, ...props }) {
     <>
       <input
         ref={inputRef}
-        className="hidden w-full"
-        type="file"
+        className='hidden w-full'
+        type='file'
         onChange={handleChange}
         {...props}
       />
       <img
         onClick={handleClick}
         src={src || placeholder}
-        className="object-contain rounded-[10px] w-[100px] cursor-pointer"
+        className='object-contain rounded-[10px] w-[100px] cursor-pointer'
       />
     </>
   );

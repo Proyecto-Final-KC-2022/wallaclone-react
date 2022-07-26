@@ -24,9 +24,6 @@ const MailBoxButton = () => {
     socket.on("setMessagesAsRead", () => {
       setHasUnreadMessages(false);
     });
-    // socket.on("getPrivateMessage", (data) => {
-    //   setHasUnreadMessages(true);
-    // });
   };
 
   useEffect(() => {
@@ -49,14 +46,14 @@ const MailBoxButton = () => {
     socketListeners();
   }, []);
   return (
-    <NavLink to="/account/chat">
+    <NavLink to='/account/chat'>
       <button className={MailBoxButtonStyles.mailButtonWrapper}>
         <div className={MailBoxButtonStyles.mailButtonContainer}>
           <div className={MailBoxButtonStyles.mailIconContainer}>
-            <img src={Inbox} alt="inbox" />
+            <img src={Inbox} alt='inbox' />
           </div>
           {hasUnreadMessages && (
-          <div className={MailBoxButtonStyles.redDot}></div>
+            <div className={MailBoxButtonStyles.redDot}></div>
           )}
           <span className={MailBoxButtonStyles.mailButtonText}>Buzón</span>
         </div>

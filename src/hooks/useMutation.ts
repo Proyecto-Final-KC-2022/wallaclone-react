@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 function useMutation<T>(mutation: (payload?: any) => T, payload?: any) {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -13,7 +13,7 @@ function useMutation<T>(mutation: (payload?: any) => T, payload?: any) {
         setIsLoading(true);
       };
 
-      const finishExecution = error => {
+      const finishExecution = (error) => {
         setIsLoading(false);
         if (error) {
           return setError(error);
@@ -30,7 +30,7 @@ function useMutation<T>(mutation: (payload?: any) => T, payload?: any) {
         throw error;
       }
     },
-    [mutation],
+    [mutation]
   );
 
   return {

@@ -73,21 +73,21 @@ const AccountProducts = () => {
     };
 
   return (
-    <div className="max-w-full w-full flex-1 block text-left">
-      <Toaster position="top-center" reverseOrder={false} />
+    <div className='max-w-full w-full flex-1 block text-left'>
+      <Toaster position='top-center' reverseOrder={false} />
       {!isLoading && !isLoadingDeletion && !error && (
         <>
-          <div className="min-h-full h-full block">
-            <div className="py-[32px] max-w-[960px] w-full px-[15px] mx-auto block">
-              <div className="mb-[1rem] flex flex-wrap mx-[-15px]">
-                <div className="flex flex-col max-w-[75%] relative w-full min-h-[1px] px-[15px]">
-                  <div className="flex items-center">
-                    <h1 className="text-[1.375rem] text-[#253238] font-bold flex items-center mt-0 mb-[0.5rem]">
-                      <span className="mr-[12px] text-left">Tus productos</span>
+          <div className='min-h-full h-full block'>
+            <div className='py-[32px] max-w-[960px] w-full px-[15px] mx-auto block'>
+              <div className='mb-[1rem] flex flex-wrap mx-[-15px]'>
+                <div className='flex flex-col max-w-[75%] relative w-full min-h-[1px] px-[15px]'>
+                  <div className='flex items-center'>
+                    <h1 className='text-[1.375rem] text-[#253238] font-bold flex items-center mt-0 mb-[0.5rem]'>
+                      <span className='mr-[12px] text-left'>Tus productos</span>
                     </h1>
                   </div>
-                  <div className="flex items-center">
-                    <h4 className="text-[.875rem] text-[#607d8b] mb-0 leading-5 font-normal block">
+                  <div className='flex items-center'>
+                    <h4 className='text-[.875rem] text-[#607d8b] mb-0 leading-5 font-normal block'>
                       Aquí podrás subir productos, gestionar los que ya tienes y
                       destacarlos para venderlos antes
                     </h4>
@@ -105,35 +105,36 @@ const AccountProducts = () => {
             </div>
           </div> */}
 
-              <div className="h-full w-full block py-2">
-                <div className="h-full flex bg-gray-200 rounded-[10px]">
-                  <div className="max-w-[960px] w-full px-[15px] mx-auto block container">
-                    <div className="block">
-                      <div className="rounded-[10px]">
+              <div className='h-full w-full block py-2'>
+                <div className='h-full flex bg-gray-200 rounded-[10px]'>
+                  <div className='max-w-[960px] w-full px-[15px] mx-auto block container'>
+                    <div className='block'>
+                      <div className='rounded-[10px]'>
                         {userAdverts?.length > 0 && (
                           <div
                             style={{ display: "flex" }}
-                            className="flex mx-[-15px] mb-4"
+                            className='flex mx-[-15px] mb-4'
                           >
-                            <div className="items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center">
-                              <div className="w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]">
+                            <div className='items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center'>
+                              <div className='w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]'>
                                 <input
-                                  id="selectAll"
-                                  name="selectAll"
-                                  className="overflow-hidden flex w-[22px] h-[22px] rounded-[6px]"
-                                  type="checkbox"
+                                  id='selectAll'
+                                  name='selectAll'
+                                  className='overflow-hidden flex w-[22px] h-[22px] rounded-[6px]'
+                                  type='checkbox'
                                   checked={allAdvertsAreSelected}
                                   onChange={toggleSelectedAdvertsToDelete(
                                     null,
                                     true
                                   )}
                                 />
-                                {/* <label htmlFor="selectAll">Seleccionar Todos</label> */}
                               </div>
                             </div>
 
-                            <div className="inline-block text-[1rem] font-bold whitespace-nowrap p-0 text-left">
-                              Seleccionar Todos
+                            <div className='inline-block text-[1rem] font-bold whitespace-nowrap p-0 text-left'>
+                              <label htmlFor='selectAll'>
+                                Seleccionar Todos
+                              </label>
                             </div>
                           </div>
                         )}
@@ -141,12 +142,12 @@ const AccountProducts = () => {
                         {userAdverts?.length > 0 ? (
                           userAdverts.map((advert: Advert, index) => {
                             return (
-                              <div key={index} className="flex mx-[-15px]">
-                                <div className="items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center">
-                                  <div className="w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]">
+                              <div key={index} className='flex mx-[-15px]'>
+                                <div className='items-center justify-center flex max-w-[8.3333333333%] w-full relative min-h-[1px] text-center'>
+                                  <div className='w-[24px] h-[24px] border-2 border-[#CFD8DC] rounded-[6px] bg-transparent p-0 flex items-center justify-center cursor-pointer hover:border-[#13c1ac]'>
                                     <input
-                                      className="overflow-hidden flex w-[22px] h-[22px] rounded-[6px]"
-                                      type="checkbox"
+                                      className='overflow-hidden flex w-[22px] h-[22px] rounded-[6px]'
+                                      type='checkbox'
                                       checked={advertIdsToDelete.some(
                                         (e) => e === advert._id
                                       )}
@@ -157,12 +158,12 @@ const AccountProducts = () => {
                                   </div>
                                 </div>
 
-                                <div className="block grow max-w-full basis-0 relative w-full min-h-[1px] text-left">
-                                  <div className="bg-white rounded-[10px] border border-1 flex ">
-                                    <div className="flex cursor-pointer p-0 items-center justify-center max-w-full w-full">
-                                      <div className="p-[4px]">
+                                <div className='block grow max-w-full basis-0 relative w-full min-h-[1px] text-left'>
+                                  <div className='bg-white rounded-[10px] border border-1 flex '>
+                                    <div className='flex cursor-pointer p-0 items-center justify-center max-w-full w-full'>
+                                      <div className='p-[4px]'>
                                         <img
-                                          className="m-0 lg:w-[80px] w-full lg:h-[80px] h-full bg-cover rounded-[4px] relative hidden lg:flex"
+                                          className='m-0 lg:w-[80px] w-full lg:h-[80px] h-full bg-cover rounded-[4px] relative hidden lg:flex'
                                           src={
                                             advert?.image?.includes(
                                               "https://wallaclone-s3-bucket.s3.amazonaws.com"
@@ -173,50 +174,48 @@ const AccountProducts = () => {
                                         />
                                       </div>
 
-                                      <div className="basis-0 grow max-w-full w-full relative min-h-[1px] block">
-                                        <div className="h-full items-center flex flex-wrap mx-[-15px]">
-                                          <div className="cursor-pointer flex flex-col relative w-full px-[15px]">
-                                            <span className="text-[1.25rem] font-bold w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                                      <div className='basis-0 grow max-w-full w-full relative min-h-[1px] block'>
+                                        <div className='h-full items-center flex flex-wrap mx-[-15px]'>
+                                          <div className='cursor-pointer flex flex-col relative w-full px-[15px]'>
+                                            <span className='text-[1.25rem] font-bold w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
                                               {advert.name}
                                             </span>
-                                            <span className="text-[1.25rem] font-bold w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                                            <span className='text-[1.25rem] font-bold w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
                                               {advert.price} €
                                             </span>
-                                            <span className="text-[#90a4ae] max-w-[250px] xl:w-full w-[110px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                                            <span className='text-[#90a4ae] max-w-[250px] xl:w-full w-[110px] overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
                                               {advert.description}
                                             </span>
                                           </div>
                                         </div>
                                       </div>
 
-                                      <div className="basis-0 grow max-w-full w-full relative min-h-[1px] px-[15px] block">
-                                        <div className="h-full items-center flex flex-wrap mx-[-15px]">
-                                          <div className="cursor-pointer flex flex-col relative w-full px-[15px]">
-                                            <span className="text-[0.875rem] w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
+                                      <div className='basis-0 grow max-w-full w-full relative min-h-[1px] px-[15px] block'>
+                                        <div className='h-full items-center flex flex-wrap mx-[-15px]'>
+                                          <div className='cursor-pointer flex flex-col relative w-full px-[15px]'>
+                                            <span className='text-[0.875rem] w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
                                               {advert.forSale
                                                 ? "En venta"
                                                 : "Se busca"}
                                             </span>
-                                            <span className="text-[#90a4ae] max-w-[250px] w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer">
-                                              {advert.creationDate}
+                                            <span className='text-[#90a4ae] max-w-[250px] w-full overflow-hidden text-ellipsis whitespace-nowrap cursor-pointer'>
+                                              Desde:{" "}
+                                              {advert.creationDate
+                                                .replace("T", " ")
+                                                .slice(0, -8)}{" "}
+                                              h.
                                             </span>
                                           </div>
                                         </div>
                                       </div>
 
-                                      <div className="flex justify-end items-center max-w-[33.3333333333%] w-full relative min-h-[1px] px-[15px]">
-                                        {/* <button className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#36474f4d] hover:text-white">
-                                      <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
-                                        <BsPencil className="text-[24px]" />
-                                      </div>
-                                    </button> */}
-
+                                      <div className='flex justify-end items-center max-w-[33.3333333333%] w-full relative min-h-[1px] px-[15px]'>
                                         <button
-                                          className="w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white"
+                                          className='w-[40px] h-[40px] rounded-[8px] mr-[8px] p-0 flex items-center justify-center border cursor-pointer hover:bg-[#fd6c67] hover:text-white'
                                           onClick={handleOpen(advert._id)}
                                         >
-                                          <div className="w-[24px] h-[24px] flex cursor-pointer items-center justify-center">
-                                            <BsTrash className="text-[24px]" />
+                                          <div className='w-[24px] h-[24px] flex cursor-pointer items-center justify-center'>
+                                            <BsTrash className='text-[24px]' />
                                           </div>
                                         </button>
                                       </div>
@@ -227,7 +226,7 @@ const AccountProducts = () => {
                             );
                           })
                         ) : (
-                          <p className="text-center">
+                          <p className='text-center'>
                             No tienes anuncios que gestionar
                           </p>
                         )}
@@ -238,12 +237,12 @@ const AccountProducts = () => {
               </div>
 
               {userAdverts?.length > 0 && (
-                <div className="sticky bottom-0 z-20 mt-auto block">
-                  <div className="bg-white border-t-2 border-gray-200 h-[100px] block rounded-[10px]">
-                    <div className="h-full max-w-[960px] w-full px-[15px] mx-auto block">
-                      <div className="h-full justify-around flex">
-                        <div className="ml-auto items-center justify-end flex">
-                          <div className="items-center flex">
+                <div className='sticky bottom-0 z-20 mt-auto block'>
+                  <div className='bg-white border-t-2 border-gray-200 h-[100px] block rounded-[10px]'>
+                    <div className='h-full max-w-[960px] w-full px-[15px] mx-auto block'>
+                      <div className='h-full justify-around flex'>
+                        <div className='ml-auto items-center justify-end flex'>
+                          <div className='items-center flex'>
                             <button
                               disabled={advertIdsToDelete.length <= 0}
                               onClick={() => setOpen(true)}
@@ -253,10 +252,10 @@ const AccountProducts = () => {
                                   : ""
                               } w-[120px] mr-[12px] border rounded-[10px] text-[.875rem] text-[#607d8b] items-center justify-center flex overflow-visible m-0 bg-white active:bg-[#fd6c67]`}
                             >
-                              <div className="w-[24px] h-[24px] flex items-center justify-center">
-                                <BsTrash className="text-[20px]" />
+                              <div className='w-[24px] h-[24px] flex items-center justify-center'>
+                                <BsTrash className='text-[20px]' />
                               </div>
-                              <span className="ml-2">Borrar</span>
+                              <span className='ml-2'>Borrar</span>
                             </button>
                           </div>
                         </div>
@@ -269,27 +268,27 @@ const AccountProducts = () => {
           </div>
 
           <Modal open={open} onClose={handleClose}>
-            <div className="absolute top-[30%] right-[50%] translate-x-1/2 translate-y-1/2 w-[400px] bg-white rounded-[8px] p-4">
-              <div className="p-[20px] relative flex-1 block">
-                <h2 className="font-bold text-[1rem] text-[#253238]">
+            <div className='absolute top-[30%] right-[50%] translate-x-1/2 translate-y-1/2 w-[400px] bg-white rounded-[8px] p-4'>
+              <div className='p-[20px] relative flex-1 block'>
+                <h2 className='font-bold text-[1rem] text-[#253238]'>
                   Borrar productos
                 </h2>
-                <p className="mt-[16px] text-[.875rem] text-[#253238]">
+                <p className='mt-[16px] text-[.875rem] text-[#253238]'>
                   {advertIdsToDelete.length && advertIdsToDelete.length > 1
                     ? `¿Estás seguro de que deseas eliminar permanentemente ${advertIdsToDelete.length} anuncios seleccionados?`
                     : `Estás seguro de que deseas eliminar permanentemente el anuncios seleccionado?`}
                 </p>
               </div>
-              <div className="p-[20px] flex items-center justify-end mt-4">
+              <div className='p-[20px] flex items-center justify-end mt-4'>
                 <button
-                  className="text-[#253238] pr-[20px] cursor-pointer"
+                  className='text-[#253238] pr-[20px] cursor-pointer'
                   onClick={handleClose}
                 >
                   Cancelar
                 </button>
                 <span> | </span>
                 <button
-                  className="text-[#fd6c67] pl-[20px] cursor-pointer"
+                  className='text-[#fd6c67] pl-[20px] cursor-pointer'
                   onClick={executeDeletion}
                 >
                   Borrar
@@ -301,7 +300,7 @@ const AccountProducts = () => {
       )}
 
       {isLoading && (
-        <div className="flex justify-center bg-gray-200 py-4 h-full">
+        <div className='flex justify-center bg-gray-200 py-4 h-full'>
           <Spinner />
         </div>
       )}

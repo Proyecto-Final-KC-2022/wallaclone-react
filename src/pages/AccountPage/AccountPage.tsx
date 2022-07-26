@@ -15,13 +15,13 @@ const AccountPage = () => {
   return (
     <>
       <Layout2>
-        <div className="min-h-[100vh] bg-gray-200 flex">
+        <div className='min-h-[100vh] bg-gray-200 flex'>
           <AccountNavbar />
           <Routes>
             <Route index element={<Profile />} />
-            <Route path="products" element={<AccountProducts />} />
-            <Route path="upload" element={<NewAdvertPage />} />
-            <Route path="chat" element={<ChatPage currentUserId={userId}/>} />
+            <Route path='products' element={<AccountProducts />} />
+            <Route path='upload' element={<NewAdvertPage />} />
+            <Route path='chat' element={<ChatPage currentUserId={userId} />} />
           </Routes>
         </div>
       </Layout2>

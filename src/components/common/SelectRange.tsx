@@ -1,4 +1,3 @@
-import React from 'react';
 import T from 'prop-types';
 import  Range  from 'rc-slider';
 import 'rc-slider/assets/index.css';

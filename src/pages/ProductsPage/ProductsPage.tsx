@@ -13,22 +13,10 @@ import FilterBar, { BarFilters } from "../../components/filter/FilterBar";
 import { Toaster, toast } from "react-hot-toast";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
-/**
-  TODO: 
-  ● Se deben mostrar los últimos anuncios publicados por orden cronológico, siendo el primero
-    el más reciente y el último el más antiguo
-  ● No se deben mostrar todos los anuncios publicados en la página inicial, se debe poner un
-    límite al número de anuncios mostrados
-  ● La UI deberá ser consistente a otros listados de anuncios
-  ● Cada anuncio deberá mostrar: nombre, imagen, descripción, si se vende o se busca, el precio
-    y el miembro de la plataforma autor del anuncio.
- */
 const ProductsPage = (): JSX.Element => {
-  //TODO: Usar un compoennte de error si ha habido algún
   const limitPerPage: number = 8;
   const [pageNumber, setPageNumber] = useState(1);
   const [refreshData, setRefreshData] = useState(false);
-  // const startQueryParam = pageNumber > 1 ? (pageNumber - 1) * limitPerPage : 0;
   const [advertisementsPayload, setAdvertisementsPayload] = useState<
     Payload<GetAllAdvertisementsQueryParams>
   >({
@@ -115,7 +103,7 @@ const ProductsPage = (): JSX.Element => {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position='top-center' reverseOrder={false} />
       <Layout
         isMainPage={true}
         getSearchInputValue={(value: string) => {
@@ -154,7 +142,7 @@ const ProductsPage = (): JSX.Element => {
                 })
               ) : (
                 <NotFoundPage
-                  customText="No se han encontrado productos"
+                  customText='No se han encontrado productos'
                   hideButton={true}
                   insideLayout={false}
                 />
@@ -166,16 +154,15 @@ const ProductsPage = (): JSX.Element => {
         {!isLoading && !error && (
           <>
             {filteredAdverts.length > 0 && hasMore && pageNumber === 1 && (
-              <div className="flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200">
+              <div className='flex py-[1.5rem] justify-center text-[16px] font-semibold bg-gray-200'>
                 <LoadMoreButton onClickFn={goToNextPage} />
               </div>
-              // <button onClick={goToNextPage}>Cargar más</button>
             )}
           </>
         )}
 
         {isLoading && (
-          <div className="flex justify-center bg-gray-200 py-4 h-full">
+          <div className='flex justify-center bg-gray-200 py-4 h-full'>
             <Spinner />
           </div>
         )}

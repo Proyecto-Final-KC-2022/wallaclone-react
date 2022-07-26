@@ -5,7 +5,7 @@ import UploadButtonStyles from "../../styles/UploadButtonStyles";
 
 const UploadButton = () => {
   return (
-    <NavLink to="/account/upload">
+    <NavLink to='/account/upload'>
       <button className={UploadButtonStyles.uploadButtonWrapper}>
         <div className={UploadButtonStyles.uploadButtonContainer}>
           <div className={UploadButtonStyles.uploadIconContainer}>

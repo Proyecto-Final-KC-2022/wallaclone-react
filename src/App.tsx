@@ -1,8 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import "./index.css";
-
 import { AuthProvider } from "../src/components/auth/context";
 import Login from "../src/components/auth/LoginPage/LoginPage";
 import SignUp from "./pages/SignupPage/SignupPage";
@@ -12,21 +10,6 @@ import Product from "./pages/ProductPage/ProductPage";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import RequireAuth from "./components/auth/RequireAuth";
-
-/*
-  MARCE
-*/
-
-/*
-  TODO PENDIENTE CORREGIR LAS IMPORTACIONES PARA TODO LO QUE NECESITA EL LOGIN.
-
-  TODO MODIFICAR LOS ARCHIVOS JS A TS
-
-  TODO PROBAR CONEXIÓN CON API
-
-  import LoginPage from "./components/auth/LoginPage"
-*/
-// import { SocketProvider } from './socket-context/socketContext';
 
 function App({ isInitiallyLogged }) {
   const [isLogged, setIsLogged] = React.useState(isInitiallyLogged);
@@ -54,8 +37,8 @@ function App({ isInitiallyLogged }) {
                 </RequireAuth>
               }
             />
-            <Route path="/404" element={<NotFoundPage />} />
-            <Route path="*" element={<Navigate to="/404" />} />
+            <Route path='/404' element={<NotFoundPage />} />
+            <Route path='*' element={<Navigate to='/404' />} />
           </Routes>
         </BrowserRouter>
       </div>

@@ -1,5 +1,4 @@
 import useMutation from "../../hooks/useMutation";
-// import { useSocketContext } from "../../socket-context/socketContext";
 import socket from '../../socket-context/socketContext';
 
 import { logout } from "../auth/service";
@@ -21,8 +20,6 @@ const LogoutButton = () => {
       navigate(0);
     }
     navigate(from, { replace: true });
-
-    // Si no se hace refresh entiende que sigue estando logueado y muestra el perfil en home
     
     refreshPage()
   };
