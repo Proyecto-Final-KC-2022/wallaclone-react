@@ -127,30 +127,31 @@ const ProductsPage = (): JSX.Element => {
             getFilters({ filtersFromBar });
           }}
         />
-        <div>
+        <div
+          className={
+            filteredAdverts?.length > 0
+              ? "grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200"
+              : ""
+          }
+        >
           {!isLoading && !error && (
             <>
               {filteredAdverts.length > 0 ? (
-                <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-2 xl:px-[200px] px-[15px] py-[15px] min-h-[100vh] bg-gray-200">
-                  {filteredAdverts.map((advert: Advert, index) => {
-                    if (
-                      filteredAdverts.length === index + 1 &&
-                      pageNumber > 1
-                    ) {
-                      return (
-                        <div ref={lastAdvertElementRef} key={advert._id}>
-                          <ProductCard2 {...advert} />
-                        </div>
-                      );
-                    } else {
-                      return (
-                        <div key={advert._id}>
-                          <ProductCard2 {...advert} />
-                        </div>
-                      );
-                    }
-                  })}
-                </div>
+                filteredAdverts.map((advert: Advert, index) => {
+                  if (filteredAdverts.length === index + 1 && pageNumber > 1) {
+                    return (
+                      <div ref={lastAdvertElementRef} key={advert._id}>
+                        <ProductCard2 {...advert} />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div key={advert._id}>
+                        <ProductCard2 {...advert} />
+                      </div>
+                    );
+                  }
+                })
               ) : (
                 <NotFoundPage
                   customText="No se han encontrado productos"
