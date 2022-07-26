@@ -50,12 +50,10 @@ Wallaclone es una plataforma dedicada a la compra venta de productos de segunda 
 
     `http://localhost:8080/`
 
-Para agregar una captura de pantalla, cree una carpeta `assets/images` en su repositorio y cargue la captura de pantalla en ella. Luego, con la ruta relativa, agréguela a su README utilizando la siguiente sintaxis:
+* Captura:
 
+    ![Captura](src/images/screenshot.png)
     
-![Captura](src/images/screenshot.png)
-    
-
 ## Créditos
 
 Autores:
