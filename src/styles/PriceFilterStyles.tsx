@@ -1,8 +1,6 @@
 const PriceFilterStyles = {
-  /* priceFilterWrapper:
-    "hidden lg:block md:block fixed top-[130px] left-[234px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]", */
   priceFilterWrapper:
-    "block fixed top-[130px] left-[234px] mx-[1rem] bg-white rounded-[10px] shadow-md overflow-hidden min-w-[380px]",
+    "block fixed bg-white rounded-[10px] shadow-md overflow-hidden lg:top-[130px] lg:left-[234px] lg:mx-[1rem] lg:min-w-[380px] lg:w-[380px] lg:h-[380px] md:top-[130px] md:left-[234px] md:mx-[1rem] md:min-w-[380px] md:w-[380px] md:h-[380px] left-0 right-0 top-[66px] w-full h-full min-w-auto",
   priceFilterHeader: "flex h-[70px] px-[1.5rem] items-center",
   headerText: "font-bold m-0 block",
   formWrapper: "overflow-auto px-[1.5rem] block",
