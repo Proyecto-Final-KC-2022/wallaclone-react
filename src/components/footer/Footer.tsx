@@ -6,7 +6,6 @@ const Footer = () => {
     <div className={FooterStyles.footerWrapper}>
       <div className={FooterStyles.footerContainer}>
         <div className={FooterStyles.logoWrapper}>
-          <div className={FooterStyles.logoContainer}>Wallaclone</div>
           <span className={FooterStyles.copyrightText}>
             Copyright &copy; 2022 Wallaclone &copy; de sus respectivos
             propietarios

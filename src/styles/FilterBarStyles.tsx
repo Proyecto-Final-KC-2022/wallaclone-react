@@ -7,7 +7,7 @@ const FilterBarStyles = {
     "flex shadow-md shadow-gray-400/20 bg-white h-[36px] rounded-[21px] items-center justify-center px-[1rem] hover:bg-slate-100",
   filterButton:
     "basis-full overflow-hidden px-1 items-center justify-center cursor-pointer flex",
-  filterText: "text-[.875rem]",
+  filterText: "lg:text-[.875rem] text-[10px]",
   filterToggle: "pl-2",
   priceIcon: "pr-2",
   findButtonContainer:

@@ -39,18 +39,18 @@ const ProductCard2 = (advert: Advert) => {
       </div>
       <div className="block px-[0.75rem] text-[0.875rem]">
         <p className="font-[700] text-[1.25rem]">{advert.name}</p>
-        <p className="overflow-hidden">
+        <p className="flex flex-wrap overflow-hidden text-ellipsis whitespace-nowrap">
           <a className="mr-2">Tags:</a>
           {advert.tags.map((tag, index) => {
             return (
-              <span key={index} className="text-[#14C1AD] mr-2 items-center">
+              <span key={index} className="text-[#14C1AD] mr-2 items-center overflow-hidden text-ellipsis whitespace-nowrap">
                 {tag}
               </span>
             );
           })}
         </p>
 
-        <p className="overflow-hidden mt-0">Descripción: {advert.description}</p>
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap mt-0">Descripción: {advert.description}</p>
         {/* <p>Tags:</p>
         {advert.tags.map((tag, index) => {
           return (
