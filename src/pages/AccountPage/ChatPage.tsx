@@ -242,8 +242,8 @@ const ChatPage = ({ currentUserId }) => {
             </nav>
           </div>
 
-          <div className="h-[calc(100vh - 66px)] flex items-center">
-            <div className="relative bg-transparent w-[340px] border border-[#CFD8DC] pt-[44px] h-full block">
+          <div className="flex items-center lg:w-[340px] md:w-[340px] w-full">
+            <div className="relative bg-transparent lg:w-[340px] md:w-[340px] w-full border border-[#CFD8DC] pt-[44px] h-full block">
               <div className="block border-b border-[#CFD8DC]">
                 <div className="h-[66px]">
                   <div className="flex items-center my-auto text-[.875rem] py-[1rem] px-[1.5rem] text-[#6c757d] whitespace-nowrap">
@@ -304,8 +304,11 @@ const ChatPage = ({ currentUserId }) => {
             </div>
           </div>
 
+          {/* <ChatContainer /> */}
+
           {/* CONTENEDOR CHAT */}
-          <div className="bg-white flex-1 relative block">
+
+          <div className="bg-white flex-1 relative lg:block md:block hidden">
             <div className="h-full">
               <div className="h-full flex">
                 <div className="grow h-full float-left block">
@@ -457,6 +460,7 @@ const ChatPage = ({ currentUserId }) => {
               </div>
             </div>
           </div>
+          
           {/* FIN DEL CONTENEDOR CHAT */}
         </div>
       )}

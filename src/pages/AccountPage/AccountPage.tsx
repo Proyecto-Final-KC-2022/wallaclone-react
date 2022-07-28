@@ -7,6 +7,7 @@ import NewAdvertPage from "../UploadPage/NewAdvertPage";
 import ChatPage from "./ChatPage";
 import storage from "../../utils/storage";
 import { parseJwt } from "../../utils/utils";
+import ChatContainer from "./ChatContainer";
 
 const AccountPage = () => {
   const auth = storage.get("auth") || storage.getSession("auth");
@@ -22,6 +23,7 @@ const AccountPage = () => {
             <Route path="products" element={<AccountProducts />} />
             <Route path="upload" element={<NewAdvertPage />} />
             <Route path="chat" element={<ChatPage currentUserId={userId}/>} />
+            <Route path="chat/:currentUserId/:chatId" element={<ChatContainer />} />
           </Routes>
         </div>
       </Layout2>

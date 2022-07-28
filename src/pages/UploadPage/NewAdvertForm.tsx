@@ -1,19 +1,18 @@
-import React from 'react';
-import T from 'prop-types';
+import React from "react";
+import T from "prop-types";
 
-import useForm from '../../hooks/useForm';
+import useForm from "../../hooks/useForm";
 
-import InputFile from './InputFile';
-import SelectTags from './SelectTags';
+import InputFile from "./InputFile";
+import SelectTags from "./SelectTags";
 
-import { IoCameraOutline } from 'react-icons/io5';
-import Camera from '../../images/camera-green.svg';
+import { IoCameraOutline } from "react-icons/io5";
+import Camera from "../../images/camera-green.svg";
 
 const validName = ({ name }) => name;
 const validPrice = ({ price }) =>
   !Number.isNaN(price) && Number.isFinite(price) && price >= 0;
 const validTags = ({ tags }) => !!tags.length;
-
 
 function NewAdvertForm({ onSubmit }) {
   const {
@@ -22,14 +21,25 @@ function NewAdvertForm({ onSubmit }) {
     handleSubmit,
     validate,
   } = useForm({
-    name: '',
+    name: "",
     image: null,
-    description: '',
+    description: "",
     forSale: true,
-    price: '',
+    price: "",
     tags: [],
   });
   const { name, image, description, forSale, price, tags } = advert;
+
+  /* const descriptionArea = document.getElementById(
+    "description-area"
+  );
+  const descriptionLetters = document.getElementById("description-letters");
+
+  descriptionArea.addEventListener("input", function () {
+    const countDesc = description.value.length;
+
+    descriptionLetters.textContent = countDesc;
+  }); */
 
   return (
     <div className="max-w-full w-full flex-1 block text-left">
@@ -67,12 +77,13 @@ function NewAdvertForm({ onSubmit }) {
                 <div className="relative w-full min-h-[1px] px-[15px]">
                   <div className="mb-[1rem] block">
                     <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
-                      ¿Qué estás vendiendo?
+                      ¿Qué estás vendiendo o buscando?
                     </label>
                     <span className="text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]">
                       0/50
                     </span>
                     <input
+                      id="name-area"
                       type="text"
                       name="name"
                       value={name}
@@ -91,7 +102,12 @@ function NewAdvertForm({ onSubmit }) {
                     Tags
                   </label>
                   <div className="flex w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] py-4 px-4">
-                    <SelectTags className="mx-3" name="tags" value={tags} onChange={handleChange} />
+                    <SelectTags
+                      className="mx-3"
+                      name="tags"
+                      value={tags}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
                 <div className="mb-[1rem] block basis-1/2">
@@ -100,8 +116,8 @@ function NewAdvertForm({ onSubmit }) {
                       Precio
                     </label>
                     <input
-                      type="number" 
-                      name="price" 
+                      type="number"
+                      name="price"
                       value={price}
                       onChange={handleChange}
                       className="block h-[50px] w-full text-[1rem] bg-white border rounded-[6px] px-4 text-[#495057] whitespace-nowrap overflow-hidden outline-none"
@@ -126,11 +142,22 @@ function NewAdvertForm({ onSubmit }) {
                     Estado del producto
                   </label>
                   <div className="block w-full text-[1rem] text-[#495057] bg-white border rounded-[6px] px-4">
-                    <select name="forSale" value={forSale} onChange={handleChange} className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer">
-                      <option value='true' className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
+                    <select
+                      name="forSale"
+                      value={forSale}
+                      onChange={handleChange}
+                      className="inline-block m-0 relative w-full h-[50px] outline-none cursor-pointer"
+                    >
+                      <option
+                        value="true"
+                        className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden"
+                      >
                         Venta
                       </option>
-                      <option value='false' className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden">
+                      <option
+                        value="false"
+                        className="border rounded-[6px] ml-[-2px] cursor-pointer w-full h-[50px] flex text-[#495057] whitespace-nowrap overflow-hidden"
+                      >
                         Compra
                       </option>
                     </select>
@@ -143,10 +170,11 @@ function NewAdvertForm({ onSubmit }) {
                     <label className="text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]">
                       Descripción
                     </label>
-                    <span className="text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]">
-                      0/640
-                    </span>
+                    <div className="text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]">
+                      <span id="description-letters">0</span>/640
+                    </div>
                     <textarea
+                      id="description-area"
                       name="description"
                       value={description}
                       onChange={handleChange}
@@ -173,7 +201,7 @@ function NewAdvertForm({ onSubmit }) {
                       <div className="w-full px-[8px] text-center mb-[8px] block">
                         <div className="border-2 border-dashed h-[120px] w-full relative rounded-[10px] items-center justify-center flex max-w-[767.98px] hover:bg-[#eceff1]">
                           {/* <img className="w-[20px] h-[20px]" src={Camera} /> */}
-                          <InputFile name="image" onChange={handleChange}  />
+                          <InputFile name="image" onChange={handleChange} />
                         </div>
                       </div>
                     </div>
