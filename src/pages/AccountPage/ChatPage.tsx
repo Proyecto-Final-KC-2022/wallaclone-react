@@ -54,7 +54,11 @@ const ChatPage = ({ currentUserId }) => {
     socket.on("privateMessageSent", (data) => {
       data?.newChat?._id &&
         setChatsList((prevChatList) => {
-          prevChatList.find((chat) => !chat.chatId).chatId = data.newChat._id;
+          const chatAux = prevChatList.find((chat) => !chat.chatId);
+          if (chatAux) {
+            prevChatList.find((chat) => !chat.chatId).chatId = data.newChat._id;
+            setCurrentChat(chatAux);
+          }
           return prevChatList;
         });
     });
