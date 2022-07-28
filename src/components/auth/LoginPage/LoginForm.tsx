@@ -79,12 +79,8 @@ function LoginForm({ onSubmit }) {
                 Iniciar sesión
               </button>
               <div className={LoginFormStyles.otherOptions}>
-                <p className={LoginFormStyles.optionsText}>
-                  Recuperar contraseña
-                </p>
-                <span className={LoginFormStyles.spanText}>|</span>
                 <div className={LoginFormStyles.optionsText}>
-                  <Link to="/signup">Regístrate</Link>
+                  <Link to="/signup" className={LoginFormStyles.signupLink}>Regístrate</Link>
                 </div>
               </div>
             </div>

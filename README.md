@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# wallaclone-react
-prueba con user rodolfo...
-=======
 # <Wallaclone>
 
 ## Descripción
@@ -31,7 +27,7 @@ Wallaclone es una plataforma dedicada a la compra venta de productos de segunda 
 - Descargue o clone el reporsitorio:
 
     ```
-    git clone https://github.com/Proyecto-Final-KC-2022/wallaclone-react.git`
+    git clone https://github.com/Proyecto-Final-KC-2022/wallaclone-react.git
     ```
 - Instale las dependencias:
 
@@ -57,6 +53,10 @@ Wallaclone es una plataforma dedicada a la compra venta de productos de segunda 
 * Captura:
 
     ![Captura](src/images/screenshot.png)
+
+* Demo:
+
+    [Wallaclone](http://wallaclone.com/)
     
 ## Créditos
 
@@ -68,4 +68,3 @@ Autores:
 * Emerson Balahan - [EmerBV](https://github.com/EmerBV)
 
 ---
->>>>>>> dev

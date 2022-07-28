@@ -66,10 +66,10 @@ function NewAdvertForm({ onSubmit }) {
                 <div className='relative w-full min-h-[1px] px-[15px]'>
                   <div className='mb-[1rem] block'>
                     <label className='text-[1rem] text-[#607d8b] inline-block mb-[0.5rem]'>
-                      ¿Qué estás vendiendo?
+                      ¿Qué estás vendiendo o buscando?
                     </label>
                     <span className='text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]'>
-                      0/50
+                      min.0/max.50
                     </span>
                     <input
                       type='text'
@@ -159,7 +159,7 @@ function NewAdvertForm({ onSubmit }) {
                       Descripción
                     </label>
                     <span className='text-[.75rem] text-[#90a4ae] float-right mt-[4px] mb-[8px]'>
-                      0/640
+                      min.0/max.640
                     </span>
                     <textarea
                       name='description'

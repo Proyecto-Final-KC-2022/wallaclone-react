@@ -16,6 +16,7 @@ const LoginFormStyles = {
   otherOptions: "flex justify-center items-center",
   optionsText: "text-center text-gray-700 my-4",
   spanText: "mx-4",
+  signupLink: "hover:text-[#13c1ac]"
 };
 
 export default LoginFormStyles;
