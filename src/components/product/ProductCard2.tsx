@@ -40,7 +40,7 @@ const ProductCard2 = (advert: Advert) => {
       <div className="block px-[0.75rem] text-[0.875rem]">
         <p className="font-[700] text-[1.25rem]">{advert.name}</p>
         <p className="overflow-hidden">
-          <a className="mr-2">Tags:</a>
+          <a className="mr-2"></a>
           {advert.tags.map((tag, index) => {
             return (
               <span key={index} className="text-[#14C1AD] mr-2 items-center">
@@ -50,7 +50,7 @@ const ProductCard2 = (advert: Advert) => {
           })}
         </p>
 
-        <p className="overflow-hidden mt-0">Descripción: {advert.description}</p>
+        <p className="overflow-hidden mt-0">{advert.description}</p>
         {/* <p>Tags:</p>
         {advert.tags.map((tag, index) => {
           return (
