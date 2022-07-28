@@ -38,6 +38,7 @@ const ProductCard2 = (advert: Advert) => {
         </div>
       </div>
       <div className="block px-[0.75rem] text-[0.875rem]">
+        <p className="font-[700] text-[#14C1AD] font-bold text-[.75rem]">{advert.forSale ? "En venta" : "Se busca"}</p> 
         <p className="font-[700] text-[1.25rem]">{advert.name}</p>
         <p className="overflow-hidden">
           <a className="mr-2"></a>
