@@ -4,7 +4,6 @@ import AdvertisementsSrv from "../../api/service/Advertisement.service";
 import useMutation from "../../hooks/useMutation";
 import useComponentVisible from "../../hooks/useComponentVisible";
 
-import TagsFilterResponsive from "./TagsFilterResponsive";
 import TagsFilterStyles from "../../styles/TagsFilterStyles";
 import Spinner from "../spinner/Spinner";
 

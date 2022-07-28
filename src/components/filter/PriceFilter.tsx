@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import useComponentVisible from "../../hooks/useComponentVisible";
-import PriceFilterResponsive from "./PriceFilterResponsive";
 import PriceFilterStyles from "../../styles/PriceFilterStyles";
 
 const MIN_VALUE = 0;
