@@ -38,6 +38,7 @@ const ProductCard2 = (advert: Advert) => {
         </div>
       </div>
       <div className="block px-[0.75rem] text-[0.875rem]">
+        <p className="text-[#14C1AD] font-bold text-[.75rem]">{advert.forSale ? "En venta" : "Se busca"}</p> 
         <p className="font-[700] text-[1.25rem]">{advert.name}</p>
         <p className="flex flex-wrap overflow-hidden text-ellipsis whitespace-nowrap">
           <a className="mr-2">Tags:</a>
@@ -50,7 +51,7 @@ const ProductCard2 = (advert: Advert) => {
           })}
         </p>
 
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap mt-0">Descripción: {advert.description}</p>
+        <p className="overflow-hidden text-ellipsis whitespace-nowrap mt-0">{advert.description}</p>
         {/* <p>Tags:</p>
         {advert.tags.map((tag, index) => {
           return (
